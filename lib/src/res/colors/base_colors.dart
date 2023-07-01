@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 ///
 /// Base Color App
 ///
-abstract class BaseColor {
+abstract class BaseColors {
+  //
+  Color get bgColor;
   // Brand color list
   Color get brandColor_01;
   Color get brandColor_02;

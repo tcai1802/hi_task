@@ -1,8 +1,10 @@
 import 'dart:ui';
 
-import 'package:hi_task/src/res/colors/base_color.dart';
+import 'package:hi_task/src/res/colors/base_colors.dart';
 
-class AppColor extends BaseColor {
+class AppColors extends BaseColors {
+  @override
+  Color get bgColor => const Color(0xFFFFFFFF);
   @override
   Color get brandColor_01 => const Color(0xFF105CDB);
 
