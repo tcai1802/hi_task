@@ -5,6 +5,7 @@ import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/blocs/get_started_bloc.dart';
 import 'package:hi_task/src/cubit/carousel_slider_cubit.dart';
 import 'package:hi_task/src/res/colors/app_colors.dart';
+import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/view/get_started/widgets/get_started_card.dart';
 
 class GetStartedScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class GetStartedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _getStartedBloc = GetStartedBloc();
+    final GetStartedBloc getStartedBloc = GetStartedBloc();
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -51,19 +52,24 @@ class GetStartedScreen extends StatelessWidget {
                     );
                   }),
                   const Spacer(),
-                  Text(
-                    "skip",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: AppColors().brandColor_02,
-                          fontWeight: FontWeight.w500,
-                        ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes().loginRoute);
+                    },
+                    child: Text(
+                      "skip",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: AppColors().brandColor_02,
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
                   )
                 ],
               ),
               BlocBuilder<CarouselSliderCubit, int>(builder: (context, index) {
                 return Flexible(
                   child: PageView.builder(
-                    itemCount: _getStartedBloc.onboardingList.length,
+                    itemCount: getStartedBloc.onboardingList.length,
                     onPageChanged: (value) {
                       context
                           .read<CarouselSliderCubit>()
@@ -71,7 +77,7 @@ class GetStartedScreen extends StatelessWidget {
                     },
                     itemBuilder: (context, index) {
                       return GetStartedCard(
-                        data: _getStartedBloc.onboardingList[index],
+                        data: getStartedBloc.onboardingList[index],
                       );
                     },
                   ),
@@ -81,7 +87,9 @@ class GetStartedScreen extends StatelessWidget {
                 width: double.infinity,
                 child: CustomButtonBase(
                   titleBtn: "Get Started",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes().loginRoute);
+                  },
                 ),
               ),
             ],

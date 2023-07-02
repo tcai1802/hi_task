@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/cubit/carousel_slider_cubit.dart';
 import 'package:hi_task/src/main_observer.dart';
 import 'package:hi_task/src/res/theme/app_theme.dart';
+import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/view/export.dart';
 
 void main() {
@@ -23,12 +24,6 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        //return MaterialApp(
-        //  title: 'Flutter Demo',
-        //  debugShowCheckedModeBanner: false,
-        //  theme: AppTheme().lightTheme,
-        //  home: const GetStartedScreen(),
-        //);
         return MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -36,10 +31,12 @@ class MyApp extends StatelessWidget {
             ),
           ],
           child: MaterialApp(
-            title: 'Flutter Demo',
+            initialRoute: AppRoutes().getStartedRoute,
+            onGenerateRoute: AppRoutes().onGenerateRoute,
+            title: 'Hi task application',
             debugShowCheckedModeBanner: false,
             theme: AppTheme().lightTheme,
-            home: const GetStartedScreen(),
+            //home: const GetStartedScreen(),
           ),
         );
       },
