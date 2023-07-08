@@ -18,6 +18,9 @@ class AppRoutes extends Routes {
   @override
   String get successVerifyRoute => '/success_verify';
 
+  @override
+  String get dashBoardRoute => '/dashboard';
+
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == getStartedRoute) {
       return MaterialPageRoute(
@@ -39,8 +42,11 @@ class AppRoutes extends Routes {
       return MaterialPageRoute(
         builder: (context) => const SuccessVerifyScreen(),
       );
+    } else if (settings.name == dashBoardRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const DashBoardScreen(),
+      );
     }
-
     return null;
   }
 }

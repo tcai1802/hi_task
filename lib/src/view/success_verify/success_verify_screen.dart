@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
+import 'package:hi_task/src/res/routes/app_routes.dart';
 
 class SuccessVerifyScreen extends StatelessWidget {
   const SuccessVerifyScreen({super.key});
@@ -72,9 +73,11 @@ class SuccessVerifyScreen extends StatelessWidget {
 
                 SizedBox(height: 70.h),
 
-                const CustomButtonBase(
+                CustomButtonBase(
                   titleBtn: 'Go to Dashboard',
                   widthBtn: double.infinity,
+                  onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                      AppRoutes().dashBoardRoute, (route) => false),
                 ),
                 SizedBox(height: 35.h),
               ],

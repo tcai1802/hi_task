@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/cubit/carousel_slider_cubit.dart';
+import 'package:hi_task/src/cubit/navigation/navigation_cubit.dart';
 import 'package:hi_task/src/main_observer.dart';
 import 'package:hi_task/src/res/theme/app_theme.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(
               create: (context) => CarouselSliderCubit(),
+            ),
+            BlocProvider(
+              create: (context) => NavigationCubit(),
             ),
           ],
           child: MaterialApp(

@@ -68,6 +68,10 @@ class LoginScreen extends StatelessWidget {
               CustomButtonBase(
                 titleBtn: 'Login',
                 widthBtn: double.infinity,
+                onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                  AppRoutes().dashBoardRoute,
+                  (route) => false,
+                ),
               ),
               SizedBox(height: 35.h),
               Padding(

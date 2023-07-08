@@ -22,6 +22,10 @@ class AppDrawable extends Drawable {
 
   @override
   String get imgVerifyAccount => "${imageBasePath}verify_account.png";
+
+  @override
+  String get imgPriorityTaskCard =>
+      "${imageBasePath}priority_task_card_home.svg";
   // Get Icons
   @override
   String get iconAdd => "${iconBasePath}ic_add.svg";
@@ -43,4 +47,13 @@ class AppDrawable extends Drawable {
 
   @override
   String get iconPerson => "${iconBasePath}ic_person.svg";
+
+  @override
+  String get iconHome => "${iconBasePath}ic_home.svg";
+
+  @override
+  String get iconCalendar => "${iconBasePath}ic_calendar.svg";
+
+  @override
+  String get iconProfile => "${iconBasePath}ic_profile.svg";
 }

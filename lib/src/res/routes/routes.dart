@@ -4,4 +4,5 @@ abstract class Routes {
   String get registerRoute;
   String get verifyAccountRoute;
   String get successVerifyRoute;
+  String get dashBoardRoute;
 }

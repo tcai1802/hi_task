@@ -5,3 +5,9 @@ enum ImageTypeEnum {
   assetFile,
   svgPicture,
 }
+
+enum NavbarEnum {
+  home,
+  calendarPriority,
+  profile,
+}

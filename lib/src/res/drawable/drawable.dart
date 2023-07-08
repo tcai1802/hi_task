@@ -9,6 +9,7 @@ abstract class Drawable {
   String get imgNoImage;
   String get imgVerifyAccount;
   String get imgSuccessVerify;
+  String get imgPriorityTaskCard;
 
   //Icons
   // Note: Only usings icons with .svg format
@@ -19,4 +20,7 @@ abstract class Drawable {
   String get iconFacebook;
   String get iconGithub;
   String get iconPerson;
+  String get iconHome;
+  String get iconCalendar;
+  String get iconProfile;
 }

@@ -17,6 +17,7 @@ class ImageBaseWidget extends StatelessWidget {
     this.imageHeight,
     this.boxFit = BoxFit.cover,
     this.imgNotFoundUrl,
+    this.imgColor,
   });
   final ImageTypeEnum imageType;
   final String imageUrl;
@@ -25,6 +26,7 @@ class ImageBaseWidget extends StatelessWidget {
   final double? imageHeight;
   final String? imgNotFoundUrl;
   final BoxFit boxFit;
+  final Color? imgColor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,12 +61,16 @@ class ImageBaseWidget extends StatelessWidget {
           width: imageWidth,
           height: imageHeight,
           fit: boxFit,
+          colorFilter: imgColor != null
+              ? ColorFilter.mode(imgColor!, BlendMode.srcIn)
+              : null,
           placeholderBuilder: (context) => _errorWidget(),
         );
       case ImageTypeEnum.netWork: //don't use, using later if necessary
         return imageFile != null ? Image.file(imageFile!) : Container();
       default:
-        return _errorWidget();
+        //return _errorWidget();
+        return Icon(Icons.error);
     }
   }
 
