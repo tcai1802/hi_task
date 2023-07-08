@@ -15,6 +15,9 @@ class AppRoutes extends Routes {
   @override
   String get verifyAccountRoute => "/verify_account";
 
+  @override
+  String get successVerifyRoute => '/success_verify';
+
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == getStartedRoute) {
       return MaterialPageRoute(
@@ -24,7 +27,20 @@ class AppRoutes extends Routes {
       return MaterialPageRoute(
         builder: (context) => const LoginScreen(),
       );
+    } else if (settings.name == registerRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const RegisterScreen(),
+      );
+    } else if (settings.name == verifyAccountRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const VerifyCodeScreen(),
+      );
+    } else if (settings.name == successVerifyRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const SuccessVerifyScreen(),
+      );
     }
+
     return null;
   }
 }

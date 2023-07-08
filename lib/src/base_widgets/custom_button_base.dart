@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hi_task/src/res/colors/app_colors.dart';
+import 'package:hi_task/src/app_context_extension.dart';
 
 class CustomButtonBase extends StatelessWidget {
   const CustomButtonBase({
@@ -10,20 +10,28 @@ class CustomButtonBase extends StatelessWidget {
     this.prefixWidget,
     this.suffixWidget,
     this.onTap,
+    this.widthBtn,
+    this.borderStyle,
+    this.bgColorBtn,
   });
   final String? titleBtn;
   final Widget? prefixWidget;
   final Widget? suffixWidget;
   final EdgeInsets? paddingBtn;
   final Function? onTap;
+  final double? widthBtn;
+  final BoxBorder? borderStyle;
+  final Color? bgColorBtn;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => onTap != null ? onTap!() : () {},
       child: Container(
+        width: widthBtn,
         decoration: BoxDecoration(
-          color: AppColors().brandColor_02,
+          color: bgColorBtn ?? context.resources.color.brandColor_02,
           borderRadius: BorderRadius.circular(10.r),
+          border: borderStyle,
         ),
         padding: paddingBtn ??
             EdgeInsets.symmetric(
@@ -41,7 +49,7 @@ class CustomButtonBase extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
-                        .copyWith(color: AppColors().brandColor_11),
+                        .copyWith(color: context.resources.color.brandColor_11),
                   )
                 : Container(),
             suffixWidget ?? Container()

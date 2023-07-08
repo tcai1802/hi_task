@@ -6,7 +6,6 @@ import 'package:hi_task/src/cubit/carousel_slider_cubit.dart';
 import 'package:hi_task/src/main_observer.dart';
 import 'package:hi_task/src/res/theme/app_theme.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
-import 'package:hi_task/src/view/export.dart';
 
 void main() {
   Bloc.observer = MainObserver();

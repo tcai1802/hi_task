@@ -1,14 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
-import 'package:hi_task/src/res/colors/app_colors.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +18,19 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: 25.h),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: CustomButtonBase(
+                  prefixWidget: Icon(
+                    Icons.arrow_back,
+                    size: 24.sp,
+                    color: context.resources.color.brandColor_11,
+                  ),
+                  paddingBtn: EdgeInsets.all(12.h),
+                  onTap: () => Navigator.of(context).pop(),
+                ),
+              ),
               const Spacer(),
               ImageBaseWidget(
                 imageType: ImageTypeEnum.svgPicture,
@@ -35,14 +46,21 @@ class LoginScreen extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                "Login to your account",
+                "Create your account",
                 style: Theme.of(context).textTheme.bodyLarge!,
               ),
               SizedBox(height: 30.h),
               TextFieldBase(
+                hintText: 'Username',
+                controller: TextEditingController(),
+                iconUrl: context.resources.drawable.iconPerson,
+              ),
+              SizedBox(height: 20.h),
+              TextFieldBase(
                 hintText: 'Email',
                 controller: TextEditingController(),
                 iconUrl: context.resources.drawable.iconEmail,
+                isPass: true,
               ),
               SizedBox(height: 20.h),
               TextFieldBase(
@@ -51,23 +69,21 @@ class LoginScreen extends StatelessWidget {
                 iconUrl: context.resources.drawable.iconLock,
                 isPass: true,
               ),
-              SizedBox(height: 4.h),
-              Row(
-                children: [
-                  const Spacer(),
-                  Text(
-                    "Forgot password?",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: context.resources.color.textColor_02),
-                  ),
-                ],
+              SizedBox(height: 20.h),
+              TextFieldBase(
+                hintText: 'Confirm password',
+                controller: TextEditingController(),
+                iconUrl: context.resources.drawable.iconLock,
+                isPass: true,
               ),
               SizedBox(height: 25.h),
               CustomButtonBase(
-                titleBtn: 'Login',
+                titleBtn: 'Register',
                 widthBtn: double.infinity,
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(AppRoutes().verifyAccountRoute);
+                },
               ),
               SizedBox(height: 35.h),
               Padding(
@@ -143,26 +159,6 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 20.h),
-                child: RichText(
-                  text: TextSpan(
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    children: [
-                      const TextSpan(text: "Don’t have an account? "),
-                      TextSpan(
-                        text: "Sign Up",
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () => Navigator.pushNamed(
-                              context, AppRoutes().registerRoute),
-                        style: TextStyle(
-                          color: context.resources.color.brandColor_02,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
               ),
               const Spacer(),
             ],
