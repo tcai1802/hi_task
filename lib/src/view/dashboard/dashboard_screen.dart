@@ -26,14 +26,15 @@ class DashBoardScreen extends StatelessWidget {
           },
         ),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(vertical: 24.h),
+          padding: EdgeInsets.symmetric(vertical: 20.h),
           decoration:
               BoxDecoration(color: context.resources.color.bgColor, boxShadow: [
             BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                offset: const Offset(0, 2),
-                spreadRadius: 5,
-                blurRadius: 7)
+              color: Colors.grey.withOpacity(0.3),
+              offset: const Offset(0, 1),
+              spreadRadius: 3,
+              blurRadius: 7,
+            )
           ]),
           child: BlocBuilder<NavigationCubit, NavigationState>(
             builder: (context, state) {

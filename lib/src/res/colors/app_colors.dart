@@ -49,4 +49,7 @@ class AppColors extends BaseColors {
 
   @override
   Color get textColor_03 => const Color(0xFFC6C2C2);
+  
+  @override
+  Color get subHeaderColor => const Color(0xFF474747);
 }

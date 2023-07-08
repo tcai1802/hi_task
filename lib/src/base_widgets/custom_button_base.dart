@@ -13,6 +13,7 @@ class CustomButtonBase extends StatelessWidget {
     this.widthBtn,
     this.borderStyle,
     this.bgColorBtn,
+    this.titleStyle,
   });
   final String? titleBtn;
   final Widget? prefixWidget;
@@ -22,6 +23,7 @@ class CustomButtonBase extends StatelessWidget {
   final double? widthBtn;
   final BoxBorder? borderStyle;
   final Color? bgColorBtn;
+  final TextStyle? titleStyle;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -46,10 +48,10 @@ class CustomButtonBase extends StatelessWidget {
             titleBtn != null
                 ? Text(
                     titleBtn!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: context.resources.color.brandColor_11),
+                    style: titleStyle ??
+                        Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              color: context.resources.color.brandColor_11,
+                            ),
                   )
                 : Container(),
             suffixWidget ?? Container()

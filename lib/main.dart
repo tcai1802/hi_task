@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/cubit/carousel_slider_cubit.dart';
+import 'package:hi_task/src/cubit/checkbox/checkbox_cubit.dart';
 import 'package:hi_task/src/cubit/navigation/navigation_cubit.dart';
 import 'package:hi_task/src/main_observer.dart';
 import 'package:hi_task/src/res/theme/app_theme.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => NavigationCubit(),
+            ),
+            BlocProvider(
+              create: (context) => CheckBoxCubit(),
             ),
           ],
           child: MaterialApp(

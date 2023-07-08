@@ -23,4 +23,5 @@ abstract class Drawable {
   String get iconHome;
   String get iconCalendar;
   String get iconProfile;
+  String get iconNotification;
 }

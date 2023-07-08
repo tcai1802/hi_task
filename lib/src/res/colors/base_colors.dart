@@ -25,4 +25,7 @@ abstract class BaseColors {
 
   // Destructive Color
   Color get destructiveColor;
+
+  // Other
+  Color get subHeaderColor;
 }
