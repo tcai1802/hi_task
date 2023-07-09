@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/custom_button_base.dart';
-import 'package:hi_task/src/res/routes/app_routes.dart';
 
-class TaskCheckBox extends StatefulWidget {
-  const TaskCheckBox({
+class PriorityTaskCheckBox extends StatefulWidget {
+  const PriorityTaskCheckBox({
     super.key,
   });
 
   @override
-  State<TaskCheckBox> createState() => _TaskCheckBoxState();
+  State<PriorityTaskCheckBox> createState() => _TaskCheckBoxState();
 }
 
-class _TaskCheckBoxState extends State<TaskCheckBox> {
+class _TaskCheckBoxState extends State<PriorityTaskCheckBox> {
   bool isCheck = false;
   @override
   void initState() {
@@ -78,7 +77,11 @@ class _TaskCheckBoxState extends State<TaskCheckBox> {
           ),
         ),
         onTap: () {
-          Navigator.pushNamed(context, AppRoutes().dailyTaskDetailsRoute);
+          if (mounted) {
+            setState(() {
+              isCheck = !isCheck;
+            });
+          }
         },
       ),
     );

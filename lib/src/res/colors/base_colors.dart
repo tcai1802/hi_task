@@ -19,6 +19,7 @@ abstract class BaseColors {
   Color get brandColor_10;
   Color get brandColor_11;
   // Text color list
+  Color get textColor;
   Color get textColor_01;
   Color get textColor_02;
   Color get textColor_03;
