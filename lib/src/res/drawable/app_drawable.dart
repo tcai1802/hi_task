@@ -59,4 +59,7 @@ class AppDrawable extends Drawable {
 
   @override
   String get iconNotification => "${iconBasePath}ic_notification.svg";
+
+  @override
+  String get iconCheckBox => "${iconBasePath}ic_checkbox.svg";
 }

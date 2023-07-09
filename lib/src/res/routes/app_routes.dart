@@ -22,10 +22,13 @@ class AppRoutes extends Routes {
   String get dashBoardRoute => '/dashboard';
 
   @override
-  String get dailyTaskDetailsRoute => 'daily_task_details';
+  String get dailyTaskDetailsRoute => '/daily_task_details';
 
   @override
-  String get priorityTaskDetailsRoute => 'priority_task_details';
+  String get priorityTaskDetailsRoute => '/priority_task_details';
+
+  @override
+  String get notifyRoute => '/notify';
 
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == getStartedRoute) {
@@ -59,6 +62,10 @@ class AppRoutes extends Routes {
     } else if (settings.name == priorityTaskDetailsRoute) {
       return MaterialPageRoute(
         builder: (context) => const PriorityTaskDetailsScreen(),
+      );
+    } else if (settings.name == notifyRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const NotifyScreen(),
       );
     }
     return null;

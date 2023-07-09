@@ -7,4 +7,5 @@ abstract class Routes {
   String get dashBoardRoute;
   String get priorityTaskDetailsRoute;
   String get dailyTaskDetailsRoute;
+  String get notifyRoute;
 }

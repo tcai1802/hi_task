@@ -98,22 +98,17 @@ class DailyTaskDetailsScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _timeWidget(
-                      context,
-                      time: "0",
-                      timeType: "months",
-                    ),
                     SizedBox(width: 10.w),
                     _timeWidget(
                       context,
                       time: "20",
-                      timeType: "days",
+                      timeType: "hours",
                     ),
                     SizedBox(width: 10.w),
                     _timeWidget(
                       context,
                       time: "18",
-                      timeType: "hours",
+                      timeType: "minutes",
                     ),
                   ],
                 ),

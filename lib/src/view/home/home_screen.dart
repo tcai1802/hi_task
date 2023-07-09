@@ -28,10 +28,14 @@ class HomeScreen extends StatelessWidget {
                       ),
                 ),
                 const Spacer(),
-                ImageBaseWidget(
-                  imageType: ImageTypeEnum.svgPicture,
-                  imageUrl: context.resources.drawable.iconNotification,
-                  imageWidth: 24.w,
+                GestureDetector(
+                  onTap: () =>
+                      Navigator.pushNamed(context, AppRoutes().notifyRoute),
+                  child: ImageBaseWidget(
+                    imageType: ImageTypeEnum.svgPicture,
+                    imageUrl: context.resources.drawable.iconNotification,
+                    imageWidth: 24.w,
+                  ),
                 )
               ],
             ),
