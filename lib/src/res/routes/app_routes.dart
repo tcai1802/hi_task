@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hi_task/src/res/arguments/add_task_argument.dart';
+import 'package:hi_task/src/res/arguments/edit_task_argument.dart';
 import 'package:hi_task/src/res/routes/routes.dart';
 import 'package:hi_task/src/view/export.dart';
 
@@ -31,6 +33,9 @@ class AppRoutes extends Routes {
   String get notifyRoute => '/notify';
   @override
   String get addTaskRoute => '/add_task';
+
+  @override
+  String get editTaskRoute => '/edit_task';
 
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == getStartedRoute) {
@@ -70,8 +75,19 @@ class AppRoutes extends Routes {
         builder: (context) => const NotifyScreen(),
       );
     } else if (settings.name == addTaskRoute) {
+      final args = settings.arguments as AddTaskArgument;
       return MaterialPageRoute(
-        builder: (context) => const AddTaskScreen(),
+        builder: (context) => AddTaskScreen(
+          taskTypeEnum: args.taskTypeEnum,
+        ),
+      );
+    } else if (settings.name == editTaskRoute) {
+      final args = settings.arguments as EditTaskArgument;
+
+      return MaterialPageRoute(
+        builder: (context) => EditTaskScreen(
+          taskTypeEnum: args.taskTypeEnum,
+        ),
       );
     }
     return null;

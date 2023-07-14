@@ -12,3 +12,4 @@ export 'daily_task_details/daily_task_details_screen.dart';
 export 'priority_task_details/priority_task_details_screen.dart';
 export 'notify/notify_screen.dart';
 export 'add_task/add_task_screen.dart';
+export 'edit_task/edit_task_screen.dart';

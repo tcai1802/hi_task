@@ -11,3 +11,5 @@ enum NavbarEnum {
   calendarPriority,
   profile,
 }
+
+enum TaskTypeEnum { dailyTask, priorityTask }

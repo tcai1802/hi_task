@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
+import 'package:hi_task/src/res/arguments/edit_task_argument.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/view/calendar/components/exports.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CalendarPriorityScreen extends StatefulWidget {
   const CalendarPriorityScreen({super.key});
@@ -48,8 +48,11 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                   ),
                   titleBtn: "Add task",
                   paddingBtn: EdgeInsets.all(10.h),
-                  onTap: () =>
-                      Navigator.pushNamed(context, AppRoutes().addTaskRoute),
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    AppRoutes().editTaskRoute,
+                    arguments: EditTaskArgument(TaskTypeEnum.priorityTask),
+                  ),
                 ),
               ],
             ),

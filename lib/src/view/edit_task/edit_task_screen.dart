@@ -4,8 +4,8 @@ import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 
-class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({
+class EditTaskScreen extends StatelessWidget {
+  const EditTaskScreen({
     super.key,
     required this.taskTypeEnum,
   });
@@ -13,7 +13,7 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBarWithBodyBase(
-      title: "Add task",
+      title: "Edit task",
       primaryColor: context.resources.color.brandColor_11,
       backgroundColor: context.resources.color.brandColor_02,
       bgAppBarColor: context.resources.color.brandColor_02,
@@ -33,6 +33,17 @@ class AddTaskScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "UI Design",
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: context.resources.color.brandColor_02,
+                      ),
+                ),
+              ),
+              SizedBox(height: 34.h),
               Row(
                 children: [
                   Expanded(
@@ -147,54 +158,13 @@ class AddTaskScreen extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: taskTypeEnum == TaskTypeEnum.priorityTask
-                        ? CustomButtonBase(
-                            titleBtn: 'Priority Task',
-                            paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
-                            onTap: () {},
-                          )
-                        : CustomButtonBase(
-                            titleBtn: 'Priority Task',
-                            paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
-                            onTap: () {},
-                            bgColorBtn: Colors.transparent,
-                            borderStyle: Border.all(
-                              color: context.resources.color.brandColor_02
-                                  .withOpacity(.1),
-                            ),
-                            titleStyle: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: context.resources.color.brandColor_02,
-                                ),
-                          ),
-                  ),
-                  SizedBox(width: 5.w),
-                  Expanded(
-                    child: taskTypeEnum == TaskTypeEnum.dailyTask
-                        ? CustomButtonBase(
-                            titleBtn: 'Daily Task',
-                            paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
-                            onTap: () {},
-                          )
-                        : CustomButtonBase(
-                            titleBtn: 'Daily Task',
-                            paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
-                            onTap: () {},
-                            bgColorBtn: Colors.transparent,
-                            borderStyle: Border.all(
-                              color: context.resources.color.brandColor_02
-                                  .withOpacity(.1),
-                            ),
-                            titleStyle: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: context.resources.color.brandColor_02,
-                                ),
-                          ),
-                  ),
+                      child: CustomButtonBase(
+                    titleBtn: taskTypeEnum == TaskTypeEnum.priorityTask
+                        ? 'Priority Task'
+                        : 'Daily Task',
+                    paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
+                    onTap: () {},
+                  )),
                 ],
               ),
               SizedBox(height: 30.h),
@@ -272,7 +242,7 @@ class AddTaskScreen extends StatelessWidget {
                 ),
               SizedBox(height: 50.h),
               CustomButtonBase(
-                titleBtn: 'Create task',
+                titleBtn: 'Update',
                 widthBtn: double.infinity,
                 paddingBtn:
                     EdgeInsets.symmetric(vertical: 15.h, horizontal: 12.w),
