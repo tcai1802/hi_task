@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
-import 'package:hi_task/src/view/calendar_priority/components/exports.dart';
+import 'package:hi_task/src/res/routes/app_routes.dart';
+import 'package:hi_task/src/view/calendar/components/exports.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CalendarPriorityScreen extends StatefulWidget {
@@ -47,6 +48,8 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                   ),
                   titleBtn: "Add task",
                   paddingBtn: EdgeInsets.all(10.h),
+                  onTap: () =>
+                      Navigator.pushNamed(context, AppRoutes().addTaskRoute),
                 ),
               ],
             ),
@@ -55,7 +58,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
             initialDate: DateTime.now(),
             onDateChange: (selectedDate) {
               //[selectedDate] the new date selected.
-              print("selected date: ${selectedDate}");
+              //print("selected date: ${selectedDate}");
             },
             headerProps: const EasyHeaderProps(
               showHeader: false,
@@ -79,7 +82,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                     margin: EdgeInsets.only(right: 10.w),
                     height: isSelected ? 64.h : 50.h,
                     width: isSelected ? 64.h : 50.h,
-                    duration: Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 200),
                     curve: Curves.easeOut,
                     decoration: BoxDecoration(
                       color: isSelected

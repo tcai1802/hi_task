@@ -11,15 +11,18 @@ class TextFieldBase extends StatelessWidget {
     this.hintText = "",
     this.isPass = false,
     required this.controller,
+    this.maxLines,
   });
   final String? iconUrl;
   final String hintText;
   final bool isPass;
   final TextEditingController controller;
+  final int? maxLines;
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      maxLines: maxLines ?? 1,
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             color: context.resources.color.textColor_01,
           ),

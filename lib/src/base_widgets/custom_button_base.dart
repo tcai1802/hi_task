@@ -14,6 +14,7 @@ class CustomButtonBase extends StatelessWidget {
     this.borderStyle,
     this.bgColorBtn,
     this.titleStyle,
+    this.mainAxisAlignment,
   });
   final String? titleBtn;
   final Widget? prefixWidget;
@@ -24,6 +25,7 @@ class CustomButtonBase extends StatelessWidget {
   final BoxBorder? borderStyle;
   final Color? bgColorBtn;
   final TextStyle? titleStyle;
+  final MainAxisAlignment? mainAxisAlignment;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -42,7 +44,7 @@ class CustomButtonBase extends StatelessWidget {
             ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
           children: [
             prefixWidget ?? Container(),
             titleBtn != null

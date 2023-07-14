@@ -29,6 +29,8 @@ class AppRoutes extends Routes {
 
   @override
   String get notifyRoute => '/notify';
+  @override
+  String get addTaskRoute => '/add_task';
 
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == getStartedRoute) {
@@ -66,6 +68,10 @@ class AppRoutes extends Routes {
     } else if (settings.name == notifyRoute) {
       return MaterialPageRoute(
         builder: (context) => const NotifyScreen(),
+      );
+    } else if (settings.name == addTaskRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const AddTaskScreen(),
       );
     }
     return null;

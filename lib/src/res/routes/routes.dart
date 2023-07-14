@@ -8,4 +8,5 @@ abstract class Routes {
   String get priorityTaskDetailsRoute;
   String get dailyTaskDetailsRoute;
   String get notifyRoute;
+  String get addTaskRoute;
 }

@@ -10,15 +10,20 @@ class AppBarWithBodyBase extends StatelessWidget {
     this.bodyWidget,
     this.bgAppBarColor,
     this.enableBorder = false,
+    this.backgroundColor,
+    this.primaryColor,
   });
   final String title;
   final Widget? bodyWidget;
   final Color? bgAppBarColor;
   final bool enableBorder;
+  final Color? backgroundColor;
+  final Color? primaryColor;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor ?? context.resources.color.bgColor,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -43,10 +48,12 @@ class AppBarWithBodyBase extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomButtonBase(
+                        bgColorBtn: primaryColor,
                         prefixWidget: Icon(
                           Icons.arrow_back,
                           size: 24.h,
-                          color: context.resources.color.brandColor_11,
+                          color: backgroundColor ??
+                              context.resources.color.brandColor_11,
                         ),
                         paddingBtn: EdgeInsets.all(10.h),
                         onTap: () => Navigator.of(context).pop(),
@@ -61,7 +68,8 @@ class AppBarWithBodyBase extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                          color: context.resources.color.brandColor_02,
+                          color: primaryColor ??
+                              context.resources.color.brandColor_02,
                           fontWeight: FontWeight.w600,
                         ),
                   ),
