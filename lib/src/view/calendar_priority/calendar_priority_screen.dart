@@ -1,8 +1,10 @@
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
+import 'package:hi_task/src/view/calendar_priority/components/exports.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CalendarPriorityScreen extends StatefulWidget {
@@ -13,8 +15,7 @@ class CalendarPriorityScreen extends StatefulWidget {
 }
 
 class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
-  final ItemScrollController itemScrollController = ItemScrollController();
-  int currentIndex = 0;
+  int currentTabIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,35 +51,38 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
               ],
             ),
           ),
-          Container(
-            //height: 64.w,
-            constraints: new BoxConstraints(
-              minHeight: 56.w,
-              maxHeight: 64.w,
+          EasyDateTimeLine(
+            initialDate: DateTime.now(),
+            onDateChange: (selectedDate) {
+              //[selectedDate] the new date selected.
+              print("selected date: ${selectedDate}");
+            },
+            headerProps: const EasyHeaderProps(
+              showHeader: false,
+              showMonthPicker: false,
             ),
-            child: ScrollablePositionedList.builder(
-              itemScrollController: itemScrollController,
-              itemCount: 200,
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  itemScrollController.jumpTo(index: 40 - 2);
-                  if (mounted) {
-                    setState(() {
-                      currentIndex = 40;
-                    });
-                  }
-                },
-                child: Center(
-                  child: AnimatedContainer(
+            activeColor: const Color(0xffFFBF9B),
+            dayProps: EasyDayProps(
+              dayStructure: DayStructure.dayNumDayStr,
+              inactiveBorderRadius: 10.r,
+              activeDayDecoration: null,
+              activeBorderRadius: 10.r,
+              height: 64.h,
+            ),
+            itemBuilder:
+                (context, dayNumber, dayName, monthName, fullDate, isSelected) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AnimatedContainer(
                     margin: EdgeInsets.only(right: 10.w),
-                    height: index == currentIndex ? 64.w : 56.w,
-                    width: index == currentIndex ? 64.w : 56.w,
+                    height: isSelected ? 64.h : 50.h,
+                    width: isSelected ? 64.h : 50.h,
                     duration: Duration(milliseconds: 200),
                     curve: Curves.easeOut,
                     decoration: BoxDecoration(
-                      color: index == currentIndex
+                      color: isSelected
                           ? context.resources.color.brandColor_02
                           : Color(0xFFEBF2FF),
                       borderRadius: BorderRadius.circular(10.r),
@@ -87,32 +91,125 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Mon",
+                          dayName,
                           style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: index == currentIndex
+                              Theme.of(context).textTheme.bodySmall!.copyWith(
+                                    color: isSelected
                                         ? context.resources.color.brandColor_10
                                         : context.resources.color.brandColor_02,
                                   ),
                         ),
                         Text(
-                          "${index}",
-                          style:
-                              Theme.of(context).textTheme.labelMedium!.copyWith(
-                                    color: index == currentIndex
-                                        ? context.resources.color.brandColor_10
-                                        : context.resources.color.brandColor_02,
+                          dayNumber,
+                          style: isSelected
+                              ? Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                    color:
+                                        context.resources.color.brandColor_10,
+                                    fontWeight: FontWeight.w700,
+                                  )
+                              : Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color:
+                                        context.resources.color.brandColor_02,
                                     fontWeight: FontWeight.w700,
                                   ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              ),
-            ),
+                ],
+              );
+            },
           ),
+          SizedBox(height: 30.h),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  _taskTabBar(
+                    context,
+                    title: "Priority Task",
+                    index: 0,
+                  ),
+                  _taskTabBar(
+                    context,
+                    title: "Daily Task",
+                    index: 1,
+                  )
+                ],
+              )
+            ],
+          ),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20.w),
+              child: currentTabIndex == 0
+                  ? ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return const PriorityCard();
+                      },
+                    )
+                  : ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return const DailyTaskItem();
+                      },
+                    ),
+            ),
+          )
         ],
+      ),
+    );
+  }
+
+  Widget _taskTabBar(
+    BuildContext context, {
+    required String title,
+    required int index,
+  }) {
+    return Expanded(
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          if (mounted) {
+            setState(() {
+              currentTabIndex = index;
+            });
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: Column(
+            children: [
+              Text(
+                "Priority Task",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: index == currentTabIndex
+                          ? context.resources.color.brandColor_02
+                          : context.resources.color.subHeaderColor,
+                    ),
+              ),
+              SizedBox(height: 4.h),
+              AnimatedContainer(
+                width: index == currentTabIndex ? 20.w : 0.w,
+                height: 2.h,
+                decoration: BoxDecoration(
+                  color: context.resources.color.brandColor_02,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeIn,
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
