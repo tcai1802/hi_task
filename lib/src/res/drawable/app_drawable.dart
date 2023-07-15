@@ -62,4 +62,11 @@ class AppDrawable extends Drawable {
 
   @override
   String get iconCheckBox => "${iconBasePath}ic_checkbox.svg";
+
+  @override
+  String get iconLeftCaretForward => "${iconBasePath}ic_left_caret_forward.svg";
+
+  @override
+  String get iconRightCaretForward =>
+      "${iconBasePath}ic_right_caret_forward.svg";
 }

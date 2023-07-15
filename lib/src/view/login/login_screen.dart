@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
-import 'package:hi_task/src/res/colors/app_colors.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 

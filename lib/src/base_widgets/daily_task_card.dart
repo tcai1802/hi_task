@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/custom_button_base.dart';
-import 'package:hi_task/src/res/routes/app_routes.dart';
 
 class DailyTaskCard extends StatefulWidget {
   const DailyTaskCard({
