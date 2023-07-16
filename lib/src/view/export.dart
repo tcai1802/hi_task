@@ -14,3 +14,4 @@ export 'notify/notify_screen.dart';
 export 'add_task/add_task_screen.dart';
 export 'edit_task/edit_task_screen.dart';
 export 'my_profile/my_profile_screen.dart';
+export 'statistic/statistic_screen.dart';

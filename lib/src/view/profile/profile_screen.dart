@@ -13,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.resources.color.bgColor,
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: Stack(
@@ -195,7 +195,8 @@ class ProfileScreen extends StatelessWidget {
                             ProfileMenuOption(
                               iconUrl: context.resources.drawable.iconChart,
                               title: "Statistic",
-                              onTap: () {},
+                              onTap: () => Navigator.pushNamed(
+                                  context, AppRoutes().statisticScreen),
                             ),
                             ProfileMenuOption(
                               iconUrl: context.resources.drawable.iconLocation,

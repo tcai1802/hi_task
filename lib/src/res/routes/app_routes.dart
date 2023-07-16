@@ -41,6 +41,9 @@ class AppRoutes extends Routes {
   @override
   String get myProfileRoute => '/my_profile';
 
+  @override
+  String get statisticScreen => '/statistic';
+
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == getStartedRoute) {
       return MaterialPageRoute(
@@ -95,7 +98,11 @@ class AppRoutes extends Routes {
       );
     } else if (settings.name == myProfileRoute) {
       return MaterialPageRoute(
-        builder: (context) => MyProfileScreen(),
+        builder: (context) => const MyProfileScreen(),
+      );
+    } else if (settings.name == statisticScreen) {
+      return MaterialPageRoute(
+        builder: (context) => const StatisticScreen(),
       );
     }
     return null;
