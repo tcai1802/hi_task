@@ -47,6 +47,9 @@ class AppRoutes extends Routes {
   @override
   String get locationRoute => '/location';
 
+  @override
+  String get settingsRoute => '/settings';
+
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == getStartedRoute) {
       return MaterialPageRoute(
@@ -110,6 +113,10 @@ class AppRoutes extends Routes {
     } else if (settings.name == locationRoute) {
       return MaterialPageRoute(
         builder: (context) => const LocationScreen(),
+      );
+    } else if (settings.name == settingsRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
       );
     }
     return null;

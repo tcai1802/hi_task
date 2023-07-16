@@ -16,3 +16,4 @@ export 'edit_task/edit_task_screen.dart';
 export 'my_profile/my_profile_screen.dart';
 export 'statistic/statistic_screen.dart';
 export 'location/location_screen.dart';
+export 'settings/settings_screen.dart';

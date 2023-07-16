@@ -87,4 +87,19 @@ class AppDrawable extends Drawable {
 
   @override
   String get iconEdit => "${iconBasePath}ic_edit.svg";
+
+  @override
+  String get iconHelp => "${iconBasePath}ic_help.svg";
+
+  @override
+  String get iconInformation => "${iconBasePath}ic_information.svg";
+
+  @override
+  String get iconLockClosed => "${iconBasePath}ic_lock_closed.svg";
+
+  @override
+  String get iconPeople => "${iconBasePath}ic_people.svg";
+
+  @override
+  String get iconSync => "${iconBasePath}ic_sync.svg";
 }

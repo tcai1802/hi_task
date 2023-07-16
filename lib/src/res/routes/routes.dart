@@ -13,4 +13,5 @@ abstract class Routes {
   String get myProfileRoute;
   String get statisticRoute;
   String get locationRoute;
+  String get settingsRoute;
 }

@@ -207,7 +207,8 @@ class ProfileScreen extends StatelessWidget {
                             ProfileMenuOption(
                               iconUrl: context.resources.drawable.iconSetting,
                               title: "Settings",
-                              onTap: () {},
+                              onTap: () => Navigator.pushNamed(
+                                  context, AppRoutes().settingsRoute),
                             ),
                             ProfileMenuOption(
                               iconUrl: context.resources.drawable.iconLogOut,

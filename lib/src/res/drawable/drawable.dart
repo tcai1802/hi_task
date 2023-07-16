@@ -33,4 +33,9 @@ abstract class Drawable {
   String get iconSetting;
   String get iconLogOut;
   String get iconEdit;
+  String get iconHelp;
+  String get iconInformation;
+  String get iconLockClosed;
+  String get iconPeople;
+  String get iconSync;
 }
