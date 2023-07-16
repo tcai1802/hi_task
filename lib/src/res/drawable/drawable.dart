@@ -10,6 +10,7 @@ abstract class Drawable {
   String get imgVerifyAccount;
   String get imgSuccessVerify;
   String get imgPriorityTaskCard;
+  String get imgFakeMap;
 
   //Icons
   // Note: Only usings icons with .svg format

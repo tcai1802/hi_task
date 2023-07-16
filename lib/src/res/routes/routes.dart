@@ -11,5 +11,6 @@ abstract class Routes {
   String get addTaskRoute;
   String get editTaskRoute;
   String get myProfileRoute;
-  String get statisticScreen;
+  String get statisticRoute;
+  String get locationRoute;
 }

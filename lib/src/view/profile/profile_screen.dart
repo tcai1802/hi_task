@@ -196,12 +196,13 @@ class ProfileScreen extends StatelessWidget {
                               iconUrl: context.resources.drawable.iconChart,
                               title: "Statistic",
                               onTap: () => Navigator.pushNamed(
-                                  context, AppRoutes().statisticScreen),
+                                  context, AppRoutes().statisticRoute),
                             ),
                             ProfileMenuOption(
                               iconUrl: context.resources.drawable.iconLocation,
                               title: "Location",
-                              onTap: () {},
+                              onTap: () => Navigator.pushNamed(
+                                  context, AppRoutes().locationRoute),
                             ),
                             ProfileMenuOption(
                               iconUrl: context.resources.drawable.iconSetting,

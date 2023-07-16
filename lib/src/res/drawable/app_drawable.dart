@@ -26,6 +26,9 @@ class AppDrawable extends Drawable {
   @override
   String get imgPriorityTaskCard =>
       "${imageBasePath}priority_task_card_home.svg";
+
+  @override
+  String get imgFakeMap => "${imageBasePath}fake_map.png";
   // Get Icons
   @override
   String get iconAdd => "${iconBasePath}ic_add.svg";
