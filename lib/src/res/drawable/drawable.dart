@@ -27,4 +27,9 @@ abstract class Drawable {
   String get iconCheckBox;
   String get iconLeftCaretForward;
   String get iconRightCaretForward;
+  String get iconChart;
+  String get iconLocation;
+  String get iconSetting;
+  String get iconLogOut;
+  String get iconEdit;
 }

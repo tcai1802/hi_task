@@ -31,11 +31,15 @@ class AppRoutes extends Routes {
 
   @override
   String get notifyRoute => '/notify';
+
   @override
   String get addTaskRoute => '/add_task';
 
   @override
   String get editTaskRoute => '/edit_task';
+
+  @override
+  String get myProfileRoute => '/my_profile';
 
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == getStartedRoute) {
@@ -88,6 +92,10 @@ class AppRoutes extends Routes {
         builder: (context) => EditTaskScreen(
           taskTypeEnum: args.taskTypeEnum,
         ),
+      );
+    } else if (settings.name == myProfileRoute) {
+      return MaterialPageRoute(
+        builder: (context) => MyProfileScreen(),
       );
     }
     return null;

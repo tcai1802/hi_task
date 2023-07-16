@@ -7,3 +7,4 @@ export 'app_bar_with_content_base.dart';
 export 'daily_task_card.dart';
 export 'dialog_base.dart';
 export 'calendar_base.dart';
+export 'circle_avatar.dart';

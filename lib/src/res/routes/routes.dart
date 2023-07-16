@@ -10,4 +10,5 @@ abstract class Routes {
   String get notifyRoute;
   String get addTaskRoute;
   String get editTaskRoute;
+  String get myProfileRoute;
 }
