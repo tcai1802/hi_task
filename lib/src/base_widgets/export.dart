@@ -5,6 +5,7 @@ export 'custom_button_base.dart';
 export 'text_field_base.dart';
 export 'app_bar_with_content_base.dart';
 export 'daily_task_card.dart';
-export 'dialog_base.dart';
+//export 'dialog_base.dart';
 export 'calendar_base.dart';
 export 'circle_avatar.dart';
+export 'show_dialog_base.dart';

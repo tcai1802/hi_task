@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
-import 'package:hi_task/src/base_widgets/calendar_dialog.dart';
+import 'package:hi_task/src/base_widgets/show_dialog_base.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
+import 'package:hi_task/src/view/add_task/components/edit_todo_widget.dart';
+import 'package:hi_task/src/view/add_task/components/exports.dart';
 
 class AddTaskScreen extends StatelessWidget {
   const AddTaskScreen({
@@ -70,7 +72,7 @@ class AddTaskScreen extends StatelessWidget {
                           ),
                           mainAxisAlignment: MainAxisAlignment.start,
                           onTap: () => {
-                            showCalendarDialog(context, const CalendarBase()),
+                            showDialogBase(context, const CalendarBase()),
                           },
                           titleStyle:
                               Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -115,7 +117,7 @@ class AddTaskScreen extends StatelessWidget {
                           ),
                           mainAxisAlignment: MainAxisAlignment.start,
                           onTap: () => {
-                            showCalendarDialog(context, const CalendarBase()),
+                            showDialogBase(context, const CalendarBase()),
                           },
                           titleStyle:
                               Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -239,7 +241,13 @@ class AddTaskScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           paddingBtn: EdgeInsets.symmetric(
                               vertical: 15.h, horizontal: 12.w),
-                          onTap: () {},
+                          onDoubleTap: () {
+                            //successWidget(
+                            //  context,
+                            //  content: "new task has been created successfully",
+                            //);
+                            newTodoWidget(context);
+                          },
                           bgColorBtn: Colors.transparent,
                           borderStyle: Border.all(
                             color: context.resources.color.brandColor_02

@@ -15,12 +15,16 @@ class CustomButtonBase extends StatelessWidget {
     this.bgColorBtn,
     this.titleStyle,
     this.mainAxisAlignment,
+    this.onLongPress,
+    this.onDoubleTap,
   });
   final String? titleBtn;
   final Widget? prefixWidget;
   final Widget? suffixWidget;
   final EdgeInsets? paddingBtn;
   final Function? onTap;
+  final Function? onLongPress;
+  final Function? onDoubleTap;
   final double? widthBtn;
   final BoxBorder? borderStyle;
   final Color? bgColorBtn;
@@ -30,6 +34,8 @@ class CustomButtonBase extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => onTap != null ? onTap!() : () {},
+      onLongPress: () => onLongPress != null ? onLongPress!() : () {},
+      onDoubleTap: () => onDoubleTap != null ? onDoubleTap!() : () {},
       child: Container(
         width: widthBtn,
         decoration: BoxDecoration(

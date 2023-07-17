@@ -9,7 +9,7 @@ class PriorityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 138.h,
-      margin: EdgeInsets.only( top: 20.h),
+      margin: EdgeInsets.only(top: 20.h),
       decoration: BoxDecoration(
         color: context.resources.color.bgColor,
         border: Border.all(

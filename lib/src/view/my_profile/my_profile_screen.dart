@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
-import 'package:hi_task/src/base_widgets/calendar_dialog.dart';
+import 'package:hi_task/src/base_widgets/show_dialog_base.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 
@@ -109,7 +109,7 @@ class MyProfileScreen extends StatelessWidget {
                 ),
                 mainAxisAlignment: MainAxisAlignment.start,
                 onTap: () => {
-                  showCalendarDialog(context, const CalendarBase()),
+                  showDialogBase(context, const CalendarBase()),
                 },
                 titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: context.resources.color.textColor,
