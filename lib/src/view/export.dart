@@ -17,3 +17,5 @@ export 'my_profile/my_profile_screen.dart';
 export 'statistic/statistic_screen.dart';
 export 'location/location_screen.dart';
 export 'settings/settings_screen.dart';
+export 'settings_notification/settings_notification_screen.dart';
+export 'settings_security/settings_security_screen.dart';

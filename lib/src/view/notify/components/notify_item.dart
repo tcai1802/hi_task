@@ -19,22 +19,24 @@ class NotifyItem extends StatelessWidget {
             imageUrl: context.resources.drawable.iconCheckBox,
           ),
           SizedBox(width: 10.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "UI Task less than 8 days",
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
-              Text(
-                "Well done Phillip, you have completed all the tasks for today",
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Color(0xFF474747),
-                    ),
-              )
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "UI Task less than 8 days",
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                Text(
+                  "Well done Phillip, you have completed all the tasks for today",
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Color(0xFF474747),
+                      ),
+                )
+              ],
+            ),
           )
         ],
       ),

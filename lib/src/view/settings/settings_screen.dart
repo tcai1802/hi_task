@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
-import 'package:hi_task/src/res/enum/app_enum.dart';
+import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/view/settings/components/exports.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -37,10 +37,18 @@ class SettingsScreen extends StatelessWidget {
                 SettingOption(
                   iconUrl: context.resources.drawable.iconNotification,
                   title: "Notification",
+                  onTap: () {
+                    Navigator.pushNamed(
+                        context, AppRoutes().settingsNotificationRoute);
+                  },
                 ),
                 SettingOption(
                   iconUrl: context.resources.drawable.iconLockClosed,
                   title: "Security",
+                  onTap: () {
+                    Navigator.pushNamed(
+                        context, AppRoutes().settingsSecurityRoute);
+                  },
                 ),
                 SettingOption(
                   iconUrl: context.resources.drawable.iconHelp,

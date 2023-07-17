@@ -19,6 +19,8 @@ class SettingOption extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap != null ? onTap!() : () {},
       child: Container(
+        color: Colors.transparent,
+        width: double.infinity,
         margin: EdgeInsets.only(top: 20.h),
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 45.h),
         child: Row(
