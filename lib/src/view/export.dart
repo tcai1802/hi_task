@@ -19,3 +19,6 @@ export 'location/location_screen.dart';
 export 'settings/settings_screen.dart';
 export 'settings_notification/settings_notification_screen.dart';
 export 'settings_security/settings_security_screen.dart';
+export 'settings_help/settings_help_screen.dart';
+export 'settings_update_system/settings_update_system_screen.dart';
+export 'settings_about/settings_about.dart';

@@ -56,6 +56,15 @@ class AppRoutes extends Routes {
   @override
   String get settingsSecurityRoute => '/settings_security';
 
+  @override
+  String get settingsHelpRoute => '/settings_help';
+
+  @override
+  String get settingsUpdateSystemRoute => '/settings_update_system';
+
+  @override
+  String get settingsAbout => '/settings_about';
+
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == getStartedRoute) {
       return MaterialPageRoute(
@@ -131,6 +140,18 @@ class AppRoutes extends Routes {
     } else if (settings.name == settingsSecurityRoute) {
       return MaterialPageRoute(
         builder: (context) => const SettingsSecurityScreen(),
+      );
+    } else if (settings.name == settingsHelpRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const SettingsHelpScreen(),
+      );
+    } else if (settings.name == settingsUpdateSystemRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const SettingsUpdateSystemScreen(),
+      );
+    } else if (settings.name == settingsAbout) {
+      return MaterialPageRoute(
+        builder: (context) => const SettingsAboutScreen(),
       );
     }
     return null;

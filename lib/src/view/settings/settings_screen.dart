@@ -53,19 +53,28 @@ class SettingsScreen extends StatelessWidget {
                 SettingOption(
                   iconUrl: context.resources.drawable.iconHelp,
                   title: "Help",
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes().settingsHelpRoute);
+                  },
                 ),
                 SettingOption(
                   iconUrl: context.resources.drawable.iconSync,
                   title: "Update System",
+                  onTap: () {
+                    Navigator.pushNamed(
+                        context, AppRoutes().settingsUpdateSystemRoute);
+                  },
                 ),
                 SettingOption(
                   iconUrl: context.resources.drawable.iconInformation,
                   title: "About",
+                  onTap: () =>
+                      Navigator.pushNamed(context, AppRoutes().settingsAbout),
                 ),
-                SettingOption(
-                  iconUrl: context.resources.drawable.iconPeople,
-                  title: "Invite a friend",
-                )
+                //SettingOption(
+                //  iconUrl: context.resources.drawable.iconPeople,
+                //  title: "Invite a friend",
+                //)
               ],
             )),
           ],
