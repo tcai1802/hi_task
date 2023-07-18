@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
+import 'package:hi_task/src/blocs/profile/profile_bloc.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/view/profile/components/exports.dart';
 
@@ -213,7 +215,10 @@ class ProfileScreen extends StatelessWidget {
                             ProfileMenuOption(
                               iconUrl: context.resources.drawable.iconLogOut,
                               title: "Logout",
-                              onTap: () {},
+                              onTap: () => {
+                                //showLogoutPopup(context)
+                                BlocProvider.of<ProfileBloc>(context).Hello()
+                              },
                             )
                           ],
                         ),

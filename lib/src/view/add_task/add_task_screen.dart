@@ -4,7 +4,6 @@ import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/show_dialog_base.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
-import 'package:hi_task/src/view/add_task/components/edit_todo_widget.dart';
 import 'package:hi_task/src/view/add_task/components/exports.dart';
 
 class AddTaskScreen extends StatelessWidget {
