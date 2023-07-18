@@ -1,4 +1,5 @@
 abstract class Routes {
+  String get splashRoute;
   String get getStartedRoute;
   String get loginRoute;
   String get registerRoute;

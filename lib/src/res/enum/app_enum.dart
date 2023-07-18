@@ -12,4 +12,6 @@ enum NavbarEnum {
   profile,
 }
 
+enum StateEnum { init, loading, success, failed }
+
 enum TaskTypeEnum { dailyTask, priorityTask }

@@ -6,6 +6,9 @@ import 'package:hi_task/src/view/export.dart';
 
 class AppRoutes extends Routes {
   @override
+  String get splashRoute => "/splash";
+
+  @override
   String get getStartedRoute => "/get_started";
 
   @override
@@ -66,7 +69,11 @@ class AppRoutes extends Routes {
   String get settingsAbout => '/settings_about';
 
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    if (settings.name == getStartedRoute) {
+    if (settings.name == splashRoute) {
+      return MaterialPageRoute(
+        builder: (context) => const SplashScreen(),
+      );
+    } else if (settings.name == getStartedRoute) {
       return MaterialPageRoute(
         builder: (context) => const GetStartedScreen(),
       );

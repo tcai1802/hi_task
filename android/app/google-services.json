@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1044569108940",
+    "project_id": "hi-task-26519",
+    "storage_bucket": "hi-task-26519.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044569108940:android:f8147953b5bfe86f8b2d69",
+        "android_client_info": {
+          "package_name": "com.example.hi_task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044569108940-jevih9u1b1ktk44i967uv6b8mdoh3np4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hi_task",
+            "certificate_hash": "13c646f283374b1ee8a0168867588153f95511bb"
+          }
+        },
+        {
+          "client_id": "1044569108940-prufa45g1buq080epc786fog7umtu94d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtPjntIalffMLIkV1IgGWoFYOa4ATaivU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044569108940-prufa45g1buq080epc786fog7umtu94d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
