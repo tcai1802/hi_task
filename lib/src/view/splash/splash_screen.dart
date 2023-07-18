@@ -7,8 +7,6 @@ import 'package:hi_task/src/blocs/splash/splash_bloc.dart';
 import 'package:hi_task/src/res/drawable/app_drawable.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
-import 'package:hi_task/src/view/profile/components/exports.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,19 +23,18 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocConsumer<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state.splashState == StateEnum.success) {
-          Navigator.pushNamed(context, AppRoutes().getStartedRoute);
+          if (!state.firstOpenAppState) {
+            Navigator.pushNamed(context, AppRoutes().getStartedRoute);
+          } else {
+            Navigator.pushNamed(context, AppRoutes().loginRoute);
+          }
         } else if (state.splashState == StateEnum.failed) {
-          showLogoutPopup(context);
+          //showLogoutPopup(context);
+          print("Error App");
         }
       },
       builder: (context, state) {

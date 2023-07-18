@@ -50,6 +50,7 @@ dependencies:
   draggable_bottom_sheet: ^1.0.2
   firebase_core: ^2.15.0
   firebase_app_check: ^0.1.5+1
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
