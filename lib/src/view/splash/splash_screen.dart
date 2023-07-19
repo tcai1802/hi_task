@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
           }
         } else if (state.splashState == StateEnum.failed) {
           //showLogoutPopup(context);
-          print("Error App");
+          //print("Error App");
         }
       },
       builder: (context, state) {

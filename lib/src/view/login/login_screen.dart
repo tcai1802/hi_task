@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
+import 'package:hi_task/src/blocs/login/login_bloc.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 
@@ -12,6 +14,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           width: double.infinity,
@@ -42,6 +45,9 @@ class LoginScreen extends StatelessWidget {
                 hintText: 'Email',
                 controller: TextEditingController(),
                 iconUrl: context.resources.drawable.iconEmail,
+                onChange: (String value) {
+                  context.read<LoginBloc>().add(ChangedEmailEvent(value));
+                },
               ),
               SizedBox(height: 20.h),
               TextFieldBase(
@@ -49,6 +55,9 @@ class LoginScreen extends StatelessWidget {
                 controller: TextEditingController(),
                 iconUrl: context.resources.drawable.iconLock,
                 isPass: true,
+                onChange: (String value) {
+                  context.read<LoginBloc>().add(ChangePassEvent(value));
+                },
               ),
               SizedBox(height: 4.h),
               Row(
@@ -64,13 +73,22 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 25.h),
-              CustomButtonBase(
-                titleBtn: 'Login',
-                widthBtn: double.infinity,
-                onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
-                  AppRoutes().dashBoardRoute,
-                  (route) => false,
-                ),
+              BlocBuilder<LoginBloc, LoginState>(
+                buildWhen: (previous, current) =>
+                    previous.isValid != current.isValid,
+                builder: (context, state) {
+                  return CustomButtonBase(
+                    titleBtn: 'Login',
+                    bgColorBtn: !state.isValid ? Colors.grey[300] : null,
+                    widthBtn: double.infinity,
+                    onTap: () => state.isValid
+                        ? Navigator.of(context).pushNamedAndRemoveUntil(
+                            AppRoutes().dashBoardRoute,
+                            (route) => false,
+                          )
+                        : () {},
+                  );
+                },
               ),
               SizedBox(height: 35.h),
               Padding(

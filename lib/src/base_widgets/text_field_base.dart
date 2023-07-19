@@ -12,12 +12,14 @@ class TextFieldBase extends StatelessWidget {
     this.isPass = false,
     required this.controller,
     this.maxLines,
+    this.onChange,
   });
   final String? iconUrl;
   final String hintText;
   final bool isPass;
   final TextEditingController controller;
   final int? maxLines;
+  final Function? onChange;
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -67,6 +69,7 @@ class TextFieldBase extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.r),
         ),
       ),
+      onChanged: (value) => onChange != null ? onChange!(value) : () {},
     );
   }
 }

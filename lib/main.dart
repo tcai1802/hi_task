@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/firebase_options.dart';
+import 'package:hi_task/src/blocs/login/login_bloc.dart';
 import 'package:hi_task/src/blocs/profile/profile_bloc.dart';
 import 'package:hi_task/src/blocs/splash/splash_bloc.dart';
 import 'package:hi_task/src/cubit/carousel_slider_cubit.dart';
@@ -37,21 +37,12 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider(
-              create: (context) => CarouselSliderCubit(),
-            ),
-            BlocProvider(
-              create: (context) => NavigationCubit(),
-            ),
-            BlocProvider(
-              create: (context) => CheckBoxCubit(),
-            ),
-            BlocProvider(
-              create: (context) => SplashBloc(),
-            ),
-            BlocProvider(
-              create: (context) => ProfileBloc(),
-            ),
+            BlocProvider(create: (context) => CarouselSliderCubit()),
+            BlocProvider(create: (context) => NavigationCubit()),
+            BlocProvider(create: (context) => CheckBoxCubit()),
+            BlocProvider(create: (context) => SplashBloc()),
+            BlocProvider(create: (context) => LoginBloc()),
+            BlocProvider(create: (context) => ProfileBloc()),
           ],
           child: MaterialApp(
             initialRoute: AppRoutes().splashRoute,
