@@ -40,7 +40,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) {}
 
   bool _handleValidateLoginForm(LoginState state) {
-    // Check value is null for email and passworod
+    // Check value is null for email and password
     if (state.email == null || state.password == null) return false;
 
     RegExp emailRegex = RegExp(AppRegex().emailRegex);
@@ -49,7 +49,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         passRegex.hasMatch(state.password!)) {
       return true;
     }
-    print("not OKO");
     return false;
   }
 }

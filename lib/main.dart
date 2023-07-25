@@ -1,11 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hi_task/firebase_options.dart';
-import 'package:hi_task/src/blocs/login/login_bloc.dart';
-import 'package:hi_task/src/blocs/profile/profile_bloc.dart';
-import 'package:hi_task/src/blocs/splash/splash_bloc.dart';
+import 'package:hi_task/src/blocs/blocs_exports.dart';
 import 'package:hi_task/src/cubit/carousel_slider_cubit.dart';
 import 'package:hi_task/src/cubit/checkbox/checkbox_cubit.dart';
 import 'package:hi_task/src/cubit/navigation/navigation_cubit.dart';
@@ -41,17 +38,18 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => NavigationCubit()),
             BlocProvider(create: (context) => CheckBoxCubit()),
             BlocProvider(create: (context) => SplashBloc()),
-            BlocProvider(create: (context) => LoginBloc()),
+            BlocProvider(lazy: false, create: (context) => LoginBloc()),
+            BlocProvider(create: (context) => RegisterBloc()),
             BlocProvider(create: (context) => ProfileBloc()),
+            BlocProvider(create: (context) => VerifyCodeBloc()),
           ],
           child: MaterialApp(
-            initialRoute: AppRoutes().splashRoute,
-            onGenerateRoute: AppRoutes().onGenerateRoute,
-            title: 'Hi task application',
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme().lightTheme,
-            //home: const GetStartedScreen(),
-          ),
+              initialRoute: AppRoutes().splashRoute,
+              onGenerateRoute: AppRoutes().onGenerateRoute,
+              title: 'Hi task application',
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme().lightTheme,
+              builder: EasyLoading.init()),
         );
       },
     );

@@ -10,14 +10,14 @@ class TextFieldBase extends StatelessWidget {
     this.iconUrl,
     this.hintText = "",
     this.isPass = false,
-    required this.controller,
+    this.controller,
     this.maxLines,
     this.onChange,
   });
   final String? iconUrl;
   final String hintText;
   final bool isPass;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final int? maxLines;
   final Function? onChange;
   @override

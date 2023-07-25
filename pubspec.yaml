@@ -51,6 +51,10 @@ dependencies:
   firebase_core: ^2.15.0
   firebase_app_check: ^0.1.5+1
   shared_preferences: ^2.2.0
+  flutter_easyloading: ^3.0.5
+  firebase_auth: ^4.7.1
+  bloc_concurrency: ^0.2.2
+  stream_bloc: ^0.5.3
 
 dev_dependencies:
   flutter_test:
