@@ -154,12 +154,13 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             );
           });
     } catch (e) {
-      emit(RegisterUnauthenticatedState(e.toString()));
+      //emit(RegisterUnauthenticatedState(e.toString()));
+      emit(
+        state.copyWith(
+          status: RegisterStatusEnum.failure,
+          message: "",
+        ),
+      );
     }
-    Future.delayed(
-      Duration(seconds: 2),
-      () {},
-    );
-    add(OnRegisterInitEvent());
   }
 }

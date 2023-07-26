@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hi_task/src/packages/authentication_repository.dart';
 import 'package:hi_task/src/res/regex/app_regex.dart';
 part 'login_event.dart';
 part 'login_state.dart';
@@ -10,6 +12,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<ChangePassEvent>(_onChangePassEvent);
     on<SubmitLoginEvent>(_onSubmitLoginEvent);
   }
+
+  @override
+  Future<void> close() {
+    return super.close();
+  }
+
   void _onChangeEmailEvent(
     ChangedEmailEvent event,
     Emitter<LoginState> emit,
@@ -17,7 +25,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(
       state.copyWith(
         email: event.email,
-        isValid: _handleValidateLoginForm(state),
+      ),
+    );
+    emit(
+      state.copyWith(
+        isValid: _handleValidateLoginForm(),
       ),
     );
   }
@@ -26,20 +38,34 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ChangePassEvent event,
     Emitter<LoginState> emit,
   ) {
-    emit(
-      state.copyWith(
-        password: event.password,
-        isValid: _handleValidateLoginForm(state),
-      ),
+    emit(state.copyWith(password: event.password));
+    emit(state.copyWith(isValid: _handleValidateLoginForm()));
+  }
+
+  Future<void> _onSubmitLoginEvent(
+    SubmitLoginEvent event,
+    Emitter<LoginState> emit,
+  ) async {
+    emit(state.copyWith(status: LoginStatusEnum.loading));
+    // Handle with firebase
+    final AuthenticationRepository authenticationRepository =
+        AuthenticationRepository();
+    await authenticationRepository.handleLogin(
+      onSuccess: (User user) {
+        emit(state.copyWith(status: LoginStatusEnum.success));
+        emit(state.copyWith(status: LoginStatusEnum.init));
+      },
+      onError: (error) {
+        print("Error: ${error}");
+        emit(state.copyWith(status: LoginStatusEnum.failed));
+        emit(state.copyWith(status: LoginStatusEnum.init));
+      },
+      email: state.email!,
+      password: state.password!,
     );
   }
 
-  void _onSubmitLoginEvent(
-    SubmitLoginEvent event,
-    Emitter<LoginState> emit,
-  ) {}
-
-  bool _handleValidateLoginForm(LoginState state) {
+  bool _handleValidateLoginForm() {
     // Check value is null for email and password
     if (state.email == null || state.password == null) return false;
 

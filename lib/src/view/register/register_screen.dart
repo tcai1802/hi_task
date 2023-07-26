@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       listener: (context, state) {
         switch (state.status) {
           case RegisterStatusEnum.loading:
-            EasyLoading.showToast("Đăng ký thất bại");
+            EasyLoading.show(status: "Loading...");
             break;
           case RegisterStatusEnum.success:
             EasyLoading.showToast("Đăng ký thành công");
@@ -54,6 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             );
             break;
           case RegisterStatusEnum.failure:
+            EasyLoading.showToast("Đăng ký thất bại: ${state.message}");
             break;
           default:
         }

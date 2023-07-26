@@ -27,7 +27,6 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<VerifyCodeBloc, VerifyCodeState>(
       listener: (context, state) {
-        // TODO: implement listener
         if (state.isVerified) {
           Navigator.pushNamed(context, AppRoutes().dashBoardRoute);
         }
@@ -116,18 +115,25 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                     ),
                     SizedBox(height: 61.h),
 
-                    CustomButtonBase(
-                      titleBtn: 'Resend',
-                      widthBtn: double.infinity,
-                      onTap: () {
-                        context
-                            .read<VerifyCodeBloc>()
-                            .add(const OnSendVerifyCodeEvent());
+                    state.duration > 20 && state == VerifyCodeProgressing
+                        ? CustomButtonBase(
+                            titleBtn: 'Resend',
+                            widthBtn: double.infinity,
+                            bgColorBtn: context.resources.color.textColor_02,
+                            onTap: () {},
+                          )
+                        : CustomButtonBase(
+                            titleBtn: 'Resend',
+                            widthBtn: double.infinity,
+                            onTap: () {
+                              context
+                                  .read<VerifyCodeBloc>()
+                                  .add(const OnSendVerifyCodeEvent());
 
-                        //Navigator.pushNamed(
-                        //    context, AppRoutes().successVerifyRoute);
-                      },
-                    ),
+                              //Navigator.pushNamed(
+                              //    context, AppRoutes().successVerifyRoute);
+                            },
+                          ),
                     SizedBox(height: 35.h),
                   ],
                 ),

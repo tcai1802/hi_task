@@ -28,6 +28,31 @@ class AuthenticationRepository {
     }
   }
 
+  Future<void> handleLogin({
+    String email = "",
+    String password = "",
+    required Function onSuccess,
+    required Function onError,
+  }) async {
+    print({
+      "email": email,
+      "pass": password,
+    });
+    try {
+      final UserCredential _credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      if (_credential.user != null) {
+        onSuccess(_credential.user);
+      } else {
+        throw Exception("Some thing error");
+      }
+    } on FirebaseAuthException catch (e) {
+      onError(e.code);
+    } catch (e) {
+      onError(e);
+    }
+  }
+
   Future<void> handleSendLinkToEmail(
     String emailAuth, {
     required Function onSuccess,

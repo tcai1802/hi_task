@@ -38,12 +38,17 @@ class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
       (duration) {
         print("====${FirebaseAuth.instance.currentUser?.emailVerified}");
         FirebaseAuth.instance.currentUser?.reload();
-        FirebaseAuth.instance.authStateChanges().listen((event) {
-          if (event != null && event.emailVerified) {
-            add(const OnVerifyCompleteEvent(_duration));
-            _tickerSubscription?.cancel();
-          }
-        });
+        //FirebaseAuth.instance.authStateChanges().listen((event) {
+        //  if (event != null && event.emailVerified) {
+        //    add(const OnVerifyCompleteEvent(_duration));
+        //    _tickerSubscription?.cancel();
+        //  }
+        //});
+        if (FirebaseAuth.instance.currentUser != null &&
+            FirebaseAuth.instance.currentUser!.emailVerified) {
+          add(const OnVerifyCompleteEvent(_duration));
+          _tickerSubscription?.cancel();
+        }
         add(OnVerifyProgressingEvent(duration));
       },
     );
