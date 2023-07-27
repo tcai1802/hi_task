@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   AppRoutes().dashBoardRoute,
-                  (route) => false,   
+                  (route) => false,
                 );
               } else {
                 Navigator.pushNamedAndRemoveUntil(
@@ -132,11 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ? {
                                 context
                                     .read<LoginBloc>()
-                                    .add(SubmitLoginEvent())
-                                //Navigator.of(context).pushNamedAndRemoveUntil(
-                                //  AppRoutes().dashBoardRoute,
-                                //  (route) => false,
-                                //)
+                                    .add(const SubmitLoginEvent())
                               }
                             : () {},
                       );
@@ -227,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextSpan(
                             text: "Sign Up",
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () => Navigator.pushNamed(
+                              ..onTap = () => Navigator.pushReplacementNamed(
                                   context, AppRoutes().registerRoute),
                             style: TextStyle(
                               color: context.resources.color.brandColor_02,

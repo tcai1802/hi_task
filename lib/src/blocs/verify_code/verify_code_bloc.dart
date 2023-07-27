@@ -27,7 +27,11 @@ class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
   _onSendVerifyCodeEvent(
     OnSendVerifyCodeEvent event,
     Emitter<VerifyCodeState> emit,
-  ) {}
+  ) {
+    if (state.isVerified) return;
+    FirebaseAuth.instance.currentUser!.sendEmailVerification();
+    add(OnVerifyInitEvent());
+  }
 
   _onVerifyInitEvent(
     OnVerifyInitEvent event,
@@ -35,17 +39,12 @@ class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
   ) {
     _tickerSubscription?.cancel();
     _tickerSubscription = tick(ticks: _duration).listen(
-      (duration) {
-        print("====${FirebaseAuth.instance.currentUser?.emailVerified}");
-        FirebaseAuth.instance.currentUser?.reload();
-        //FirebaseAuth.instance.authStateChanges().listen((event) {
-        //  if (event != null && event.emailVerified) {
-        //    add(const OnVerifyCompleteEvent(_duration));
-        //    _tickerSubscription?.cancel();
-        //  }
-        //});
-        if (FirebaseAuth.instance.currentUser != null &&
-            FirebaseAuth.instance.currentUser!.emailVerified) {
+      (duration) async {
+        //print("====${FirebaseAuth.instance.currentUser?.emailVerified}");
+        await FirebaseAuth.instance.currentUser?.reload();
+        final user = FirebaseAuth.instance.currentUser;
+
+        if (user != null && user.emailVerified) {
           add(const OnVerifyCompleteEvent(_duration));
           _tickerSubscription?.cancel();
         }
@@ -55,7 +54,7 @@ class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
   }
 
   Stream<int> tick({required int ticks}) {
-    return Stream.periodic(Duration(seconds: 1), (x) => ticks - x - 1)
+    return Stream.periodic(const Duration(seconds: 1), (x) => ticks - x - 1)
         .take(ticks);
   }
 

@@ -24,7 +24,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   void initState() {
     super.initState();
-    //context.read<RegisterBloc>().add(const OnRegisterInitEvent());
   }
 
   @override
@@ -39,7 +38,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<RegisterBloc, RegisterState>(
-      //bloc: BlocProvider.of<RegisterBloc>(context),
       listener: (context, state) {
         switch (state.status) {
           case RegisterStatusEnum.loading:

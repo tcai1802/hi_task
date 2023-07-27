@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hi_task/src/blocs/login/login_bloc.dart';
 import 'package:hi_task/src/blocs/register/register_bloc.dart';
 import 'package:hi_task/src/res/arguments/add_task_argument.dart';
 import 'package:hi_task/src/res/arguments/edit_task_argument.dart';
@@ -71,6 +72,7 @@ class AppRoutes extends Routes {
   String get settingsAbout => '/settings_about';
 
   final _registerBloc = RegisterBloc();
+  final _loginBloc = LoginBloc();
 
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == splashRoute) {
@@ -83,7 +85,10 @@ class AppRoutes extends Routes {
       );
     } else if (settings.name == loginRoute) {
       return MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
+        builder: (context) => BlocProvider.value(
+          value: _loginBloc,
+          child: const LoginScreen(),
+        ),
       );
     } else if (settings.name == registerRoute) {
       return MaterialPageRoute(

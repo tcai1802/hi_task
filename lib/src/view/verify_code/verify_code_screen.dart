@@ -115,7 +115,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                     ),
                     SizedBox(height: 61.h),
 
-                    state.duration > 20 && state == VerifyCodeProgressing
+                    state.duration > 20
                         ? CustomButtonBase(
                             titleBtn: 'Resend',
                             widthBtn: double.infinity,

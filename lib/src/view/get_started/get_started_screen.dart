@@ -54,7 +54,11 @@ class GetStartedScreen extends StatelessWidget {
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, AppRoutes().loginRoute);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        AppRoutes().loginRoute,
+                        (route) => false,
+                      );
                     },
                     child: Text(
                       "skip",
@@ -88,7 +92,11 @@ class GetStartedScreen extends StatelessWidget {
                 child: CustomButtonBase(
                   titleBtn: "Get Started",
                   onTap: () {
-                    Navigator.pushNamed(context, AppRoutes().loginRoute);
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes().loginRoute,
+                      (route) => false,
+                    );
                   },
                 ),
               ),

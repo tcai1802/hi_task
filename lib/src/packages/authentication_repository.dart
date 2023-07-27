@@ -18,12 +18,11 @@ class AuthenticationRepository {
     } on FirebaseAuthException catch (e) {
       onError(e.code);
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        //print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        //print('The account already exists for that email.');
       }
     } catch (e) {
-      print(e);
       onError(e.toString());
     }
   }
@@ -34,16 +33,14 @@ class AuthenticationRepository {
     required Function onSuccess,
     required Function onError,
   }) async {
-    print({
-      "email": email,
-      "pass": password,
-    });
     try {
-      final UserCredential _credential = await FirebaseAuth.instance
+      final UserCredential credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      if (_credential.user != null) {
-        _credential.user!.sendEmailVerification();
-        onSuccess(_credential.user);
+      if (credential.user != null) {
+        if (!credential.user!.emailVerified) {
+          credential.user!.sendEmailVerification();
+        }
+        onSuccess(credential.user);
       } else {
         throw Exception("Some thing error");
       }
@@ -52,33 +49,5 @@ class AuthenticationRepository {
     } catch (e) {
       onError(e);
     }
-  }
-
-  Future<void> handleSendLinkToEmail(
-    String emailAuth, {
-    required Function onSuccess,
-    required Function onError,
-  }) async {
-    var acs = ActionCodeSettings(
-        // URL you want to redirect back to. The domain (www.example.com) for this
-        // URL must be whitelisted in the Firebase Console.
-        url: 'https://example.com/',
-        // This must be true
-        handleCodeInApp: true,
-        iOSBundleId: 'com.example.hiTask',
-        androidPackageName: 'com.example.hi_task',
-        // installIfNotAvailable
-        androidInstallApp: true,
-        // minimumVersion
-        androidMinimumVersion: '12');
-    FirebaseAuth.instance
-        .sendSignInLinkToEmail(
-          email: emailAuth,
-          actionCodeSettings: acs,
-        )
-        .catchError((error) => onError(error))
-        .then(
-          (value) => onSuccess(),
-        );
   }
 }

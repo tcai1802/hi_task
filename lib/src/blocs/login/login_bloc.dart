@@ -28,9 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       ),
     );
     emit(
-      state.copyWith(
-        isValid: _handleValidateLoginForm(),
-      ),
+      state.copyWith(isValid: _handleValidateLoginForm()),
     );
   }
 
