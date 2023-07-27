@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hi_task/src/models/user_model/exports.dart';
 
 class AuthenticationRepository {
+  final CollectionReference users =
+      FirebaseFirestore.instance.collection("users");
   Future<void> handleRegister({
+    required String username,
     required String email,
     required String password,
     required Function onSuccess,
@@ -12,6 +17,18 @@ class AuthenticationRepository {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       if (credential.user != null) {
+        await users.add(
+          CreateUserRequest().toMap(
+            UserModel(
+              email: email,
+              userId: credential.user!.uid,
+              userName: username,
+              createdAt: DateTime.now().toUtc(),
+              updatedAt: DateTime.now().toUtc(),
+            ),
+          ),
+        );
+
         credential.user!.sendEmailVerification();
       }
       onSuccess(credential.user);

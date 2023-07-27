@@ -176,6 +176,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     Future.delayed(const Duration(seconds: 2));
     try {
       await AuthenticationRepository().handleRegister(
+          username: state.username!,
           email: state.email!,
           password: state.password!,
           onSuccess: (User user) {
