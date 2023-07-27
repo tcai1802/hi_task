@@ -20,10 +20,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final TextEditingController confirmPassController = TextEditingController();
+  final registerBloc = RegisterBloc();
   @override
   void initState() {
     super.initState();
-    context.read<RegisterBloc>().add(const OnRegisterInitEvent());
+    //context.read<RegisterBloc>().add(const OnRegisterInitEvent());
   }
 
   @override
@@ -59,192 +60,199 @@ class _RegisterScreenState extends State<RegisterScreen> {
           default:
         }
       },
-      child: Scaffold(
-        body: SafeArea(
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 25.h),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: CustomButtonBase(
-                      prefixWidget: Icon(
-                        Icons.arrow_back,
-                        size: 24.sp,
-                        color: context.resources.color.brandColor_11,
-                      ),
-                      paddingBtn: EdgeInsets.all(12.h),
-                      onTap: () => Navigator.of(context).pop(),
-                    ),
-                  ),
-                  //const Spacer(),
-                  ImageBaseWidget(
-                    imageType: ImageTypeEnum.svgPicture,
-                    imageUrl: context.resources.drawable.imgLogo,
-                  ),
-                  SizedBox(height: 10.h),
-                  Text(
-                    "Management  App",
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelSmall!
-                        .copyWith(color: context.resources.color.textColor_02),
-                  ),
-                  //const Spacer(),
-                  Text(
-                    "Create your account",
-                    style: Theme.of(context).textTheme.bodyLarge!,
-                  ),
-                  SizedBox(height: 30.h),
-                  TextFieldBase(
-                    hintText: 'Username',
-                    controller: userNameController,
-                    iconUrl: context.resources.drawable.iconPerson,
-                    onChange: (String value) {
-                      context
-                          .read<RegisterBloc>()
-                          .add(OnChangedUserNameEvent(value));
-                    },
-                  ),
-                  SizedBox(height: 20.h),
-                  TextFieldBase(
-                    hintText: 'Email',
-                    controller: emailController,
-                    iconUrl: context.resources.drawable.iconEmail,
-                    onChange: (String value) {
-                      context
-                          .read<RegisterBloc>()
-                          .add(OnChangedEmailEvent(value));
-                    },
-                  ),
-                  SizedBox(height: 20.h),
-                  TextFieldBase(
-                    hintText: 'Password',
-                    controller: passController,
-                    iconUrl: context.resources.drawable.iconLock,
-                    isPass: true,
-                    onChange: (String value) {
-                      context
-                          .read<RegisterBloc>()
-                          .add(OnChangedPasswordEvent(value));
-                    },
-                  ),
-                  SizedBox(height: 20.h),
-                  TextFieldBase(
-                    hintText: 'Confirm password',
-                    controller: confirmPassController,
-                    iconUrl: context.resources.drawable.iconLock,
-                    isPass: true,
-                    onChange: (String value) {
-                      context
-                          .read<RegisterBloc>()
-                          .add(OnChangedConfirmPassEvent(value));
-                    },
-                  ),
-                  SizedBox(height: 25.h),
-                  BlocBuilder<RegisterBloc, RegisterState>(
-                      buildWhen: (previous, current) =>
-                          previous.isValid != current.isValid,
-                      builder: (context, state) {
-                        return CustomButtonBase(
-                          titleBtn: 'Register',
-                          bgColorBtn: state.isValid ? null : Colors.grey[300],
-                          widthBtn: double.infinity,
-                          onTap: state.isValid
-                              ? () {
-                                  context
-                                      .read<RegisterBloc>()
-                                      .add(OnRegisterSubmitEvent(true));
-                                }
-                              : () {},
-                        );
-                      }),
-                  SizedBox(height: 35.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 2,
-                          width: 10.w,
-                          color: context.resources.color.brandColor_02,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.h),
-                          child: Text(
-                            "Or Login with",
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ),
-                        Container(
-                          height: 2,
-                          width: 10.w,
-                          color: context.resources.color.brandColor_02,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
+      child: BlocBuilder<RegisterBloc, RegisterState>(
+        builder: (context, state) {
+          return Scaffold(
+            body: SafeArea(
+              child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: SingleChildScrollView(
+                  physics: const ClampingScrollPhysics(),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CustomButtonBase(
-                        prefixWidget: ImageBaseWidget(
-                          imageType: ImageTypeEnum.svgPicture,
-                          imageWidth: 30.h,
-                          imageHeight: 30.h,
-                          imageUrl: context.resources.drawable.iconGoogle,
-                        ),
-                        paddingBtn: EdgeInsets.all(15.h),
-                        bgColorBtn: Colors.transparent,
-                        borderStyle: Border.all(
-                          color: context.resources.color.brandColor_02
-                              .withOpacity(.1),
-                        ),
-                      ),
-                      SizedBox(width: 40.w),
-                      CustomButtonBase(
-                        prefixWidget: ImageBaseWidget(
-                          imageType: ImageTypeEnum.svgPicture,
-                          imageWidth: 30.h,
-                          imageHeight: 30.h,
-                          imageUrl: context.resources.drawable.iconFacebook,
-                        ),
-                        paddingBtn: EdgeInsets.all(15.h),
-                        bgColorBtn: Colors.transparent,
-                        borderStyle: Border.all(
-                          color: context.resources.color.brandColor_02
-                              .withOpacity(.1),
+                      SizedBox(height: 25.h),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: CustomButtonBase(
+                          prefixWidget: Icon(
+                            Icons.arrow_back,
+                            size: 24.sp,
+                            color: context.resources.color.brandColor_11,
+                          ),
+                          paddingBtn: EdgeInsets.all(12.h),
+                          onTap: () => Navigator.of(context).pop(),
                         ),
                       ),
-                      SizedBox(width: 40.w),
+                      //const Spacer(),
+                      ImageBaseWidget(
+                        imageType: ImageTypeEnum.svgPicture,
+                        imageUrl: context.resources.drawable.imgLogo,
+                      ),
+                      SizedBox(height: 10.h),
+                      Text(
+                        "Management  App",
+                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                            color: context.resources.color.textColor_02),
+                      ),
+                      //const Spacer(),
+                      Text(
+                        "Create your account",
+                        style: Theme.of(context).textTheme.bodyLarge!,
+                      ),
+                      SizedBox(height: 30.h),
+                      TextFieldBase(
+                        hintText: 'Username',
+                        controller: userNameController,
+                        iconUrl: context.resources.drawable.iconPerson,
+                        onChange: (String value) {
+                          context
+                              .read<RegisterBloc>()
+                              .add(OnChangedUserNameEvent(value));
+                        },
+                      ),
+                      SizedBox(height: 20.h),
+
+                      TextFieldBase(
+                        hintText: 'Email',
+                        controller: emailController,
+                        iconUrl: context.resources.drawable.iconEmail,
+                        onChange: (String value) {
+                          context
+                              .read<RegisterBloc>()
+                              .add(OnChangedEmailEvent(value));
+                        },
+                        errorText: state.emailErr,
+                      ),
+                      SizedBox(height: 20.h),
+                      BlocBuilder<RegisterBloc, RegisterState>(
+                        buildWhen: (previous, current) =>
+                            previous.passErr != current.passErr,
+                        builder: (context, state) {
+                          return TextFieldBase(
+                            hintText: 'Password',
+                            controller: passController,
+                            iconUrl: context.resources.drawable.iconLock,
+                            isPass: true,
+                            onChange: (String value) {
+                              context
+                                  .read<RegisterBloc>()
+                                  .add(OnChangedPasswordEvent(value));
+                            },
+                            errorText: state.passErr,
+                          );
+                        },
+                      ),
+                      SizedBox(height: 20.h),
+                      TextFieldBase(
+                        hintText: 'Confirm password',
+                        controller: confirmPassController,
+                        iconUrl: context.resources.drawable.iconLock,
+                        isPass: true,
+                        onChange: (String value) {
+                          context
+                              .read<RegisterBloc>()
+                              .add(OnChangedConfirmPassEvent(value));
+                        },
+                        errorText: state.confirmPassErr,
+                      ),
+                      SizedBox(height: 25.h),
                       CustomButtonBase(
-                        prefixWidget: ImageBaseWidget(
-                          imageWidth: 30.h,
-                          imageHeight: 30.h,
-                          imageType: ImageTypeEnum.svgPicture,
-                          imageUrl: context.resources.drawable.iconGithub,
-                        ),
-                        paddingBtn: EdgeInsets.all(15.h),
-                        bgColorBtn: Colors.transparent,
-                        borderStyle: Border.all(
-                          color: context.resources.color.brandColor_02
-                              .withOpacity(.1),
+                        titleBtn: 'Register',
+                        bgColorBtn: state.isValid ? null : Colors.grey[300],
+                        widthBtn: double.infinity,
+                        onTap: state.isValid
+                            ? () {
+                                context
+                                    .read<RegisterBloc>()
+                                    .add(OnRegisterSubmitEvent(true));
+                              }
+                            : () {},
+                      ),
+                      SizedBox(height: 35.h),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 2,
+                              width: 10.w,
+                              color: context.resources.color.brandColor_02,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.h),
+                              child: Text(
+                                "Or Login with",
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                            ),
+                            Container(
+                              height: 2,
+                              width: 10.w,
+                              color: context.resources.color.brandColor_02,
+                            ),
+                          ],
                         ),
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomButtonBase(
+                            prefixWidget: ImageBaseWidget(
+                              imageType: ImageTypeEnum.svgPicture,
+                              imageWidth: 30.h,
+                              imageHeight: 30.h,
+                              imageUrl: context.resources.drawable.iconGoogle,
+                            ),
+                            paddingBtn: EdgeInsets.all(15.h),
+                            bgColorBtn: Colors.transparent,
+                            borderStyle: Border.all(
+                              color: context.resources.color.brandColor_02
+                                  .withOpacity(.1),
+                            ),
+                          ),
+                          SizedBox(width: 40.w),
+                          CustomButtonBase(
+                            prefixWidget: ImageBaseWidget(
+                              imageType: ImageTypeEnum.svgPicture,
+                              imageWidth: 30.h,
+                              imageHeight: 30.h,
+                              imageUrl: context.resources.drawable.iconFacebook,
+                            ),
+                            paddingBtn: EdgeInsets.all(15.h),
+                            bgColorBtn: Colors.transparent,
+                            borderStyle: Border.all(
+                              color: context.resources.color.brandColor_02
+                                  .withOpacity(.1),
+                            ),
+                          ),
+                          SizedBox(width: 40.w),
+                          CustomButtonBase(
+                            prefixWidget: ImageBaseWidget(
+                              imageWidth: 30.h,
+                              imageHeight: 30.h,
+                              imageType: ImageTypeEnum.svgPicture,
+                              imageUrl: context.resources.drawable.iconGithub,
+                            ),
+                            paddingBtn: EdgeInsets.all(15.h),
+                            bgColorBtn: Colors.transparent,
+                            borderStyle: Border.all(
+                              color: context.resources.color.brandColor_02
+                                  .withOpacity(.1),
+                            ),
+                          ),
+                        ],
+                      ),
+                      //const Spacer(),
                     ],
                   ),
-                  //const Spacer(),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

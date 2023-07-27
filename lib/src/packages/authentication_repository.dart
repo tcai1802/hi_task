@@ -42,6 +42,7 @@ class AuthenticationRepository {
       final UserCredential _credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       if (_credential.user != null) {
+        _credential.user!.sendEmailVerification();
         onSuccess(_credential.user);
       } else {
         throw Exception("Some thing error");

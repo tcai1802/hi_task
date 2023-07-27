@@ -10,6 +10,10 @@ class RegisterState extends Equatable {
   final bool isValid;
   final RegisterStatusEnum status;
   final String message;
+  final String? userNameErr;
+  final String? emailErr;
+  final String? passErr;
+  final String? confirmPassErr;
   const RegisterState({
     this.username = "",
     this.email = "",
@@ -18,6 +22,10 @@ class RegisterState extends Equatable {
     this.isValid = false,
     this.status = RegisterStatusEnum.unknown,
     this.message = "",
+    this.userNameErr,
+    this.emailErr,
+    this.passErr,
+    this.confirmPassErr,
   });
 
   RegisterState copyWith({
@@ -28,15 +36,24 @@ class RegisterState extends Equatable {
     bool? isValid,
     String? message,
     RegisterStatusEnum? status,
+    String? userNameErr,
+    String? emailErr,
+    String? passErr,
+    String? confirmPassErr,
   }) {
     return RegisterState(
-        username: username ?? this.username,
-        email: email ?? this.email,
-        password: password ?? this.password,
-        confirmPass: confirmPass ?? this.confirmPass,
-        isValid: isValid ?? this.isValid,
-        status: status ?? this.status,
-        message: message ?? this.message);
+      username: username ?? this.username,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      confirmPass: confirmPass ?? this.confirmPass,
+      isValid: isValid ?? this.isValid,
+      status: status ?? this.status,
+      message: message ?? this.message,
+      userNameErr: userNameErr ?? this.userNameErr,
+      emailErr: emailErr ?? this.emailErr,
+      passErr: passErr ?? this.passErr,
+      confirmPassErr: confirmPassErr ?? this.confirmPassErr,
+    );
   }
 
   @override
@@ -48,27 +65,8 @@ class RegisterState extends Equatable {
         isValid,
         status,
         message,
+        userNameErr,
+        emailErr,
+        passErr,
       ];
-}
-
-class RegisterInitState extends RegisterState {}
-
-class RegisterLoadingState extends RegisterState {
-  //const RegisterLoadingState();
-}
-
-class RegisterAuthenticatedState extends RegisterState {
-  const RegisterAuthenticatedState(this.successText);
-  final String successText;
-
-  //@override
-  //List<Object?> get props => [successText];
-}
-
-class RegisterUnauthenticatedState extends RegisterState {
-  const RegisterUnauthenticatedState(this.errorText);
-  final String errorText;
-
-  //@override
-  //List<Object?> get props => [errorText];
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hi_task/src/blocs/register/register_bloc.dart';
 import 'package:hi_task/src/res/arguments/add_task_argument.dart';
 import 'package:hi_task/src/res/arguments/edit_task_argument.dart';
 import 'package:hi_task/src/res/routes/routes.dart';
@@ -68,6 +70,8 @@ class AppRoutes extends Routes {
   @override
   String get settingsAbout => '/settings_about';
 
+  final _registerBloc = RegisterBloc();
+
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == splashRoute) {
       return MaterialPageRoute(
@@ -83,7 +87,10 @@ class AppRoutes extends Routes {
       );
     } else if (settings.name == registerRoute) {
       return MaterialPageRoute(
-        builder: (context) => const RegisterScreen(),
+        builder: (context) => BlocProvider.value(
+          value: _registerBloc,
+          child: const RegisterScreen(),
+        ),
       );
     } else if (settings.name == verifyAccountRoute) {
       return MaterialPageRoute(
@@ -162,5 +169,9 @@ class AppRoutes extends Routes {
       );
     }
     return null;
+  }
+
+  void dispose() {
+    _registerBloc.close();
   }
 }

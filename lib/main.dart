@@ -44,12 +44,13 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => VerifyCodeBloc()),
           ],
           child: MaterialApp(
-              initialRoute: AppRoutes().splashRoute,
-              onGenerateRoute: AppRoutes().onGenerateRoute,
-              title: 'Hi task application',
-              debugShowCheckedModeBanner: false,
-              theme: AppTheme().lightTheme,
-              builder: EasyLoading.init()),
+            initialRoute: AppRoutes().splashRoute,
+            onGenerateRoute: AppRoutes().onGenerateRoute,
+            title: 'Hi task application',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme().lightTheme,
+            builder: EasyLoading.init(),
+          ),
         );
       },
     );

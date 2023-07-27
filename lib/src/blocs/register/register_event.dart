@@ -8,14 +8,15 @@ class RegisterEvent extends Equatable {
 
 class OnRegisterInitEvent extends RegisterEvent {
   const OnRegisterInitEvent();
-  //@override
-  //List<Object?> get props => [];
+  @override
+  List<Object?> get props => [];
 }
 
 class OnChangedUserNameEvent extends RegisterEvent {
   const OnChangedUserNameEvent(this.username);
 
   final String username;
+
   @override
   List<Object?> get props => [username];
 }

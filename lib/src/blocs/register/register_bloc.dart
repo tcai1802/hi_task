@@ -19,6 +19,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<OnRegisterSubmitEvent>(_onRegisterSubmitEvent);
   }
 
+  @override
+  Future<void> close() {
+    print("Close");
+    return super.close();
+  }
+
   void _onRegisterInitEvent(
     OnRegisterInitEvent event,
     Emitter<RegisterState> emit,
@@ -51,6 +57,14 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         ),
       ),
     );
+    emit(
+      state.copyWith(
+        isValid: (state.userNameErr == null || state.userNameErr!.isEmpty) &&
+            (state.emailErr == null || state.emailErr!.isEmpty) &&
+            (state.passErr == null || state.passErr!.isEmpty) &&
+            (state.confirmPass == state.password),
+      ),
+    );
   }
 
   void _onChangeEmailEvent(
@@ -59,13 +73,14 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ) {
     emit(
       state.copyWith(
-        email: event.email,
-        isValid: _handleValidateRegisterForm(
-          username: state.username,
-          email: event.email,
-          password: state.password,
-          confirmPass: state.confirmPass,
-        ),
+          email: event.email, emailErr: handleEmailValidate(event.email)),
+    );
+    emit(
+      state.copyWith(
+        isValid: (state.userNameErr == null || state.userNameErr!.isEmpty) &&
+            (state.emailErr == null || state.emailErr!.isEmpty) &&
+            (state.passErr == null || state.passErr!.isEmpty) &&
+            (state.confirmPass == state.password),
       ),
     );
   }
@@ -77,12 +92,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(
       state.copyWith(
         password: event.password,
-        isValid: _handleValidateRegisterForm(
-          username: state.username,
-          email: state.email,
-          password: event.password,
-          confirmPass: state.confirmPass,
-        ),
+        passErr: handlePassValidate(event.password),
+      ),
+    );
+    emit(
+      state.copyWith(
+        isValid: (state.userNameErr == null || state.userNameErr!.isEmpty) &&
+            (state.emailErr == null || state.emailErr!.isEmpty) &&
+            (state.passErr == null || state.passErr!.isEmpty) &&
+            (state.confirmPass == state.password),
       ),
     );
   }
@@ -94,14 +112,35 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(
       state.copyWith(
         confirmPass: event.confirmPass,
-        isValid: _handleValidateRegisterForm(
-          username: state.username,
-          email: state.email,
-          password: state.password,
-          confirmPass: event.confirmPass,
-        ),
+        confirmPassErr: event.confirmPass == state.password
+            ? ""
+            : "Confirm password is incorrect",
       ),
     );
+    emit(
+      state.copyWith(
+        isValid: (state.userNameErr == null || state.userNameErr!.isEmpty) &&
+            (state.emailErr == null || state.emailErr!.isEmpty) &&
+            (state.passErr == null || state.passErr!.isEmpty) &&
+            (state.confirmPass == state.password),
+      ),
+    );
+  }
+
+  String handleEmailValidate(String email) {
+    final RegExp emailRegex = RegExp(AppRegex().emailRegex);
+    if (emailRegex.hasMatch(email)) {
+      return "";
+    }
+    return "Invalid email";
+  }
+
+  String? handlePassValidate(String password) {
+    final RegExp passRegex = RegExp(AppRegex().passRegex);
+    if (passRegex.hasMatch(password)) {
+      return "";
+    }
+    return "Invalid password";
   }
 
   bool _handleValidateRegisterForm({
@@ -134,7 +173,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(state.copyWith(
       status: RegisterStatusEnum.loading,
     ));
-    //emit(RegisterLoadingState());
+    Future.delayed(const Duration(seconds: 2));
     try {
       await AuthenticationRepository().handleRegister(
           email: state.email!,
@@ -154,7 +193,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             );
           });
     } catch (e) {
-      //emit(RegisterUnauthenticatedState(e.toString()));
       emit(
         state.copyWith(
           status: RegisterStatusEnum.failure,

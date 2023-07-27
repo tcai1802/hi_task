@@ -32,6 +32,7 @@ class CustomButtonBase extends StatelessWidget {
   final MainAxisAlignment? mainAxisAlignment;
   @override
   Widget build(BuildContext context) {
+    print("Render");
     return GestureDetector(
       onTap: () => onTap != null ? onTap!() : () {},
       onLongPress: () => onLongPress != null ? onLongPress!() : () {},

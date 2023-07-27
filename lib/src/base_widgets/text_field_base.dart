@@ -13,6 +13,7 @@ class TextFieldBase extends StatelessWidget {
     this.controller,
     this.maxLines,
     this.onChange,
+    this.errorText,
   });
   final String? iconUrl;
   final String hintText;
@@ -20,9 +21,10 @@ class TextFieldBase extends StatelessWidget {
   final TextEditingController? controller;
   final int? maxLines;
   final Function? onChange;
+  final String? errorText;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       maxLines: maxLines ?? 1,
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -68,6 +70,16 @@ class TextFieldBase extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(10.r),
         ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        errorText:
+            errorText != null && errorText!.isNotEmpty ? errorText : null,
       ),
       onChanged: (value) => onChange != null ? onChange!(value) : () {},
     );
