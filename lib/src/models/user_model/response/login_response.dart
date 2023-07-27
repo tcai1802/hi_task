@@ -1,8 +1,8 @@
-import 'package:hi_task/src/models/user_model/user_model.dart';
 
-class LoginResponse extends UserModel {
+class LoginResponse {
+  final String? userId;
   const LoginResponse({
-    super.userId,
+    this.userId,
   });
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(

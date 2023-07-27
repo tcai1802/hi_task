@@ -27,7 +27,10 @@ class _SplashScreenState extends State<SplashScreen> {
     return BlocConsumer<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state.splashState == StateEnum.success) {
-          if (!state.firstOpenAppState) {
+          if (state.isLogged) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes().dashBoardRoute, (route) => false);
+          } else if (!state.firstOpenAppState) {
             Navigator.pushNamed(context, AppRoutes().getStartedRoute);
           } else {
             Navigator.pushNamed(context, AppRoutes().loginRoute);

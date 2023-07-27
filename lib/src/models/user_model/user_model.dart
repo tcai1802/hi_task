@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class UserModel extends Equatable {
+class UserModel {
   const UserModel({
     this.userId = "",
     this.userName,
@@ -23,7 +21,4 @@ class UserModel extends Equatable {
   final String? profession;
   final DateTime? createdAt;
   final DateTime? updatedAt;
-
-  @override
-  List<Object?> get props => [];
 }

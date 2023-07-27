@@ -31,18 +31,17 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         androidProvider: AndroidProvider.debug,
         appleProvider: AppleProvider.appAttest,
       );
-      //FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      //  if (user != null) {
-      //    emit(LoggedUserState());
-      //    return;
-      //  } else {
-      //    emit(UnLoggedUserState());
-      //  }
-      //});
-      if (FirebaseAuth.instance.currentUser != null) {}
+
       // Check is the first open app
       await Future.delayed(const Duration(seconds: 2)); // slow app
-      FirebaseAuth.instance.signOut();
+      if (FirebaseAuth.instance.currentUser != null) {
+        emit(state.copyWith(
+          splashState: StateEnum.success,
+          firstOpenAppState: false,
+          isLogged: true,
+        ));
+      }
+      //FirebaseAuth.instance.signOut();
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final bool? firstOpenApp = prefs.getBool("firstOpenApp");
       if (firstOpenApp == null || !firstOpenApp) {
@@ -50,10 +49,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         emit(state.copyWith(
           splashState: StateEnum.success,
           firstOpenAppState: true,
-          
         ));
       } else {
-        emit(state.copyWith(splashState: StateEnum.success, firstOpenAppState: true));
+        emit(state.copyWith(
+            splashState: StateEnum.success, firstOpenAppState: true));
       }
     } catch (e) {
       //print("Error: $e");
