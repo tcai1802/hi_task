@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 
-newTodoWidget(BuildContext context) {
+newTodoWidget(
+  BuildContext context, {
+  Function? onAddTodo,
+}) {
+  final TextEditingController inputController = TextEditingController();
   return showDialogBase(
     context,
     Container(
@@ -13,17 +17,21 @@ newTodoWidget(BuildContext context) {
       child: Column(
         children: [
           TextFieldBase(
-            controller: TextEditingController(
-              text: "Make a Moodboard",
-            ),
-            hintText: "Hello",
+            controller: inputController,
+            hintText: "Type somethings...",
           ),
           SizedBox(height: 25.h),
           SizedBox(height: 15.h),
           CustomButtonBase(
             titleBtn: "Add Task",
             widthBtn: double.infinity,
-            onTap: () {},
+            onTap: () {
+              String text = inputController.text.trim();
+              if (text.isNotEmpty) {
+                onAddTodo != null ? onAddTodo(text) : () {};
+                Navigator.pop(context);
+              }
+            },
           ),
           SizedBox(height: 15.h),
           CustomButtonBase(

@@ -3,21 +3,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 
 class CustomButtonBase extends StatelessWidget {
-  const CustomButtonBase({
-    super.key,
-    this.titleBtn,
-    this.paddingBtn,
-    this.prefixWidget,
-    this.suffixWidget,
-    this.onTap,
-    this.widthBtn,
-    this.borderStyle,
-    this.bgColorBtn,
-    this.titleStyle,
-    this.mainAxisAlignment,
-    this.onLongPress,
-    this.onDoubleTap,
-  });
+  const CustomButtonBase(
+      {super.key,
+      this.titleBtn,
+      this.paddingBtn,
+      this.prefixWidget,
+      this.suffixWidget,
+      this.onTap,
+      this.widthBtn,
+      this.borderStyle,
+      this.bgColorBtn,
+      this.titleStyle,
+      this.mainAxisAlignment,
+      this.onLongPress,
+      this.onDoubleTap,
+      this.textAlign = TextAlign.center});
   final String? titleBtn;
   final Widget? prefixWidget;
   final Widget? suffixWidget;
@@ -30,6 +30,7 @@ class CustomButtonBase extends StatelessWidget {
   final Color? bgColorBtn;
   final TextStyle? titleStyle;
   final MainAxisAlignment? mainAxisAlignment;
+  final TextAlign textAlign;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -52,14 +53,18 @@ class CustomButtonBase extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
           children: [
-            prefixWidget ?? Container(),
+            if (prefixWidget != null) prefixWidget!,
             titleBtn != null
-                ? Text(
-                    titleBtn!,
-                    style: titleStyle ??
-                        Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              color: context.resources.color.brandColor_11,
-                            ),
+                ? Flexible(
+                    child: Text(
+                      titleBtn!,
+                      maxLines: 1,
+                      textAlign: textAlign,
+                      style: titleStyle ??
+                          Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                color: context.resources.color.brandColor_11,
+                              ),
+                    ),
                   )
                 : Container(),
             suffixWidget ?? Container()

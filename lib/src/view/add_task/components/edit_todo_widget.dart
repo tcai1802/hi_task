@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
+import 'package:hi_task/src/models/model_exports.dart';
 
-editTodoWidget(BuildContext context) {
+editTodoWidget(
+  BuildContext context, {
+  required TodoModel currentModel,
+  required Function onEditTodo,
+  required Function onDeleteTodo,
+}) {
+  final TextEditingController controller = TextEditingController(
+    text: currentModel.content,
+  );
   return showDialogBase(
     context,
     Container(
@@ -13,22 +22,29 @@ editTodoWidget(BuildContext context) {
       child: Column(
         children: [
           TextFieldBase(
-            controller: TextEditingController(
-              text: "Make a Moodboard",
-            ),
+            controller: controller,
             hintText: "Hello",
           ),
           SizedBox(height: 25.h),
           CustomButtonBase(
             titleBtn: "Edit Task",
             widthBtn: double.infinity,
-            onTap: () {},
+            onTap: () {
+              final content = controller.text.trim();
+              if (content.isNotEmpty) {
+                onEditTodo(content);
+                Navigator.pop(context);
+              }
+            },
           ),
           SizedBox(height: 15.h),
           CustomButtonBase(
             titleBtn: "Delete Task",
             widthBtn: double.infinity,
-            onTap: () {},
+            onTap: () {
+              onDeleteTodo();
+              Navigator.pop(context);
+            },
           ),
           SizedBox(height: 15.h),
           CustomButtonBase(

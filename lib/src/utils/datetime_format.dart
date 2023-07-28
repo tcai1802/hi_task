@@ -9,5 +9,11 @@ class DateTimeFormat {
     return dateFormat.parse(timeString);
   }
 
-
+  String? convertDateTimeToString(
+    DateTime dateTime, {
+    String formatString = "",
+  }) {
+    var format = DateFormat("yMMMMEEEEd").format(dateTime);
+    return format;
+  }
 }

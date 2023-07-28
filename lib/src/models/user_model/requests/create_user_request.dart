@@ -10,8 +10,8 @@ class CreateUserRequest {
         "loginMethod": userModel.loginMethod,
         "dateOfBirth": userModel.dateOfBirth,
         "profession": userModel.profession,
-        "createdAt": userModel.createdAt.toString(),
-        "updatedAt": userModel.updatedAt.toString(),
+        "createdAt": userModel.createdAt,
+        "updatedAt": userModel.updatedAt,
       };
   String toJson() => json.encode(toMap);
 }

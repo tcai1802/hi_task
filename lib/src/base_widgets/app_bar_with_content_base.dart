@@ -12,6 +12,7 @@ class AppBarWithBodyBase extends StatelessWidget {
     this.enableBorder = false,
     this.backgroundColor,
     this.primaryColor,
+    this.resizeToAvoidBottomInset = false,
   });
   final String title;
   final Widget? bodyWidget;
@@ -19,10 +20,12 @@ class AppBarWithBodyBase extends StatelessWidget {
   final bool enableBorder;
   final Color? backgroundColor;
   final Color? primaryColor;
+  final bool resizeToAvoidBottomInset;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       backgroundColor: backgroundColor ?? context.resources.color.bgColor,
       body: SafeArea(
         child: Column(

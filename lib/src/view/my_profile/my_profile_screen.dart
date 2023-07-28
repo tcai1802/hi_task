@@ -109,7 +109,11 @@ class MyProfileScreen extends StatelessWidget {
                 ),
                 mainAxisAlignment: MainAxisAlignment.start,
                 onTap: () => {
-                  showDialogBase(context, const CalendarBase()),
+                  showDialogBase(context,  CalendarBase(
+                    onDaySelected: (DateTime timeSelected) {
+                      
+                    },
+                  )),
                 },
                 titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: context.resources.color.textColor,

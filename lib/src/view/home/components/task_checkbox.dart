@@ -40,42 +40,35 @@ class _TaskCheckBoxState extends State<TaskCheckBox> {
         borderStyle: Border.all(
           color: context.resources.color.brandColor_02.withOpacity(.1),
         ),
-        suffixWidget: Expanded(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Spacer(),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    height: 22.h,
-                    width: 22.h,
-                    decoration: BoxDecoration(
-                      color: context.resources.color.bgColor,
-                      border: Border.all(
-                        color: context.resources.color.brandColor_02,
-                      ),
-                      borderRadius: BorderRadius.circular(50.r),
-                    ),
-                  ),
-                  AnimatedContainer(
-                    height: isCheck ? 16.h : 0.h,
-                    width: isCheck ? 16.h : 0.h,
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.bounceOut,
-                    decoration: BoxDecoration(
-                      color: context.resources.color.brandColor_02,
-                      border: Border.all(
-                        color: context.resources.color.brandColor_02,
-                      ),
-                      borderRadius: BorderRadius.circular(50.r),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        suffixWidget: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: 22.h,
+              width: 22.h,
+              decoration: BoxDecoration(
+                color: context.resources.color.bgColor,
+                border: Border.all(
+                  color: context.resources.color.brandColor_02,
+                ),
+                borderRadius: BorderRadius.circular(50.r),
+              ),
+            ),
+            AnimatedContainer(
+              height: isCheck ? 16.h : 0.h,
+              width: isCheck ? 16.h : 0.h,
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.bounceOut,
+              decoration: BoxDecoration(
+                color: context.resources.color.brandColor_02,
+                border: Border.all(
+                  color: context.resources.color.brandColor_02,
+                ),
+                borderRadius: BorderRadius.circular(50.r),
+              ),
+            ),
+          ],
         ),
         onTap: () {
           Navigator.pushNamed(context, AppRoutes().dailyTaskDetailsRoute);

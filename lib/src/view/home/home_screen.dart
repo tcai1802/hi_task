@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  "Sell all",
+                  "See all",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.w700,
                         color: context.resources.color.brandColor_02,
@@ -104,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  "Sell all",
+                  "See all",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.w700,
                         color: context.resources.color.brandColor_02,

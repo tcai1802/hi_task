@@ -1,3 +1,4 @@
+import 'package:hi_task/src/models/model_exports.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 
 class TaskModel {
@@ -7,7 +8,7 @@ class TaskModel {
   final DateTime? startDate;
   final DateTime? endDate;
   final String? description;
-  final List? todoList;
+  final List<TodoModel>? todoList;
   final TaskTypeEnum? taskType;
   final DateTime? createdAt;
   final DateTime? updatedAt;

@@ -8,8 +8,9 @@ import 'package:table_calendar/table_calendar.dart';
 class CalendarBase extends StatefulWidget {
   const CalendarBase({
     super.key,
+    required this.onDaySelected,
   });
-
+  final Function onDaySelected;
   @override
   State<CalendarBase> createState() => _CalendarBaseState();
 }
@@ -17,16 +18,15 @@ class CalendarBase extends StatefulWidget {
 class _CalendarBaseState extends State<CalendarBase> {
   DateTime today = DateTime.now();
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    print('Click');
     setState(() {
       today = focusedDay;
       print('Today ${today}');
+      widget.onDaySelected(focusedDay);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Rebuild");
     return Container(
       height: 300.h,
       width: double.maxFinite,
