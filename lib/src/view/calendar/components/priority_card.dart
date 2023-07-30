@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/models/task_model/exports.dart';
 import 'package:hi_task/src/utils/datetime_format.dart';
+import 'package:hi_task/src/view/calendar/components/exports.dart';
 
 class PriorityCard extends StatelessWidget {
   const PriorityCard({
@@ -57,10 +58,16 @@ class PriorityCard extends StatelessWidget {
                           ),
                     ),
                     const Spacer(),
-                    Icon(
-                      Icons.more_horiz_rounded,
-                      size: 24.h,
-                      color: context.resources.color.brandColor_02,
+                    GestureDetector(
+                      onTap: () {
+                        menuOptionDialog(context,
+                            onEditTodo: () {}, onDeleteTodo: () {});
+                      },
+                      child: Icon(
+                        Icons.more_horiz_rounded,
+                        size: 30.h,
+                        color: context.resources.color.brandColor_02,
+                      ),
                     )
                   ],
                 ),

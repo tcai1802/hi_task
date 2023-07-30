@@ -23,7 +23,11 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<CalendarBloc>().add(CalendarInitEvent(DateTime.now()));
+    if (context.read<CalendarBloc>().state.isFirstInit) {
+      {
+        context.read<CalendarBloc>().add(CalendarInitEvent(DateTime.now()));
+      }
+    }
   }
 
   @override
@@ -237,7 +241,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
           child: Column(
             children: [
               Text(
-                "Priority Task",
+                title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelSmall!.copyWith(

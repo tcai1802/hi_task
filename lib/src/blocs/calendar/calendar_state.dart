@@ -1,6 +1,7 @@
 part of 'calendar_bloc.dart';
 
 class CalendarState extends Equatable {
+  final bool isFirstInit;
   final int currentTabIndex;
   final DateTime? currentTime;
   final List<TaskModel> dailyTaskList;
@@ -9,6 +10,7 @@ class CalendarState extends Equatable {
   final PriorityTaskStatusEnum priorityTaskStatus;
 
   const CalendarState({
+    this.isFirstInit = true,
     this.currentTabIndex = 0,
     this.currentTime,
     this.dailyTaskList = const [],
@@ -18,6 +20,7 @@ class CalendarState extends Equatable {
   });
 
   CalendarState copyWith({
+    bool? isFirstInit,
     int? currentTabIndex,
     DateTime? currentTime,
     List<TaskModel>? priorityTaskList,
@@ -32,6 +35,7 @@ class CalendarState extends Equatable {
       dailyTaskStatus: dailyTaskStatus ?? this.dailyTaskStatus,
       priorityTaskStatus: priorityTaskStatus ?? this.priorityTaskStatus,
       currentTabIndex: currentTabIndex ?? this.currentTabIndex,
+      isFirstInit: isFirstInit ?? this.isFirstInit,
     );
   }
 
@@ -43,7 +47,6 @@ class CalendarState extends Equatable {
         priorityTaskList,
         dailyTaskStatus,
         priorityTaskStatus,
+        isFirstInit
       ];
 }
-
-class CalendarInitial extends CalendarState {}

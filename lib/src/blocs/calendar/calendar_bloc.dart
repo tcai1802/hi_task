@@ -23,6 +23,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       priorityTaskStatus: PriorityTaskStatusEnum.loading,
       dailyTaskStatus: DailyTaskStatusEnum.loading,
       currentTime: event.currentTime,
+      isFirstInit: false,
     ));
     Future.delayed(const Duration(seconds: 2));
 
