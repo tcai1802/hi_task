@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
+import 'package:hi_task/src/blocs/blocs_exports.dart';
 import 'package:hi_task/src/blocs/home/home_bloc.dart';
 import 'package:hi_task/src/cubit/navigation/navigation_cubit.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
@@ -16,6 +17,7 @@ class DashBoardScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(lazy: false, create: (context) => HomeBloc()),
+        BlocProvider(lazy: false, create: (context) => CalendarBloc()),
       ],
       child: Scaffold(
           body: BlocBuilder<NavigationCubit, NavigationState>(

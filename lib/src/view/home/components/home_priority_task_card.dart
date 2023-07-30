@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
+import 'package:hi_task/src/models/model_exports.dart';
 import 'package:hi_task/src/models/task_model/exports.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
+import 'package:hi_task/src/utils/datetime_format.dart';
 
 class HomePriorityTaskCard extends StatelessWidget {
   const HomePriorityTaskCard({
@@ -15,6 +17,10 @@ class HomePriorityTaskCard extends StatelessWidget {
   final TaskModel? taskModel;
   @override
   Widget build(BuildContext context) {
+    final List<TodoModel> completedTaskList = taskModel!.todoList!
+        .where((element) => element.isCompleted == true)
+        .toList();
+    print("====${taskModel!.startDate}");
     return GestureDetector(
       onTap: () => onTap != null ? onTap!() : () {},
       child: Container(
@@ -50,7 +56,8 @@ class HomePriorityTaskCard extends StatelessWidget {
                             color: context.resources.color.bgColor,
                             borderRadius: BorderRadius.circular(10.r)),
                         child: Text(
-                          "10 days",
+                          DateTimeFormat()
+                              .convertToRemainTime(taskModel!.endDate!),
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       )
@@ -58,7 +65,6 @@ class HomePriorityTaskCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   Row(
-                    //crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Icon(
                         Icons.directions_run_outlined,
@@ -84,7 +90,7 @@ class HomePriorityTaskCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Progress",
+                        taskModel!.isCompleted! ? "Completed" : "Progress",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
@@ -107,7 +113,10 @@ class HomePriorityTaskCard extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: FractionallySizedBox(
-                          widthFactor: 0.65,
+                          widthFactor: taskModel!.todoList!.isNotEmpty
+                              ? completedTaskList.length /
+                                  taskModel!.todoList!.length
+                              : 1,
                           child: Container(
                             height: 4,
                             decoration: BoxDecoration(
@@ -124,7 +133,7 @@ class HomePriorityTaskCard extends StatelessWidget {
                     children: [
                       const Spacer(),
                       Text(
-                        "80%",
+                        "${((taskModel!.todoList!.isNotEmpty ? completedTaskList.length / taskModel!.todoList!.length : 1) * 100).toInt()} %",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(

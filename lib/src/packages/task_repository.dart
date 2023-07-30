@@ -25,23 +25,27 @@ class TaskRepository {
     required TaskTypeEnum taskTypeEnum,
     required Function onSuccess,
     required Function onError,
+    required DateTime startTime,
+    required DateTime endTime,
   }) async {
     final List<TaskModel> outputTaskModelList = [];
-    final nowTime = DateTime.now();
-    final inputTime = DateTime.utc(nowTime.year, nowTime.month, nowTime.day);
-    final endDate =
-        DateTime.utc(nowTime.year, nowTime.month, nowTime.day, 24, 00, 00);
+    //final nowTime = DateTime.now();
+    //final inputTime = DateTime.utc(nowTime.year, nowTime.month, nowTime.day);
+    //final endDate =
+    //    DateTime.utc(nowTime.year, nowTime.month, nowTime.day, 24, 00, 00);
     String userId = FirebaseAuth.instance.currentUser!.uid;
     try {
       final resultQuery = await postCollection
           .where("userId", isEqualTo: userId)
-          .where("startDate", isGreaterThanOrEqualTo: inputTime)
-          .where("startDate", isLessThanOrEqualTo: endDate)
+          .where("startDate", isGreaterThanOrEqualTo: startTime)
+          .where("startDate", isLessThanOrEqualTo: endTime)
           .where("taskType", isEqualTo: taskTypeEnum.name)
           .get();
 
       for (var docSnapshot in resultQuery.docs) {
+        print("Vãi: ${docSnapshot.data()}");
         final TaskModel data = TaskModel.fromJson(docSnapshot.data());
+        //print("Data: ${data.endDate}");
         outputTaskModelList.add(data);
       }
       print('Data: $outputTaskModelList');
@@ -50,6 +54,6 @@ class TaskRepository {
     } catch (e) {
       onError(e.toString());
     }
-    print("End==");
+    //print("End==");
   }
 }

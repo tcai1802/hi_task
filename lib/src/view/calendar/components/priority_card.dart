@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
+import 'package:hi_task/src/models/task_model/exports.dart';
+import 'package:hi_task/src/utils/datetime_format.dart';
 
 class PriorityCard extends StatelessWidget {
-  const PriorityCard({super.key});
+  const PriorityCard({
+    super.key,
+    required this.taskModel,
+  });
+  final TaskModel taskModel;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +48,7 @@ class PriorityCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "UI Design",
+                      taskModel.title!.toUpperCase(),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -59,18 +65,22 @@ class PriorityCard extends StatelessWidget {
                   ],
                 ),
                 Expanded(
-                  child: Text(
-                    "User interface (UI) design is the process designers use to build interfaces in software or computerized devices, focusing on looks or style. Designers aim to create interfaces which users find easy to use and pleasurable. UI design refers to graphical user interfaces and other forms e.g., voice-controlled interfaces.",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: context.resources.color.textColor,
-                        ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      taskModel.description!,
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: context.resources.color.textColor,
+                          ),
+                    ),
                   ),
                 ),
                 Row(
                   children: [
                     const Spacer(),
                     Text(
-                      "Feb, 21 - Mar, 22",
+                      "${DateTimeFormat().convertDateTimeToString(taskModel.startDate!, formatString: "MMMM,dd")} - ${DateTimeFormat().convertDateTimeToString(taskModel.endDate!, formatString: "MMMM,dd")}",
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: const Color(0xFF0668E5),
                           ),

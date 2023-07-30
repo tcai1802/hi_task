@@ -12,12 +12,15 @@ class HomeState extends Equatable {
   final HomeStatusEnum homeStatusEnum;
   final PriorityTaskStatusEnum priorityTaskStatus;
   final DailyTaskStatusEnum dailyTaskStatus;
-  const HomeState(
-      {this.priorityTaskList,
-      this.dailyTaskList,
-      this.homeStatusEnum = HomeStatusEnum.init,
-      this.priorityTaskStatus = PriorityTaskStatusEnum.init,
-      this.dailyTaskStatus = DailyTaskStatusEnum.init});
+  final bool firstInit;
+  const HomeState({
+    this.priorityTaskList,
+    this.dailyTaskList,
+    this.homeStatusEnum = HomeStatusEnum.init,
+    this.priorityTaskStatus = PriorityTaskStatusEnum.init,
+    this.dailyTaskStatus = DailyTaskStatusEnum.init,
+    this.firstInit = true,
+  });
 
   HomeState copyWith({
     List<TaskModel>? priorityTaskList,
@@ -25,6 +28,7 @@ class HomeState extends Equatable {
     HomeStatusEnum? homeStatusEnum,
     PriorityTaskStatusEnum? priorityTaskStatus,
     DailyTaskStatusEnum? dailyTaskStatus,
+    bool? firstInit,
   }) {
     return HomeState(
       priorityTaskList: priorityTaskList ?? this.priorityTaskList,
@@ -32,6 +36,7 @@ class HomeState extends Equatable {
       homeStatusEnum: homeStatusEnum ?? this.homeStatusEnum,
       priorityTaskStatus: priorityTaskStatus ?? this.priorityTaskStatus,
       dailyTaskStatus: dailyTaskStatus ?? this.dailyTaskStatus,
+      firstInit: firstInit ?? this.firstInit,
     );
   }
 

@@ -40,11 +40,10 @@ class TaskModel {
       userId: json['userId'],
       title: json['title'],
       startDate: json['startDate'] != null
-          ? DateTime.fromMicrosecondsSinceEpoch(json['startDate'].seconds)
+          ? json['startDate'].toDate() as DateTime
           : null,
-      endDate: json['endDate'] != null
-          ? DateTime.fromMicrosecondsSinceEpoch(json['endDate'].seconds)
-          : null,
+      endDate:
+          json['endDate'] != null ? json['endDate'].toDate() as DateTime : null,
       description:
           json['description'] != null ? json['description'] as String : null,
       todoList: json['todoList'] != null
