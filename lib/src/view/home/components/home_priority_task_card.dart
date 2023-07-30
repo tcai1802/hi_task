@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
+import 'package:hi_task/src/models/task_model/exports.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 
 class HomePriorityTaskCard extends StatelessWidget {
   const HomePriorityTaskCard({
     super.key,
     this.onTap,
+    this.taskModel,
   });
   final Function? onTap;
+  final TaskModel? taskModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -64,7 +67,7 @@ class HomePriorityTaskCard extends StatelessWidget {
                       SizedBox(width: 5.w),
                       Expanded(
                         child: Text(
-                          "Laravel Task ",
+                          "${taskModel?.title} ",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context)

@@ -15,6 +15,7 @@ class CreateTaskRequest {
         "createdAt": taskModel.createdAt,
         "updatedAt": taskModel.updatedAt,
         "taskId": taskId,
+        "isCompleted": taskModel.isCompleted ?? false
       };
 
   String toJson() => json.encode(toMap);

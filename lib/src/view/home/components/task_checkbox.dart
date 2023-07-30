@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/custom_button_base.dart';
+import 'package:hi_task/src/models/model_exports.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 
 class TaskCheckBox extends StatefulWidget {
-  const TaskCheckBox({
-    super.key,
-  });
+  const TaskCheckBox({super.key, required this.data});
+  final TaskModel data;
 
   @override
   State<TaskCheckBox> createState() => _TaskCheckBoxState();
@@ -25,14 +25,14 @@ class _TaskCheckBoxState extends State<TaskCheckBox> {
     return Container(
       margin: EdgeInsets.only(bottom: 10.h),
       child: CustomButtonBase(
-        titleBtn: "Daily meeting",
+        titleBtn: widget.data.title,
         paddingBtn: EdgeInsets.symmetric(
           vertical: 12.h,
           horizontal: 15.w,
         ),
         bgColorBtn: context.resources.color.brandColor_11,
         titleStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: isCheck
+              color: widget.data.isCompleted!
                   ? context.resources.color.brandColor_02
                   : const Color(0xFF4A4646),
               fontWeight: FontWeight.w500,
@@ -56,8 +56,8 @@ class _TaskCheckBoxState extends State<TaskCheckBox> {
               ),
             ),
             AnimatedContainer(
-              height: isCheck ? 16.h : 0.h,
-              width: isCheck ? 16.h : 0.h,
+              height: widget.data.isCompleted! ? 16.h : 0.h,
+              width: widget.data.isCompleted! ? 16.h : 0.h,
               duration: const Duration(milliseconds: 400),
               curve: Curves.bounceOut,
               decoration: BoxDecoration(

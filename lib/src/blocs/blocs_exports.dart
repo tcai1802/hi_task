@@ -1,4 +1,4 @@
-export 'dashboard/dash_board_bloc.dart';
+export 'dash_board/dash_board_bloc.dart';
 export 'login/login_bloc.dart';
 export 'profile/profile_bloc.dart';
 export 'register/register_bloc.dart';

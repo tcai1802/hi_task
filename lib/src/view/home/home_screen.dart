@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/image_base.dart';
+import 'package:hi_task/src/blocs/home/home_bloc.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/view/home/components/exports.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<HomeBloc>().add(HomeInitEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +44,10 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 GestureDetector(
-                  onTap: () =>
-                      Navigator.pushNamed(context, AppRoutes().notifyRoute),
+                  onTap: () => {
+                    context.read<HomeBloc>().add(HomeInitEvent())
+                    //Navigator.pushNamed(context, AppRoutes().notifyRoute)
+                  },
                   child: ImageBaseWidget(
                     imageType: ImageTypeEnum.svgPicture,
                     imageUrl: context.resources.drawable.iconNotification,
@@ -76,21 +93,56 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 10.h),
-            SizedBox(
-              height: 188.h,
-              child: ListView.builder(
-                itemCount: 10,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return HomePriorityTaskCard(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                        AppRoutes().priorityTaskDetailsRoute,
-                      );
-                    },
+            BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                if (state.priorityTaskStatus ==
+                    PriorityTaskStatusEnum.loading) {
+                  return SizedBox(
+                    height: 188.h,
+                    child: Center(
+                      child: Text(
+                        "Loading data...",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.black,
+                            ),
+                      ),
+                    ),
                   );
-                },
-              ),
+                }
+                return state.priorityTaskList != null &&
+                        state.priorityTaskList!.isNotEmpty
+                    ? SizedBox(
+                        height: 188.h,
+                        child: ListView.builder(
+                          itemCount: state.priorityTaskList?.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return HomePriorityTaskCard(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                  AppRoutes().priorityTaskDetailsRoute,
+                                );
+                              },
+                              taskModel: state.priorityTaskList![index],
+                            );
+                          },
+                        ),
+                      )
+                    : SizedBox(
+                        height: 188.h,
+                        child: Center(
+                          child: Text(
+                            "You have no task",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Colors.black,
+                                ),
+                          ),
+                        ),
+                      );
+              },
             ),
             SizedBox(height: 32.h),
             Row(
@@ -114,10 +166,39 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return const TaskCheckBox();
+              child: BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  if (state.dailyTaskStatus == DailyTaskStatusEnum.loading) {
+                    return Center(
+                      child: Text(
+                        "Loading data...",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.black,
+                            ),
+                      ),
+                    );
+                  }
+                  return state.dailyTaskList != null &&
+                          state.dailyTaskList!.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: state.dailyTaskList!.length,
+                          itemBuilder: (context, index) {
+                            return TaskCheckBox(
+                              data: state.dailyTaskList![index],
+                            );
+                          },
+                        )
+                      : Center(
+                          child: Text(
+                            "You have no daily task",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Colors.black,
+                                ),
+                          ),
+                        );
                 },
               ),
             )

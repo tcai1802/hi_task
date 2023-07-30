@@ -114,6 +114,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                   context,
                                   CalendarBase(
                                     onDaySelected: (DateTime timeSelected) {
+                                      print(
+                                          "Time selected: ${timeSelected.toUtc()} ");
                                       context.read<AddTaskBloc>().add(
                                           OnChangeStartTimeEvent(timeSelected));
                                     },

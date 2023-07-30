@@ -74,6 +74,7 @@ class AppRoutes extends Routes {
 
   final _registerBloc = RegisterBloc();
   final _loginBloc = LoginBloc();
+  final _dashboardBloc = DashboardBloc();
   final _addTaskBloc = AddTaskBloc();
 
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -109,7 +110,10 @@ class AppRoutes extends Routes {
       );
     } else if (settings.name == dashBoardRoute) {
       return MaterialPageRoute(
-        builder: (context) => const DashBoardScreen(),
+        builder: (context) => BlocProvider.value(
+          value: _dashboardBloc,
+          child: const DashBoardScreen(),
+        ),
       );
     } else if (settings.name == dailyTaskDetailsRoute) {
       return MaterialPageRoute(
@@ -184,5 +188,6 @@ class AppRoutes extends Routes {
   void dispose() {
     _registerBloc.close();
     _loginBloc.close();
+    _dashboardBloc.close();
   }
 }

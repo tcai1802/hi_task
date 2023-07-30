@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Container(),
                 AnimatedContainer(
                   height: 40.h,
-                  duration: Duration(seconds: 4),
+                  duration: const Duration(seconds: 4),
                   curve: Curves.easeIn,
                   child: SvgPicture.asset(AppDrawable().imgLogo),
                 ),

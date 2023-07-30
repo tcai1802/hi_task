@@ -28,7 +28,7 @@ class _CalendarBaseState extends State<CalendarBase> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300.h,
+      height: 350.h,
       width: double.maxFinite,
       padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.w),
       child: SingleChildScrollView(
