@@ -43,9 +43,9 @@ class TaskRepository {
           .get();
 
       for (var docSnapshot in resultQuery.docs) {
-        print("Vãi: ${docSnapshot.data()}");
+        //print("Vãi: ${docSnapshot.data()}");
         final TaskModel data = TaskModel.fromJson(docSnapshot.data());
-        //print("Data: ${data.endDate}");
+        //print("Data: ${docSnapshot.id}");
         outputTaskModelList.add(data);
       }
       print('Data: $outputTaskModelList');
@@ -55,5 +55,31 @@ class TaskRepository {
       onError(e.toString());
     }
     //print("End==");
+  }
+
+  Future<void> deleteTaskApi(String taskId) async {
+    final _credential =
+        await postCollection.where("taskId", isEqualTo: taskId).get();
+    if (_credential.docs.isNotEmpty) {
+      postCollection.doc(_credential.docs.first.id).delete();
+    }
+  }
+
+  Future<void> editTaskApi(
+    String taskId, {
+    required Function(String message) onSuccess,
+    required Function(String error) onError,
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      final credential =
+          await postCollection.where("taskId", isEqualTo: taskId).get();
+      if (credential.docs.isNotEmpty) {
+        postCollection.doc(credential.docs.first.id).update(data);
+      }
+      onSuccess("Updated successfully");
+    } catch (e) {
+      onError(e.toString());
+    }
   }
 }

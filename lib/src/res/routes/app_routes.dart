@@ -139,10 +139,12 @@ class AppRoutes extends Routes {
       );
     } else if (settings.name == editTaskRoute) {
       final args = settings.arguments as EditTaskArgument;
-
       return MaterialPageRoute(
-        builder: (context) => EditTaskScreen(
-          taskTypeEnum: args.taskTypeEnum,
+        builder: (context) => BlocProvider.value(
+          value: _addTaskBloc,
+          child: EditTaskScreen(
+            taskModel: args.taskModel,
+          ),
         ),
       );
     } else if (settings.name == myProfileRoute) {

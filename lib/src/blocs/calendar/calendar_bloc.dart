@@ -13,6 +13,21 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   CalendarBloc() : super(CalendarState()) {
     on<CalendarInitEvent>(_onCalendarInitEvent);
     on<OnChangeIndexTabEvent>(_onChangeTabIndexEvent);
+    on<OnDeleteClickEvent>(_onDeleteClickEvent);
+  }
+
+  _onDeleteClickEvent(
+    OnDeleteClickEvent event,
+    Emitter<CalendarState> emit,
+  ) async {
+    await TaskRepository().deleteTaskApi(event.taskId);
+    emit(
+      state.copyWith(
+        priorityTaskList: state.priorityTaskList
+            .where((element) => element.taskId != event.taskId)
+            .toList(),
+      ),
+    );
   }
 
   _onCalendarInitEvent(

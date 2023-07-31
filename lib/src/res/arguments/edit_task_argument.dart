@@ -1,7 +1,7 @@
 
-import 'package:hi_task/src/res/enum/app_enum.dart';
+import 'package:hi_task/src/models/model_exports.dart';
 
 class EditTaskArgument {
-  final TaskTypeEnum taskTypeEnum;
-  EditTaskArgument(this.taskTypeEnum);
+  final TaskModel taskModel;
+  EditTaskArgument(this.taskModel);
 }

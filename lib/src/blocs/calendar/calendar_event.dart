@@ -16,3 +16,8 @@ class OnChangeIndexTabEvent extends CalendarEvent {
   final int currentTabIndex;
   const OnChangeIndexTabEvent(this.currentTabIndex);
 }
+
+class OnDeleteClickEvent extends CalendarEvent {
+  final String taskId;
+  const OnDeleteClickEvent(this.taskId);
+}

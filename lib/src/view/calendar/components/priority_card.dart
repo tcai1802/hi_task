@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
+import 'package:hi_task/src/blocs/blocs_exports.dart';
 import 'package:hi_task/src/models/task_model/exports.dart';
+import 'package:hi_task/src/res/arguments/edit_task_argument.dart';
+import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/utils/datetime_format.dart';
 import 'package:hi_task/src/view/calendar/components/exports.dart';
 
@@ -60,8 +64,21 @@ class PriorityCard extends StatelessWidget {
                     const Spacer(),
                     GestureDetector(
                       onTap: () {
-                        menuOptionDialog(context,
-                            onEditTodo: () {}, onDeleteTodo: () {});
+                        menuOptionDialog(
+                          context,
+                          onEditTodo: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes().editTaskRoute,
+                              arguments: EditTaskArgument(taskModel),
+                            );
+                          },
+                          onDeleteTodo: () {
+                            context
+                                .read<CalendarBloc>()
+                                .add(OnDeleteClickEvent(taskModel.taskId!));
+                          },
+                        );
                       },
                       child: Icon(
                         Icons.more_horiz_rounded,
