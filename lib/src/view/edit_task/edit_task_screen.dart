@@ -9,8 +9,8 @@ import 'package:hi_task/src/models/model_exports.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/utils/datetime_format.dart';
+import 'package:hi_task/src/view/add_task/components/exports.dart';
 import 'package:hi_task/src/view/edit_task/components/todo_checkbox.dart';
-import 'package:hi_task/src/view/home/components/task_checkbox.dart';
 
 class EditTaskScreen extends StatefulWidget {
   const EditTaskScreen({
@@ -294,14 +294,62 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                               ),
                         ),
                         SizedBox(height: 5.h),
-                        ...state.todoList
-                            .map((data) => TodoCheckBox(data: data)),
+                        ...state.todoList.asMap().entries.map(
+                              (data) => TodoCheckBox(
+                                data: data.value,
+                                onDoubleTap: () {
+                                  editTodoWidget(
+                                    context,
+                                    currentModel: data.value,
+                                    onEditTodo: (String value) {
+                                      context.read<AddTaskBloc>().add(
+                                            OnEditTodoEvent(
+                                              TodoModel(
+                                                content: value,
+                                                isCompleted: false,
+                                              ),
+                                              data.key,
+                                            ),
+                                          );
+                                    },
+                                    onDeleteTodo: () {
+                                      context.read<EditTaskBloc>().add(
+                                            OnEditDelTodoEvent(data.key),
+                                          );
+                                    },
+                                  );
+                                },
+                                onTap: () {
+                                  print("Change");
+                                  context.read<EditTaskBloc>().add(
+                                        OnChangeTodoItemStatusEvent(
+                                          data.key,
+                                          !data.value.isCompleted,
+                                        ),
+                                      );
+                                },
+                              ),
+                            ),
                         CustomButtonBase(
                           titleBtn: 'Add more',
                           widthBtn: double.infinity,
                           paddingBtn: EdgeInsets.symmetric(
                               vertical: 12.h, horizontal: 12.w),
-                          onTap: () {},
+                          onTap: () {
+                            newTodoWidget(
+                              context,
+                              onAddTodo: (String value) {
+                                context.read<EditTaskBloc>().add(
+                                      OnEditAddTodoEvent(
+                                        TodoModel(
+                                          content: value,
+                                          isCompleted: false,
+                                        ),
+                                      ),
+                                    );
+                              },
+                            );
+                          },
                           prefixWidget: Padding(
                             padding: EdgeInsets.only(right: 10.w),
                             child: Icon(

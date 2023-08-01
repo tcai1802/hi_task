@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
-import 'package:hi_task/src/base_widgets/show_dialog_base.dart';
 
 showLogoutPopup(BuildContext context) {
   return showDialogBase(

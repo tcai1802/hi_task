@@ -7,6 +7,18 @@ class TodoModel extends Equatable {
     this.content = "",
     this.isCompleted = false,
   });
+
+  TodoModel copyWith({
+    String? content,
+    bool? isCompleted,
+
+  }) {
+    return TodoModel(
+      content: content ?? this.content,
+      isCompleted: isCompleted ?? this.isCompleted,
+    );
+  }
+
   Map<String, dynamic> toMap(TodoModel todoModel) => {
         "content": todoModel.content,
         "isCompleted": todoModel.isCompleted,

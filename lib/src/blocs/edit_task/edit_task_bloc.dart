@@ -16,7 +16,62 @@ class EditTaskBloc extends Bloc<EditTaskEvent, EditTaskState> {
     on<OnChangeStartDateEvent>(_onChangeStartDateEvent);
     on<OnChangeEndDateEvent>(_onChangeEndDateEvent);
     on<SubmitEditEvent>(_onSubmitEditEvent);
+    on<OnEditAddTodoEvent>(_onAddTodoEvent);
+    on<OnEditEditTodoEvent>(_onEditTodoEvent);
+    on<OnEditDelTodoEvent>(_onDelTodoEvent);
+    on<OnChangeTodoItemStatusEvent>(_onChangeTodoItemStatusEvent);
   }
+
+  _onChangeTodoItemStatusEvent(
+    OnChangeTodoItemStatusEvent event,
+    Emitter<EditTaskState> emit,
+  ) {
+    final List<TodoModel> newTodoList = List.from(state.todoList);
+    newTodoList[event.indexTodo] = newTodoList[event.indexTodo]
+        .copyWith(isCompleted: !newTodoList[event.indexTodo].isCompleted);
+    emit(
+      state.copyWith(
+        todoList: newTodoList,
+      ),
+    );
+  }
+
+  _onAddTodoEvent(
+    OnEditAddTodoEvent event,
+    Emitter<EditTaskState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        todoList: [...state.todoList, event.todoModel],
+      ),
+    );
+    //print("Clmaaa ${state.todoList}");
+  }
+
+  _onEditTodoEvent(
+    OnEditEditTodoEvent event,
+    Emitter<EditTaskState> emit,
+  ) {
+    final List<TodoModel> newTodoList = List.from(state.todoList);
+    newTodoList[event.index] = event.todoModel;
+    emit(
+      state.copyWith(
+        todoList: newTodoList,
+      ),
+    );
+    //print("Clmaaa ${state.todoList}");
+  }
+
+  _onDelTodoEvent(
+    OnEditDelTodoEvent event,
+    Emitter<EditTaskState> emit,
+  ) {
+    final List<TodoModel> newTodoList = List.from(state.todoList);
+    newTodoList.removeAt(event.index);
+
+    emit(state.copyWith(todoList: newTodoList));
+  }
+
   _onInitDataEvent(OnInitDataEvent event, Emitter<EditTaskState> emit) {
     emit(
       state.copyWith(
@@ -88,7 +143,7 @@ class EditTaskBloc extends Bloc<EditTaskEvent, EditTaskState> {
             message: "Please enter full information"),
       );
       //print("Vui lòng nhập đầy đủ thông tin");
-    }
+    } 
     emit(
       state.copyWith(
         ediTaskStatus: AddTaskStatusEnum.init,

@@ -1,4 +1,3 @@
-import 'package:hi_task/src/models/task_model/exports.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 
 class PriorityTaskResponse {

@@ -9,6 +9,7 @@ import 'package:hi_task/src/blocs/home/home_bloc.dart';
 import 'package:hi_task/src/res/arguments/add_task_argument.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
+import 'package:hi_task/src/utils/datetime_format.dart';
 import 'package:hi_task/src/view/calendar/components/exports.dart';
 
 class CalendarPriorityScreen extends StatefulWidget {
@@ -52,13 +53,20 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                       imageWidth: 24.w,
                     ),
                     SizedBox(width: 4.w),
-                    Text(
-                      "Feb, 2022",
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
+                    Expanded(
+                      child: Text(
+                        DateTimeFormat().convertDateTimeToString(
+                                state.currentTime ?? DateTime.now(),
+                                formatString: "MMMM,yyyy") ??
+                            "",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
                     ),
-                    const Spacer(),
+                    //const Spacer(),
                     CustomButtonBase(
                       prefixWidget: Icon(
                         Icons.add,

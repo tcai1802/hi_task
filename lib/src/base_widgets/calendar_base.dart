@@ -20,7 +20,7 @@ class _CalendarBaseState extends State<CalendarBase> {
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     setState(() {
       today = focusedDay;
-      print('Today ${today}');
+      //print('Today ${today}');
       widget.onDaySelected(focusedDay);
     });
   }

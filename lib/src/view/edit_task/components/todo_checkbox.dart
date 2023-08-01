@@ -5,15 +5,20 @@ import 'package:hi_task/src/base_widgets/custom_button_base.dart';
 import 'package:hi_task/src/models/model_exports.dart';
 
 class TodoCheckBox extends StatefulWidget {
-  const TodoCheckBox({super.key, required this.data, this.onTap});
+  const TodoCheckBox({
+    super.key,
+    required this.data,
+    this.onTap,
+    this.onDoubleTap,
+  });
   final TodoModel data;
   final Function? onTap;
+  final Function? onDoubleTap;
   @override
   State<TodoCheckBox> createState() => _TodoCheckBoxState();
 }
 
 class _TodoCheckBoxState extends State<TodoCheckBox> {
-  bool isCheck = false;
   @override
   void initState() {
     super.initState();
@@ -21,6 +26,7 @@ class _TodoCheckBoxState extends State<TodoCheckBox> {
 
   @override
   Widget build(BuildContext context) {
+    print("Re render: ${widget.data.isCompleted}");
     return Container(
       margin: EdgeInsets.only(bottom: 10.h),
       width: double.infinity,
@@ -32,7 +38,7 @@ class _TodoCheckBoxState extends State<TodoCheckBox> {
         ),
         bgColorBtn: context.resources.color.brandColor_11,
         titleStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: widget.data.isCompleted!
+              color: widget.data.isCompleted
                   ? context.resources.color.brandColor_02
                   : const Color(0xFF4A4646),
               fontWeight: FontWeight.w500,
@@ -71,6 +77,8 @@ class _TodoCheckBoxState extends State<TodoCheckBox> {
           ],
         ),
         onTap: () => widget.onTap != null ? widget.onTap!() : () {},
+        onDoubleTap: () =>
+            widget.onDoubleTap != null ? widget.onDoubleTap!() : () {},
       ),
     );
   }

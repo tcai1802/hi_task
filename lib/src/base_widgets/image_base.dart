@@ -29,7 +29,7 @@ class ImageBaseWidget extends StatelessWidget {
   final Color? imgColor;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: imageHeight,
       width: imageWidth,
       child: _imageBodyWidget(),
@@ -70,7 +70,7 @@ class ImageBaseWidget extends StatelessWidget {
         return imageFile != null ? Image.file(imageFile!) : Container();
       default:
         //return _errorWidget();
-        return Icon(Icons.error);
+        return const Icon(Icons.error);
     }
   }
 

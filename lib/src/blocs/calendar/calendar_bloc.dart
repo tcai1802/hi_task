@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hi_task/src/blocs/blocs_exports.dart';
 import 'package:hi_task/src/blocs/home/home_bloc.dart';
 import 'package:hi_task/src/models/task_model/exports.dart';
 import 'package:hi_task/src/packages/task_repository.dart';
@@ -10,7 +9,7 @@ part 'calendar_event.dart';
 part 'calendar_state.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
-  CalendarBloc() : super(CalendarState()) {
+  CalendarBloc() : super(const CalendarState()) {
     on<CalendarInitEvent>(_onCalendarInitEvent);
     on<OnChangeIndexTabEvent>(_onChangeTabIndexEvent);
     on<OnDeleteClickEvent>(_onDeleteClickEvent);
@@ -87,7 +86,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     OnChangeIndexTabEvent event,
     Emitter<CalendarState> emit,
   ) {
-    print("Index: ${event.currentTabIndex}");
+    //print("Index: ${event.currentTabIndex}");
     emit(
       state.copyWith(currentTabIndex: event.currentTabIndex),
     );

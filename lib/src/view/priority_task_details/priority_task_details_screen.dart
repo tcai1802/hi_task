@@ -196,7 +196,7 @@ class PriorityTaskDetailsScreen extends StatelessWidget {
                   children: [
                     ...List.generate(
                       10,
-                      (index) => PriorityTaskCheckBox(),
+                      (index) => const PriorityTaskCheckBox(),
                     )
                   ],
                 ),

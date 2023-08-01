@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
-import 'package:hi_task/src/models/model_exports.dart';
 
 menuOptionDialog(
   BuildContext context, {
@@ -23,6 +22,7 @@ menuOptionDialog(
             widthBtn: double.infinity,
             onTap: () {
               onEditTodo();
+              Navigator.pop(context);
             },
           ),
           SizedBox(height: 15.h),
