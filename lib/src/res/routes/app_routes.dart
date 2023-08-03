@@ -110,10 +110,11 @@ class AppRoutes extends Routes {
       );
     } else if (settings.name == dashBoardRoute) {
       return MaterialPageRoute(
-        builder: (context) => BlocProvider.value(
-          value: _dashboardBloc,
-          child: const DashBoardScreen(),
-        ),
+        //builder: (context) => BlocProvider.value(
+        //  value: _dashboardBloc,
+        //  child: const DashBoardScreen(),
+        //),
+        builder: (context) => DashBoardScreen(),
       );
     } else if (settings.name == dailyTaskDetailsRoute) {
       return MaterialPageRoute(

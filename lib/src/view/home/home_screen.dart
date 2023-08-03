@@ -86,13 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       .copyWith(fontWeight: FontWeight.w700),
                 ),
                 const Spacer(),
-                Text(
-                  "See all",
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: context.resources.color.brandColor_02,
-                      ),
-                ),
               ],
             ),
             SizedBox(height: 10.h),
@@ -158,13 +151,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       .copyWith(fontWeight: FontWeight.w700),
                 ),
                 const Spacer(),
-                Text(
-                  "See all",
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: context.resources.color.brandColor_02,
-                      ),
-                ),
               ],
             ),
             SizedBox(height: 10.h),

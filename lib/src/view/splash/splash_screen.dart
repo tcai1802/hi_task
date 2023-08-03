@@ -28,8 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       listener: (context, state) {
         if (state.splashState == StateEnum.success) {
           if (state.isLogged) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, AppRoutes().dashBoardRoute, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(context, AppRoutes().dashBoardRoute, (route) => false);
           } else if (!state.firstOpenAppState) {
             Navigator.pushNamed(context, AppRoutes().getStartedRoute);
           } else {

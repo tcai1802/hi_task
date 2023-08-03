@@ -11,6 +11,7 @@ abstract class Drawable {
   String get imgSuccessVerify;
   String get imgPriorityTaskCard;
   String get imgFakeMap;
+  String get imgAvatarDefault;
 
   //Icons
   // Note: Only usings icons with .svg format
@@ -38,4 +39,5 @@ abstract class Drawable {
   String get iconLockClosed;
   String get iconPeople;
   String get iconSync;
+  String get iconBag;
 }

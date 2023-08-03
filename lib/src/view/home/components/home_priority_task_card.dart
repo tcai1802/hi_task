@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
@@ -20,7 +22,17 @@ class HomePriorityTaskCard extends StatelessWidget {
     final List<TodoModel> completedTaskList = taskModel!.todoList!
         .where((element) => element.isCompleted == true)
         .toList();
-    print("====${taskModel!.startDate}");
+    //print("====${taskModel!.startDate}");
+
+    Color randomColor() {
+      List<Color> colorList = [
+        Color(0xFF68A0F4),
+        Color(0xFF362075),
+        Color(0xFFCD2C2C),
+      ];
+      return colorList[Random().nextInt(colorList.length)];
+    }
+
     return GestureDetector(
       onTap: () => onTap != null ? onTap!() : () {},
       child: Container(
@@ -32,12 +44,13 @@ class HomePriorityTaskCard extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 //color: context.resources.color.brandColor_02,
-                color: Color(0xFF362075),
+                color: randomColor(),
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: ImageBaseWidget(
                 imageType: ImageTypeEnum.svgPicture,
                 imageUrl: context.resources.drawable.imgPriorityTaskCard,
+                imgColor: Colors.white,
               ),
             ),
             Container(

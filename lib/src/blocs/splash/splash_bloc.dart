@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hi_task/firebase_options.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
+import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'splash_event.dart';
 part 'splash_state.dart';
@@ -51,9 +52,15 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           firstOpenAppState: true,
         ));
       } else {
-        emit(state.copyWith(
-            splashState: StateEnum.success, firstOpenAppState: true));
+        emit(state.copyWith(splashState: StateEnum.success, firstOpenAppState: true));
       }
+
+      FirebaseAuth.instance.authStateChanges().listen((event) {
+        print("Usedr====${event}");
+        if (event == null) {
+          AppRoutes().dispose();
+        }
+      });
     } catch (e) {
       //print("Error: $e");
       emit(state.copyWith(splashState: StateEnum.failed));

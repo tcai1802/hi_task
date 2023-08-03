@@ -6,7 +6,11 @@ part 'dash_board_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   DashboardBloc() : super(DashboardInitial()) {
-    on<DashboardEvent>((event, emit) {
-    });
+    on<DashboardEvent>((event, emit) {});
+  }
+  @override
+  Future<void> close() async {
+    //cancel streams
+    super.close();
   }
 }

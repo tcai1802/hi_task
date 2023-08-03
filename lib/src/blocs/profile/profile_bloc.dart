@@ -1,21 +1,33 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hi_task/src/models/user_model/requests/login_request.dart';
-import 'package:hi_task/src/models/user_model/response/login_response.dart';
-import 'package:hi_task/src/models/user_model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hi_task/src/models/model_exports.dart';
+import 'package:hi_task/src/packages/user_repository.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc() : super(ProfileState());
+  ProfileBloc() : super(const ProfileState()) {
+    on<OnLogoutRequested>(_onLogoutRequested);
+    on<ProfileInitEvent>(_profileInitEvent);
+  }
+  void _onLogoutRequested(
+    OnLogoutRequested event,
+    Emitter<ProfileState> emit,
+  ) {
+    FirebaseAuth.instance.signOut();
+  }
 
-  void Hello() {
-    final UserModel userModel = UserModel(userId: "hhhehe");
-    final data = LoginRequest().toMap(userModel);
-    print("data ${data}");
-    final fakeData = {"userId": "TestData"};
-    final data2 = LoginResponse.fromJson(fakeData);
-    print("data2 ${data2.userId}");
+  _profileInitEvent(
+    ProfileInitEvent event,
+    Emitter<ProfileState> emit,
+  ) async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final UserModel? user = await UserRepository().getUser(userId);
+    //print('Data1111: ${data}');
+    emit(state.copyWith(
+      userModel: user,
+    ));
   }
 }
