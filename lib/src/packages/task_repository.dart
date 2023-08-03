@@ -11,8 +11,7 @@ class TaskRepository {
     required Function onError,
   }) async {
     try {
-      final CollectionReference posts =
-          FirebaseFirestore.instance.collection("posts");
+      final CollectionReference posts = FirebaseFirestore.instance.collection("posts");
       final String taskId = posts.doc().id;
       await posts.add(CreateTaskRequest().toMap(taskModel, taskId));
       onSuccess();
@@ -58,8 +57,7 @@ class TaskRepository {
   }
 
   Future<void> deleteTaskApi(String taskId) async {
-    final _credential =
-        await postCollection.where("taskId", isEqualTo: taskId).get();
+    final _credential = await postCollection.where("taskId", isEqualTo: taskId).get();
     if (_credential.docs.isNotEmpty) {
       postCollection.doc(_credential.docs.first.id).delete();
     }
@@ -72,8 +70,7 @@ class TaskRepository {
     required Map<String, dynamic> data,
   }) async {
     try {
-      final credential =
-          await postCollection.where("taskId", isEqualTo: taskId).get();
+      final credential = await postCollection.where("taskId", isEqualTo: taskId).get();
       if (credential.docs.isNotEmpty) {
         postCollection.doc(credential.docs.first.id).update(data);
       }
@@ -81,5 +78,10 @@ class TaskRepository {
     } catch (e) {
       onError(e.toString());
     }
+  }
+
+  Stream<int> totalCompletedTask(String userId) async* {
+    final data = await postCollection.where("userId", isEqualTo: userId).count().get();
+    yield data.count;
   }
 }

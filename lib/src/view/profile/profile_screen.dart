@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/blocs/profile/profile_bloc.dart';
+import 'package:hi_task/src/packages/task_repository.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/view/profile/components/exports.dart';
 
@@ -155,14 +156,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   size: 14.h,
                                                 ),
                                                 SizedBox(width: 4.w),
-                                                Text(
-                                                  "Malang, Indonesia",
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                                                        color: context.resources.color.textColor,
-                                                      ),
-                                                ),
+                                                StreamBuilder<int>(
+                                                    stream: TaskRepository()
+                                                        .totalCompletedTask(state.userModel?.userId ?? ""),
+                                                    builder: (context, snapshot) {
+                                                      return Text(
+                                                        "${snapshot.data ?? 0} Task Completed",
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow.ellipsis,
+                                                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                                              color: context.resources.color.textColor,
+                                                            ),
+                                                      );
+                                                    }),
                                               ],
                                             ),
                                           )

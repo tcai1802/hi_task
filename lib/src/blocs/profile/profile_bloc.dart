@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hi_task/src/models/model_exports.dart';
@@ -30,4 +31,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       userModel: user,
     ));
   }
+
+  //Stream<int> getTotalTaskCompleted(String userId) async* {
+
+  //  FirebaseFirestore.instance.collection("posts")
+
+  //  yield 0;
+  //}
 }
