@@ -59,8 +59,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 break;
               case AddTaskStatusEnum.success:
                 EasyLoading.showSuccess("Task created");
-                Navigator.pushNamedAndRemoveUntil(
-                    context, AppRoutes().dashBoardRoute, (route) => false);
+                Navigator.pushNamedAndRemoveUntil(context, AppRoutes().dashBoardRoute, (route) => false);
                 break;
             }
           },
@@ -77,12 +76,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           children: [
                             Text(
                               "Start",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    color:
-                                        context.resources.color.brandColor_02,
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: context.resources.color.brandColor_02,
                                     fontWeight: FontWeight.w500,
                                   ),
                             ),
@@ -105,8 +100,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                   : "---",
                               paddingBtn: EdgeInsets.all(10.h),
                               borderStyle: Border.all(
-                                color: context.resources.color.brandColor_02
-                                    .withOpacity(.1),
+                                color: context.resources.color.brandColor_02.withOpacity(.1),
                               ),
                               mainAxisAlignment: MainAxisAlignment.start,
                               onTap: () => {
@@ -114,18 +108,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                   context,
                                   CalendarBase(
                                     onDaySelected: (DateTime timeSelected) {
-                                      print(
-                                          "Time selected: ${timeSelected.toUtc()} ");
-                                      context.read<AddTaskBloc>().add(
-                                          OnChangeStartTimeEvent(timeSelected));
+                                      //print("Time selected: ${timeSelected.toUtc()} ");
+                                      context.read<AddTaskBloc>().add(OnChangeStartTimeEvent(timeSelected));
                                     },
                                   ),
                                 ),
                               },
-                              titleStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
+                              titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: context.resources.color.textColor,
                                   ),
                             ),
@@ -139,12 +128,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           children: [
                             Text(
                               "Ends",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    color:
-                                        context.resources.color.brandColor_02,
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: context.resources.color.brandColor_02,
                                     fontWeight: FontWeight.w500,
                                   ),
                             ),
@@ -161,13 +146,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               ),
                               bgColorBtn: context.resources.color.bgColor,
                               titleBtn: state.endTime != null
-                                  ? DateTimeFormat().convertDateTimeToString(
-                                      state.endTime ?? DateTime.now())
+                                  ? DateTimeFormat().convertDateTimeToString(state.endTime ?? DateTime.now())
                                   : "---",
                               paddingBtn: EdgeInsets.all(10.h),
                               borderStyle: Border.all(
-                                color: context.resources.color.brandColor_02
-                                    .withOpacity(.1),
+                                color: context.resources.color.brandColor_02.withOpacity(.1),
                               ),
                               mainAxisAlignment: MainAxisAlignment.start,
                               onTap: () => {
@@ -175,16 +158,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                   context,
                                   CalendarBase(
                                     onDaySelected: (DateTime timeSelected) {
-                                      context.read<AddTaskBloc>().add(
-                                          OnChangeEndTimeEvent(timeSelected));
+                                      context.read<AddTaskBloc>().add(OnChangeEndTimeEvent(timeSelected));
                                     },
                                   ),
                                 ),
                               },
-                              titleStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
+                              titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: context.resources.color.textColor,
                                   ),
                             ),
@@ -221,30 +200,23 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         child: state.taskTypeEnum == TaskTypeEnum.priorityTask
                             ? CustomButtonBase(
                                 titleBtn: 'Priority Task',
-                                paddingBtn:
-                                    EdgeInsets.symmetric(vertical: 13.h),
+                                paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
                                 onTap: () {},
                               )
                             : CustomButtonBase(
                                 titleBtn: 'Priority Task',
-                                paddingBtn:
-                                    EdgeInsets.symmetric(vertical: 13.h),
+                                paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
                                 onTap: () {
-                                  context.read<AddTaskBloc>().add(
-                                      OnChangeTaskTypeEvent(
-                                          TaskTypeEnum.priorityTask));
+                                  context
+                                      .read<AddTaskBloc>()
+                                      .add(const OnChangeTaskTypeEvent(TaskTypeEnum.priorityTask));
                                 },
                                 bgColorBtn: Colors.transparent,
                                 borderStyle: Border.all(
-                                  color: context.resources.color.brandColor_02
-                                      .withOpacity(.1),
+                                  color: context.resources.color.brandColor_02.withOpacity(.1),
                                 ),
-                                titleStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      color:
-                                          context.resources.color.brandColor_02,
+                                titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      color: context.resources.color.brandColor_02,
                                     ),
                               ),
                       ),
@@ -253,30 +225,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         child: state.taskTypeEnum == TaskTypeEnum.dailyTask
                             ? CustomButtonBase(
                                 titleBtn: 'Daily Task',
-                                paddingBtn:
-                                    EdgeInsets.symmetric(vertical: 13.h),
+                                paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
                                 onTap: () {},
                               )
                             : CustomButtonBase(
                                 titleBtn: 'Daily Task',
-                                paddingBtn:
-                                    EdgeInsets.symmetric(vertical: 13.h),
+                                paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
                                 onTap: () {
                                   context.read<AddTaskBloc>().add(
-                                      OnChangeTaskTypeEvent(
-                                          TaskTypeEnum.dailyTask));
+                                        const OnChangeTaskTypeEvent(
+                                          TaskTypeEnum.dailyTask,
+                                        ),
+                                      );
                                 },
                                 bgColorBtn: Colors.transparent,
                                 borderStyle: Border.all(
-                                  color: context.resources.color.brandColor_02
-                                      .withOpacity(.1),
+                                  color: context.resources.color.brandColor_02.withOpacity(.1),
                                 ),
-                                titleStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      color:
-                                          context.resources.color.brandColor_02,
+                                titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      color: context.resources.color.brandColor_02,
                                     ),
                               ),
                       ),
@@ -303,10 +270,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         SizedBox(height: 30.h),
                         Text(
                           "To do list",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                 color: context.resources.color.brandColor_02,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -327,10 +291,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                         child: CustomButtonBase(
                                           titleBtn: entry.value.content,
                                           widthBtn: double.infinity,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          paddingBtn: EdgeInsets.symmetric(
-                                              vertical: 15.h, horizontal: 12.w),
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          paddingBtn: EdgeInsets.symmetric(vertical: 15.h, horizontal: 12.w),
                                           onDoubleTap: () {
                                             //successWidget(
                                             //  context,
@@ -359,13 +321,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                           },
                                           bgColorBtn: Colors.transparent,
                                           borderStyle: Border.all(
-                                            color: context
-                                                .resources.color.brandColor_02
-                                                .withOpacity(.1),
+                                            color: context.resources.color.brandColor_02.withOpacity(.1),
                                           ),
-                                          titleStyle: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium,
+                                          titleStyle: Theme.of(context).textTheme.bodyMedium,
                                         ),
                                       ),
                                     ),
@@ -376,16 +334,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         CustomButtonBase(
                           titleBtn: 'Add more',
                           widthBtn: double.infinity,
-                          paddingBtn: EdgeInsets.symmetric(
-                              vertical: 12.h, horizontal: 12.w),
+                          paddingBtn: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
                           onTap: () {
                             newTodoWidget(
                               context,
                               onAddTodo: (String value) {
                                 context.read<AddTaskBloc>().add(
                                       OnAddTodoEvent(
-                                        TodoModel(
-                                            content: value, isCompleted: false),
+                                        TodoModel(content: value, isCompleted: false),
                                       ),
                                     );
                               },
@@ -401,13 +357,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           ),
                           bgColorBtn: Colors.transparent,
                           borderStyle: Border.all(
-                            color: context.resources.color.brandColor_02
-                                .withOpacity(.1),
+                            color: context.resources.color.brandColor_02.withOpacity(.1),
                           ),
-                          titleStyle:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: context.resources.color.textColor_01,
-                                  ),
+                          titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: context.resources.color.textColor_01,
+                              ),
                         ),
                       ],
                     ),
@@ -415,8 +369,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   CustomButtonBase(
                     titleBtn: 'Create task',
                     widthBtn: double.infinity,
-                    paddingBtn:
-                        EdgeInsets.symmetric(vertical: 15.h, horizontal: 12.w),
+                    paddingBtn: EdgeInsets.symmetric(vertical: 15.h, horizontal: 12.w),
                     onTap: () {
                       context.read<AddTaskBloc>().add(
                             OnSubmitTaskEvent(
@@ -433,10 +386,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             ),
                           );
                     },
-                    titleStyle:
-                        Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: context.resources.color.brandColor_11,
-                            ),
+                    titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: context.resources.color.brandColor_11,
+                        ),
                   ),
                 ],
               ),

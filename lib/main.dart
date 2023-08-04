@@ -38,11 +38,12 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => NavigationCubit()),
             BlocProvider(create: (context) => CheckBoxCubit()),
             BlocProvider(create: (context) => SplashBloc()),
-            BlocProvider(lazy: false, create: (context) => LoginBloc()),
+            BlocProvider(create: (context) => LoginBloc()),
             BlocProvider(create: (context) => RegisterBloc()),
             BlocProvider(create: (context) => ProfileBloc()),
             BlocProvider(create: (context) => VerifyCodeBloc()),
             BlocProvider(create: (context) => EditTaskBloc()),
+            BlocProvider(create: (context) => EditProfileBloc()),
           ],
           child: MaterialApp(
             initialRoute: AppRoutes().splashRoute,

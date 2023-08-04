@@ -21,7 +21,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   @override
   Future<void> close() {
-    print("Close");
+    //print("Close");
     return super.close();
   }
 

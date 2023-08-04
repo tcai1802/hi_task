@@ -24,6 +24,6 @@ class PriorityTaskResponse {
     this.isCompleted,
   });
   factory PriorityTaskResponse.fromJson(Map<String, dynamic> json) {
-    return PriorityTaskResponse();
+    return const PriorityTaskResponse();
   }
 }

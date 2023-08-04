@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/models/model_exports.dart';
-import 'package:hi_task/src/models/task_model/exports.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/utils/datetime_format.dart';
 
@@ -25,7 +24,7 @@ class HomePriorityTaskCard extends StatelessWidget {
     //print("====${taskModel!.startDate}");
 
     Color randomColor() {
-      List<Color> colorList = [
+      List<Color> colorList = const [
         Color(0xFF68A0F4),
         Color(0xFF362075),
         Color(0xFFCD2C2C),

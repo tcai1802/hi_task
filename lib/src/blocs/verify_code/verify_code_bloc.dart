@@ -19,7 +19,7 @@ class VerifyCodeBloc extends Bloc<VerifyCodeEvent, VerifyCodeState> {
   static const _duration = 60;
   @override
   Future<void> close() {
-    print("Bloc dispose");
+    //print("Bloc dispose");
     _tickerSubscription?.cancel();
     return super.close();
   }

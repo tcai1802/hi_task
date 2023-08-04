@@ -47,7 +47,7 @@ class TaskRepository {
         //print("Data: ${docSnapshot.id}");
         outputTaskModelList.add(data);
       }
-      print('Data: $outputTaskModelList');
+      //print('Data: $outputTaskModelList');
 
       onSuccess(outputTaskModelList);
     } catch (e) {
@@ -57,9 +57,9 @@ class TaskRepository {
   }
 
   Future<void> deleteTaskApi(String taskId) async {
-    final _credential = await postCollection.where("taskId", isEqualTo: taskId).get();
-    if (_credential.docs.isNotEmpty) {
-      postCollection.doc(_credential.docs.first.id).delete();
+    final credential = await postCollection.where("taskId", isEqualTo: taskId).get();
+    if (credential.docs.isNotEmpty) {
+      postCollection.doc(credential.docs.first.id).delete();
     }
   }
 

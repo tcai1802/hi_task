@@ -28,7 +28,7 @@ class DateTimeFormat {
     } else if (remainTime.inSeconds > 0) {
       return "${remainTime.inSeconds} s";
     }
-    print("Remain time: ${remainTime}");
+    //print("Remain time: ${remainTime}");
     return "--";
   }
 }

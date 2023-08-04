@@ -7,3 +7,4 @@ export 'verify_code/verify_code_bloc.dart';
 export 'add_task/add_task_bloc.dart';
 export 'calendar/calendar_bloc.dart';
 export 'edit_task/edit_task_bloc.dart';
+export 'edit_profile/edit_profile_bloc.dart';

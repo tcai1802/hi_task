@@ -13,7 +13,7 @@ class NotifyScreen extends StatelessWidget {
       bodyWidget: ListView.builder(
         itemCount: 20,
         itemBuilder: (context, index) {
-          return NotifyItem();
+          return const NotifyItem();
         },
       ),
     );

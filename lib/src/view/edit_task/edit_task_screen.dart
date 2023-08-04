@@ -53,7 +53,6 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                 context, AppRoutes().dashBoardRoute, (route) => false);
             break;
         }
-        // TODO: implement listener
       },
       builder: (context, state) {
         return AppBarWithBodyBase(
@@ -134,8 +133,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                   context,
                                   CalendarBase(
                                     onDaySelected: (DateTime timeSelected) {
-                                      print(
-                                          "Time selected: ${timeSelected.toUtc()} ");
+                                      //print(
+                                      //    "Time selected: ${timeSelected.toUtc()} ");
                                       context.read<EditTaskBloc>().add(
                                           OnChangeStartDateEvent(timeSelected));
                                     },
@@ -196,8 +195,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                   context,
                                   CalendarBase(
                                     onDaySelected: (DateTime timeSelected) {
-                                      print(
-                                          "Time selected: ${timeSelected.toUtc()} ");
+                                      //print(
+                                      //    "Time selected: ${timeSelected.toUtc()} ");
                                       context.read<EditTaskBloc>().add(
                                           OnChangeEndDateEvent(timeSelected));
                                     },
@@ -320,7 +319,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                   );
                                 },
                                 onTap: () {
-                                  print("Change");
+                                  //print("Change");
                                   context.read<EditTaskBloc>().add(
                                         OnChangeTodoItemStatusEvent(
                                           data.key,

@@ -60,6 +60,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeLoadingEvent event,
     Emitter<HomeState> emit,
   ) {
-    print("==== Loading event");
+    //print("==== Loading event");
   }
 }

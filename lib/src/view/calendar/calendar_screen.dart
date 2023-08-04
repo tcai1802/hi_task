@@ -22,7 +22,6 @@ class CalendarPriorityScreen extends StatefulWidget {
 class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (context.read<CalendarBloc>().state.isFirstInit) {
       {
@@ -35,7 +34,6 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<CalendarBloc, CalendarState>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         return SafeArea(
@@ -87,8 +85,8 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                 initialDate: state.currentTime ?? DateTime.now(),
                 onDateChange: (selectedDate) {
                   //[selectedDate] the new date selected.
-                  print("selected date: ${selectedDate}");
-                  print("selected date: ${DateTime.now()}");
+                  //print("selected date: ${selectedDate}");
+                  //print("selected date: ${DateTime.now()}");
                   context
                       .read<CalendarBloc>()
                       .add(CalendarInitEvent(selectedDate));
@@ -120,7 +118,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? context.resources.color.brandColor_02
-                              : Color(0xFFEBF2FF),
+                              : const Color(0xFFEBF2FF),
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Column(

@@ -26,7 +26,6 @@ class _TodoCheckBoxState extends State<TodoCheckBox> {
 
   @override
   Widget build(BuildContext context) {
-    print("Re render: ${widget.data.isCompleted}");
     return Container(
       margin: EdgeInsets.only(bottom: 10.h),
       width: double.infinity,

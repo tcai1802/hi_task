@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
@@ -145,49 +144,49 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
     );
   }
 
-  Widget _textField(
-    BuildContext context, {
-    bool first = false,
-    bool last = false,
-  }) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.w),
-      width: 50.w,
-      child: TextField(
-        autofocus: true,
-        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-              fontWeight: FontWeight.bold,
-              color: context.resources.color.brandColor_02,
-            ),
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(1),
-        ],
-        onChanged: (value) {
-          if (value.length == 1 && last == false) {
-            FocusScope.of(context).nextFocus();
-          }
-          if (value.isEmpty && first == false) {
-            FocusScope.of(context).previousFocus();
-          }
-        },
-        textAlign: TextAlign.center,
-        decoration: InputDecoration(
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: context.resources.color.brandColor_02,
-              width: 3,
-            ),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: context.resources.color.brandColor_02,
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-        ),
-      ),
-    );
-  }
+  //Widget _textField(
+  //  BuildContext context, {
+  //  bool first = false,
+  //  bool last = false,
+  //}) {
+  //  return Container(
+  //    margin: EdgeInsets.symmetric(horizontal: 10.w),
+  //    width: 50.w,
+  //    child: TextField(
+  //      autofocus: true,
+  //      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+  //            fontWeight: FontWeight.bold,
+  //            color: context.resources.color.brandColor_02,
+  //          ),
+  //      keyboardType: TextInputType.number,
+  //      inputFormatters: [
+  //        LengthLimitingTextInputFormatter(1),
+  //      ],
+  //      onChanged: (value) {
+  //        if (value.length == 1 && last == false) {
+  //          FocusScope.of(context).nextFocus();
+  //        }
+  //        if (value.isEmpty && first == false) {
+  //          FocusScope.of(context).previousFocus();
+  //        }
+  //      },
+  //      textAlign: TextAlign.center,
+  //      decoration: InputDecoration(
+  //        enabledBorder: UnderlineInputBorder(
+  //          borderSide: BorderSide(
+  //            color: context.resources.color.brandColor_02,
+  //            width: 3,
+  //          ),
+  //        ),
+  //        focusedBorder: UnderlineInputBorder(
+  //          borderSide: BorderSide(
+  //            color: context.resources.color.brandColor_02,
+  //            width: 3,
+  //          ),
+  //          borderRadius: BorderRadius.circular(10.r),
+  //        ),
+  //      ),
+  //    ),
+  //  );
+  //}
 }

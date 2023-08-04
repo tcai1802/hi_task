@@ -11,7 +11,7 @@ class NotifyItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(15.h),
-      color: Color(0xFFF1F7FE),
+      color: const Color(0xFFF1F7FE),
       child: Row(
         children: [
           ImageBaseWidget(
@@ -32,7 +32,7 @@ class NotifyItem extends StatelessWidget {
                 Text(
                   "Well done Phillip, you have completed all the tasks for today",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Color(0xFF474747),
+                        color: const Color(0xFF474747),
                       ),
                 )
               ],

@@ -2,15 +2,13 @@ import 'dart:convert';
 
 import 'package:hi_task/src/models/user_model/user_model.dart';
 
-class CreateUserRequest {
+class UpdateUserRequest {
   Map<String, dynamic> toMap(UserModel userModel) => {
-        "userId": userModel.userId,
         "userName": userModel.userName,
         "email": userModel.email,
-        "loginMethod": userModel.loginMethod,
         "dateOfBirth": userModel.dateOfBirth,
         "profession": userModel.profession,
-        "createdAt": userModel.createdAt,
+        "updatedAt": userModel.updatedAt,
         "avatarUrl": userModel.avatarUrl,
       };
   String toJson() => json.encode(toMap);

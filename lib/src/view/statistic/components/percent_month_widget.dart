@@ -23,7 +23,7 @@ class PercentMonthWidget extends StatelessWidget {
           animation: true,
           percent: 90 / 100,
           reverse: true,
-          center: Text(90.toString() + "%",
+          center: Text("${90}%",
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.w500,
                   )),

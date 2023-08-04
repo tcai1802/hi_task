@@ -13,10 +13,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<SubmitLoginEvent>(_onSubmitLoginEvent);
   }
 
-  @override
-  Future<void> close() {
-    return super.close();
-  }
 
   void _onChangeEmailEvent(
     ChangedEmailEvent event,
@@ -54,7 +50,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(status: LoginStatusEnum.init));
       },
       onError: (error) {
-        print("Error: ${error}");
+        //print("Error: ${error}");
         emit(state.copyWith(status: LoginStatusEnum.failed));
         emit(state.copyWith(status: LoginStatusEnum.init));
       },

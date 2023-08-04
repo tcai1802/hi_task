@@ -18,17 +18,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    print("Init state");
+    //print("Init state");
     if (context.read<HomeBloc>().state.firstInit) {
-      context.read<HomeBloc>().add(HomeInitEvent());
+      context.read<HomeBloc>().add(const HomeInitEvent());
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    print("=====");
+    //print("=====");
     return SafeArea(
       child: Container(
         width: double.infinity,
@@ -48,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const Spacer(),
                 GestureDetector(
                   onTap: () => {
-                    context.read<HomeBloc>().add(HomeInitEvent())
+                    context.read<HomeBloc>().add(const HomeInitEvent())
                     //Navigator.pushNamed(context, AppRoutes().notifyRoute)
                   },
                   child: ImageBaseWidget(

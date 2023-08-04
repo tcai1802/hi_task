@@ -164,7 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ? () {
                                 context
                                     .read<RegisterBloc>()
-                                    .add(OnRegisterSubmitEvent(true));
+                                    .add(const OnRegisterSubmitEvent(true));
                               }
                             : () {},
                       ),
