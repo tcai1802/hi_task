@@ -24,11 +24,10 @@ class TaskRepository {
     required TaskTypeEnum taskTypeEnum,
     required Function onSuccess,
     required Function onError,
-    required DateTime startTime,
-    required DateTime endTime,
+    required DateTime currentTime,
   }) async {
     final List<TaskModel> outputTaskModelList = [];
-    //final nowTime = DateTime.now();
+    final nowTime = DateTime.now();
     //final inputTime = DateTime.utc(nowTime.year, nowTime.month, nowTime.day);
     //final endDate =
     //    DateTime.utc(nowTime.year, nowTime.month, nowTime.day, 24, 00, 00);
@@ -36,21 +35,22 @@ class TaskRepository {
     try {
       final resultQuery = await postCollection
           .where("userId", isEqualTo: userId)
-          .where("startDate", isGreaterThanOrEqualTo: startTime)
-          .where("startDate", isLessThanOrEqualTo: endTime)
+          .where("startDate", isLessThanOrEqualTo: nowTime)
           .where("taskType", isEqualTo: taskTypeEnum.name)
           .get();
-
       for (var docSnapshot in resultQuery.docs) {
-        //print("Vãi: ${docSnapshot.data()}");
+        //print("Data: ${docSnapshot.data()}");
         final TaskModel data = TaskModel.fromJson(docSnapshot.data());
         //print("Data: ${docSnapshot.id}");
-        outputTaskModelList.add(data);
+        if (data.endDate!.isAfter(currentTime)) {
+          outputTaskModelList.add(data);
+        }
       }
       //print('Data: $outputTaskModelList');
 
       onSuccess(outputTaskModelList);
     } catch (e) {
+      print("Error: $e");
       onError(e.toString());
     }
     //print("End==");

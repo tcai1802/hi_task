@@ -22,9 +22,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     await TaskRepository().deleteTaskApi(event.taskId);
     emit(
       state.copyWith(
-        priorityTaskList: state.priorityTaskList
-            .where((element) => element.taskId != event.taskId)
-            .toList(),
+        priorityTaskList: state.priorityTaskList.where((element) => element.taskId != event.taskId).toList(),
       ),
     );
   }
@@ -46,24 +44,15 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       onSuccess: (List<TaskModel> data) {
         emit(state.copyWith(priorityTaskList: data));
 
-        emit(state.copyWith(
-            priorityTaskStatus: PriorityTaskStatusEnum.complete));
+        emit(state.copyWith(priorityTaskStatus: PriorityTaskStatusEnum.complete));
       },
       onError: (String error) {
         emit(state.copyWith(priorityTaskStatus: PriorityTaskStatusEnum.failed));
       },
-      startTime: DateTime.utc(
+      currentTime: DateTime.utc(
         state.currentTime!.year,
         state.currentTime!.month,
         state.currentTime!.day,
-      ),
-      endTime: DateTime.utc(
-        state.currentTime!.year,
-        state.currentTime!.month,
-        state.currentTime!.day,
-        24,
-        00,
-        00,
       ),
     );
     await TaskRepository().getTaskInADay(
@@ -75,10 +64,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       onError: (String error) {
         emit(state.copyWith(dailyTaskStatus: DailyTaskStatusEnum.failed));
       },
-      startTime: DateTime.utc(state.currentTime!.year, state.currentTime!.month,
-          state.currentTime!.day),
-      endTime: DateTime.utc(state.currentTime!.year, state.currentTime!.month,
-          state.currentTime!.day, 24, 00, 00),
+      currentTime: DateTime.utc(state.currentTime!.year, state.currentTime!.month, state.currentTime!.day),
     );
   }
 

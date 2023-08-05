@@ -32,7 +32,8 @@ class UserRepository {
       final result = await users.where("userId", isEqualTo: userModel.userId).get();
       final currentUser = result.docs.first;
       if (result.docs.isNotEmpty) {
-        users.doc(currentUser.id).update(UpdateUserRequest().toMap(userModel)).then((value) => {onSuccess()});
+        users.doc(currentUser.id).update(UpdateUserRequest().toMap(userModel));
+        onSuccess();
       }
     } catch (e) {
       onError(e.toString());

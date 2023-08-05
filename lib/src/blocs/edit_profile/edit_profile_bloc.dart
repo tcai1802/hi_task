@@ -115,11 +115,12 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     if (state.userName != null && state.userName!.isNotEmpty ||
         state.profession != null && state.profession!.isNotEmpty ||
         state.dateOfBirth != null && state.imageAsset != null) {
+      emit(state.copyWith(editProfileStatus: EditProfileStatus.loading));
+
       String? avatarUrl;
       if (state.imageAsset != null) {
         avatarUrl = await MediaRepository().uploadFile(state.imageAsset!);
       }
-
       final UserModel userModel = UserModel(
         userId: event.originData.userId,
         userName: state.userName,
@@ -127,15 +128,16 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         dateOfBirth: state.dateOfBirth,
         avatarUrl: avatarUrl ?? event.originData.avatarUrl,
       );
-      UserRepository().updateUser(
+      await UserRepository().updateUser(
         userModel,
         onSuccess: () {
-          print('Câp nhật thành công');
+          emit(state.copyWith(editProfileStatus: EditProfileStatus.success));
         },
         onError: (error) {
-          print("Cập nhật thất bại: ${error}");
+          emit(state.copyWith(editProfileStatus: EditProfileStatus.failure));
         },
       );
+      emit(state.copyWith(editProfileStatus: EditProfileStatus.init));
     }
   }
   //----------------- End Edit Profile Bloc Function --------------------///

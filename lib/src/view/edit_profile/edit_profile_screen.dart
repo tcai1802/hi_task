@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/blocs/blocs_exports.dart';
 import 'package:hi_task/src/models/user_model/user_model.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
+import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/utils/datetime_format.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -39,7 +41,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<EditProfileBloc, EditProfileState>(
       listener: (context, state) {
-        // TODO: implement listener
+        switch (state.editProfileStatus) {
+          case EditProfileStatus.loading:
+            EasyLoading.show(status: "Updating...");
+            break;
+          case EditProfileStatus.init:
+            break;
+          case EditProfileStatus.failure:
+            EasyLoading.showError("Câp nhật thất bại");
+            break;
+          case EditProfileStatus.success:
+            EasyLoading.showSuccess("Cập nhật thành công");
+            Navigator.pushNamedAndRemoveUntil(context, AppRoutes().dashBoardRoute, (route) => false);
+            break;
+        }
       },
       builder: (context, state) {
         return AppBarWithBodyBase(

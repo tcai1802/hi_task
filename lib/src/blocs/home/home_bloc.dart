@@ -29,15 +29,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       onSuccess: (List<TaskModel> data) {
         emit(state.copyWith(priorityTaskList: data));
 
-        emit(state.copyWith(
-            priorityTaskStatus: PriorityTaskStatusEnum.complete));
+        emit(state.copyWith(priorityTaskStatus: PriorityTaskStatusEnum.complete));
       },
       onError: (String error) {
         emit(state.copyWith(priorityTaskStatus: PriorityTaskStatusEnum.failed));
       },
-      startTime: DateTime.utc(nowTime.year, nowTime.month, nowTime.day),
-      endTime:
-          DateTime.utc(nowTime.year, nowTime.month, nowTime.day, 24, 00, 00),
+      currentTime: DateTime.utc(nowTime.year, nowTime.month, nowTime.day),
     );
     await TaskRepository().getTaskInADay(
       taskTypeEnum: TaskTypeEnum.dailyTask,
@@ -48,9 +45,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       onError: (String error) {
         emit(state.copyWith(dailyTaskStatus: DailyTaskStatusEnum.failed));
       },
-      startTime: DateTime.utc(nowTime.year, nowTime.month, nowTime.day),
-      endTime:
-          DateTime.utc(nowTime.year, nowTime.month, nowTime.day, 24, 00, 00),
+      currentTime: DateTime.utc(nowTime.year, nowTime.month, nowTime.day),
     );
 
     Future.delayed(const Duration(seconds: 2));
