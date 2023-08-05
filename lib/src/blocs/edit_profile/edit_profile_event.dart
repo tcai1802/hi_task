@@ -1,6 +1,6 @@
 part of 'edit_profile_bloc.dart';
 
-abstract class EditProfileEvent extends Equatable {
+class EditProfileEvent extends Equatable {
   const EditProfileEvent();
 
   @override
@@ -8,11 +8,11 @@ abstract class EditProfileEvent extends Equatable {
 }
 
 class OnChangeAvatarAssetEvent extends EditProfileEvent {
-  final String imageAsset;
-  const OnChangeAvatarAssetEvent(this.imageAsset);
+  //final String imageAsset;
+  const OnChangeAvatarAssetEvent();
 
   @override
-  List<Object> get props => [imageAsset];
+  List<Object> get props => [];
 }
 
 class EditProfileInitEvent extends EditProfileEvent {
@@ -47,4 +47,13 @@ class OnChangeDateOfBirthEvent extends EditProfileEvent {
   List<Object> get props => [dateOfBirth];
 }
 
-class UpdateProfileEvent extends EditProfileEvent {}
+class UpdateProfileEvent extends EditProfileEvent {
+  final UserModel originData;
+  const UpdateProfileEvent(this.originData);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [originData];
+}
+
+class ClearDataEvent extends EditProfileEvent {}

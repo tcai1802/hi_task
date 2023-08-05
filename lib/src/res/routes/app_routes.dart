@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hi_task/src/blocs/blocs_exports.dart';
 import 'package:hi_task/src/res/arguments/add_task_argument.dart';
+import 'package:hi_task/src/res/arguments/edit_profile_argument.dart';
 import 'package:hi_task/src/res/arguments/edit_task_argument.dart';
 import 'package:hi_task/src/res/routes/routes.dart';
 import 'package:hi_task/src/view/export.dart';
@@ -147,8 +148,10 @@ class AppRoutes extends Routes {
         ),
       );
     } else if (settings.name == myProfileRoute) {
+      final args = settings.arguments as EditProfileArgument;
+
       return MaterialPageRoute(
-        builder: (context) => const MyProfileScreen(),
+        builder: (context) => EditProfileScreen(userModel: args.userModel),
       );
     } else if (settings.name == statisticRoute) {
       return MaterialPageRoute(

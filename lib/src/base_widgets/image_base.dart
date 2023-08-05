@@ -32,7 +32,7 @@ class ImageBaseWidget extends StatelessWidget {
     return SizedBox(
       height: imageHeight,
       width: imageWidth,
-      child: _imageBodyWidget(),
+      child: imageUrl.isEmpty ? _errorWidget() : _imageBodyWidget(),
     );
   }
 
@@ -60,14 +60,14 @@ class ImageBaseWidget extends StatelessWidget {
           imageUrl,
           width: imageWidth,
           height: imageHeight,
-          fit: boxFit,
-          colorFilter: imgColor != null
-              ? ColorFilter.mode(imgColor!, BlendMode.srcIn)
-              : null,
+          colorFilter: imgColor != null ? ColorFilter.mode(imgColor!, BlendMode.srcIn) : null,
           placeholderBuilder: (context) => _errorWidget(),
         );
-      case ImageTypeEnum.netWork: //don't use, using later if necessary
-        return imageFile != null ? Image.file(imageFile!) : Container();
+      case ImageTypeEnum.file: //don't use, using later if necessary
+        return Image.file(
+          File(imageUrl),
+          fit: boxFit,
+        );
       default:
         //return _errorWidget();
         return const Icon(Icons.error);

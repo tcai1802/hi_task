@@ -33,7 +33,8 @@ class UserModel {
       email: json["email"],
       loginMethod: json["loginMethod"],
       profession: json["profession"],
-      dateOfBirth: json["dateOfBirth"] != null ? DateTimeFormat().convertStringToDateTime(json["dateOfBirth"]) : null,
+      dateOfBirth:
+          json["dateOfBirth"] != null ? DateTime.fromMicrosecondsSinceEpoch(json['dateOfBirth'].seconds) : null,
       avatarUrl: json["avatarUrl"],
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
@@ -9,9 +11,11 @@ class CircleAvatarWidget extends StatelessWidget {
     super.key,
     this.size,
     this.imageUrl = "",
+    this.imageTypeEnum = ImageTypeEnum.cachedNetWork,
   });
   final double? size;
   final String imageUrl;
+  final ImageTypeEnum imageTypeEnum;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +32,7 @@ class CircleAvatarWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50.r),
         child: ImageBaseWidget(
-          imageType: ImageTypeEnum.cachedNetWork,
+          imageType: imageTypeEnum,
           imageUrl: imageUrl,
         ),
       ),

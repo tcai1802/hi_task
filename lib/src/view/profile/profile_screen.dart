@@ -5,6 +5,7 @@ import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/blocs/profile/profile_bloc.dart';
 import 'package:hi_task/src/packages/task_repository.dart';
+import 'package:hi_task/src/res/arguments/edit_profile_argument.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/view/profile/components/exports.dart';
 
@@ -184,7 +185,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ProfileMenuOption(
                                 iconUrl: context.resources.drawable.iconPerson,
                                 title: "My profile",
-                                onTap: () => Navigator.pushNamed(context, AppRoutes().myProfileRoute),
+                                onTap: () => Navigator.pushNamed(context, AppRoutes().myProfileRoute,
+                                    arguments: EditProfileArgument(state.userModel!)),
                               ),
                               ProfileMenuOption(
                                 iconUrl: context.resources.drawable.iconChart,

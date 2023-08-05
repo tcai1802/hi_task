@@ -49,8 +49,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
             break;
           case AddTaskStatusEnum.success:
             EasyLoading.showSuccess(state.message);
-            Navigator.pushNamedAndRemoveUntil(
-                context, AppRoutes().dashBoardRoute, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(context, AppRoutes().dashBoardRoute, (route) => false);
             break;
         }
       },
@@ -80,11 +79,10 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     alignment: Alignment.center,
                     child: Text(
                       "UI Design",
-                      style:
-                          Theme.of(context).textTheme.displayMedium!.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: context.resources.color.brandColor_02,
-                              ),
+                      style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: context.resources.color.brandColor_02,
+                          ),
                     ),
                   ),
                   SizedBox(height: 34.h),
@@ -96,12 +94,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                           children: [
                             Text(
                               "Start",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    color:
-                                        context.resources.color.brandColor_02,
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: context.resources.color.brandColor_02,
                                     fontWeight: FontWeight.w500,
                                   ),
                             ),
@@ -117,15 +111,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                 ),
                               ),
                               bgColorBtn: context.resources.color.bgColor,
-                              titleBtn:
-                                  DateTimeFormat().convertDateTimeToString(
+                              titleBtn: DateTimeFormat().convertDateTimeToString(
                                 state.startDate ?? DateTime.now(),
                                 formatString: "MMMM-dd-yyyy",
                               ),
                               paddingBtn: EdgeInsets.all(10.h),
                               borderStyle: Border.all(
-                                color: context.resources.color.brandColor_02
-                                    .withOpacity(.1),
+                                color: context.resources.color.brandColor_02.withOpacity(.1),
                               ),
                               mainAxisAlignment: MainAxisAlignment.start,
                               onTap: () => {
@@ -135,16 +127,12 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                     onDaySelected: (DateTime timeSelected) {
                                       //print(
                                       //    "Time selected: ${timeSelected.toUtc()} ");
-                                      context.read<EditTaskBloc>().add(
-                                          OnChangeStartDateEvent(timeSelected));
+                                      context.read<EditTaskBloc>().add(OnChangeStartDateEvent(timeSelected));
                                     },
                                   ),
                                 ),
                               },
-                              titleStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
+                              titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: context.resources.color.textColor,
                                   ),
                             ),
@@ -158,12 +146,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                           children: [
                             Text(
                               "Ends",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(
-                                    color:
-                                        context.resources.color.brandColor_02,
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: context.resources.color.brandColor_02,
                                     fontWeight: FontWeight.w500,
                                   ),
                             ),
@@ -179,15 +163,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                 ),
                               ),
                               bgColorBtn: context.resources.color.bgColor,
-                              titleBtn:
-                                  DateTimeFormat().convertDateTimeToString(
+                              titleBtn: DateTimeFormat().convertDateTimeToString(
                                 state.endDate ?? DateTime.now(),
                                 formatString: "MMMM-dd-yyyy",
                               ),
                               paddingBtn: EdgeInsets.all(10.h),
                               borderStyle: Border.all(
-                                color: context.resources.color.brandColor_02
-                                    .withOpacity(.1),
+                                color: context.resources.color.brandColor_02.withOpacity(.1),
                               ),
                               mainAxisAlignment: MainAxisAlignment.start,
                               onTap: () => {
@@ -197,16 +179,12 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                     onDaySelected: (DateTime timeSelected) {
                                       //print(
                                       //    "Time selected: ${timeSelected.toUtc()} ");
-                                      context.read<EditTaskBloc>().add(
-                                          OnChangeEndDateEvent(timeSelected));
+                                      context.read<EditTaskBloc>().add(OnChangeEndDateEvent(timeSelected));
                                     },
                                   ),
                                 ),
                               },
-                              titleStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
+                              titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: context.resources.color.textColor,
                                   ),
                             ),
@@ -228,9 +206,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     hintText: 'Enter title...',
                     controller: titleController,
                     onChange: (String value) {
-                      context
-                          .read<EditTaskBloc>()
-                          .add(OnChangeTitleEvent(value.trim()));
+                      context.read<EditTaskBloc>().add(OnChangeTitleEvent(value.trim()));
                     },
                   ),
                   SizedBox(height: 30.h),
@@ -246,11 +222,9 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     children: [
                       Expanded(
                           child: CustomButtonBase(
-                        titleBtn: widget.taskModel.taskType ==
-                                TaskTypeEnum.priorityTask
+                        titleBtn: widget.taskModel.taskType == TaskTypeEnum.priorityTask
                             ? 'Priority Task'
-                            : widget.taskModel.taskType ==
-                                    TaskTypeEnum.dailyTask
+                            : widget.taskModel.taskType == TaskTypeEnum.dailyTask
                                 ? 'Daily Task'
                                 : "-----",
                         paddingBtn: EdgeInsets.symmetric(vertical: 13.h),
@@ -272,9 +246,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     controller: desController,
                     maxLines: 8,
                     onChange: (String value) {
-                      context
-                          .read<EditTaskBloc>()
-                          .add(OnChangeDesEvent(value.trim()));
+                      context.read<EditTaskBloc>().add(OnChangeDesEvent(value.trim()));
                     },
                   ),
                   if (widget.taskModel.taskType == TaskTypeEnum.priorityTask)
@@ -284,10 +256,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                         SizedBox(height: 30.h),
                         Text(
                           "To do list",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                 color: context.resources.color.brandColor_02,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -332,8 +301,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                         CustomButtonBase(
                           titleBtn: 'Add more',
                           widthBtn: double.infinity,
-                          paddingBtn: EdgeInsets.symmetric(
-                              vertical: 12.h, horizontal: 12.w),
+                          paddingBtn: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
                           onTap: () {
                             newTodoWidget(
                               context,
@@ -359,13 +327,11 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                           ),
                           bgColorBtn: Colors.transparent,
                           borderStyle: Border.all(
-                            color: context.resources.color.brandColor_02
-                                .withOpacity(.1),
+                            color: context.resources.color.brandColor_02.withOpacity(.1),
                           ),
-                          titleStyle:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: context.resources.color.textColor_01,
-                                  ),
+                          titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: context.resources.color.textColor_01,
+                              ),
                         ),
                       ],
                     ),
@@ -373,17 +339,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   CustomButtonBase(
                     titleBtn: 'Update',
                     widthBtn: double.infinity,
-                    paddingBtn:
-                        EdgeInsets.symmetric(vertical: 15.h, horizontal: 12.w),
+                    paddingBtn: EdgeInsets.symmetric(vertical: 15.h, horizontal: 12.w),
                     onTap: () {
-                      context
-                          .read<EditTaskBloc>()
-                          .add(SubmitEditEvent(widget.taskModel));
+                      context.read<EditTaskBloc>().add(SubmitEditEvent(widget.taskModel));
                     },
-                    titleStyle:
-                        Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: context.resources.color.brandColor_11,
-                            ),
+                    titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: context.resources.color.brandColor_11,
+                        ),
                   ),
                 ],
               ),
