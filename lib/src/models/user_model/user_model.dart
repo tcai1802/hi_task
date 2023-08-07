@@ -1,4 +1,3 @@
-import 'package:hi_task/src/utils/datetime_format.dart';
 
 class UserModel {
   const UserModel({

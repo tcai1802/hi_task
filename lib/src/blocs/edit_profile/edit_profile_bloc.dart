@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hi_task/src/blocs/blocs_exports.dart';
 import 'package:hi_task/src/models/user_model/user_model.dart';
 import 'package:hi_task/src/packages/media_repository.dart';
 import 'package:hi_task/src/packages/user_repository.dart';
@@ -34,7 +33,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     EditProfileInitEvent event,
     Emitter<EditProfileState> emit,
   ) async {
-    //print("datr: ${event.userData.userName}");
     emit(state.clearState());
     emit(state.copyWith(
       userName: event.userData.userName,

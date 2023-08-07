@@ -11,6 +11,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   @override
   Future<void> close() async {
     //cancel streams
+    print('Cancel===');
     super.close();
   }
 }

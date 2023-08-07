@@ -84,4 +84,15 @@ class TaskRepository {
     final data = await postCollection.where("userId", isEqualTo: userId).count().get();
     yield data.count;
   }
+
+  Future<TaskModel?> handleGetTaskDetail(String taskId) async {
+    try {
+      final data = await postCollection.where("taskId", isEqualTo: taskId).get();
+      if (data.docs.isNotEmpty) {
+        final TaskModel taskModel = TaskModel.fromJson(data.docs.first.data());
+        return taskModel;
+      }
+    } catch (e) {}
+    return null;
+  }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/image_base.dart';
 import 'package:hi_task/src/blocs/home/home_bloc.dart';
+import 'package:hi_task/src/res/arguments/arguments.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 import 'package:hi_task/src/view/home/components/exports.dart';
@@ -62,27 +63,18 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               "Welcome Phillip",
               textAlign: TextAlign.start,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium!
-                  .copyWith(fontWeight: FontWeight.w700),
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w700),
             ),
             Text(
               "Have a nice day !",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .copyWith(color: context.resources.color.subHeaderColor),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: context.resources.color.subHeaderColor),
             ),
             SizedBox(height: 32.h),
             Row(
               children: [
                 Text(
                   "My Priority Task",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelMedium!
-                      .copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w700),
                 ),
                 const Spacer(),
               ],
@@ -90,8 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 10.h),
             BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
-                if (state.priorityTaskStatus ==
-                    PriorityTaskStatusEnum.loading) {
+                if (state.priorityTaskStatus == PriorityTaskStatusEnum.loading) {
                   return SizedBox(
                     height: 188.h,
                     child: Center(
@@ -104,8 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }
-                return state.priorityTaskList != null &&
-                        state.priorityTaskList!.isNotEmpty
+                return state.priorityTaskList != null && state.priorityTaskList!.isNotEmpty
                     ? SizedBox(
                         height: 188.h,
                         child: ListView.builder(
@@ -114,9 +104,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) {
                             return HomePriorityTaskCard(
                               onTap: () {
-                                Navigator.of(context).pushNamed(
-                                  AppRoutes().priorityTaskDetailsRoute,
-                                );
+                                Navigator.of(context).pushNamed(AppRoutes().priorityTaskDetailsRoute,
+                                    arguments: PriorityTaskDetailsArguments(
+                                      state.priorityTaskList![index],
+                                    ));
                               },
                               taskModel: state.priorityTaskList![index],
                             );
@@ -128,10 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Center(
                           child: Text(
                             "You have no task",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                   color: Colors.black,
                                 ),
                           ),
@@ -144,10 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Text(
                   "Daily Task",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelMedium!
-                      .copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w700),
                 ),
                 const Spacer(),
               ],
@@ -166,8 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   }
-                  return state.dailyTaskList != null &&
-                          state.dailyTaskList!.isNotEmpty
+                  return state.dailyTaskList != null && state.dailyTaskList!.isNotEmpty
                       ? ListView.builder(
                           itemCount: state.dailyTaskList!.length,
                           itemBuilder: (context, index) {
@@ -179,10 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       : Center(
                           child: Text(
                             "You have no daily task",
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                   color: Colors.black,
                                 ),
                           ),
