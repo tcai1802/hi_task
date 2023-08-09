@@ -7,6 +7,7 @@ import 'package:hi_task/src/blocs/home/home_bloc.dart';
 import 'package:hi_task/src/res/arguments/arguments.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
+import 'package:hi_task/src/utils/datetime_format.dart';
 import 'package:hi_task/src/view/home/components/exports.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,7 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               children: [
                 Text(
-                  "Saturday, Feb 20 2022",
+                  //"Saturday, Feb 20 2022",
+                  DateTimeFormat().convertDateTimeToString(DateTime.now(), formatString: "EEEE, MMMM dd yyyy") ?? "",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: context.resources.color.subHeaderColor,
                       ),
@@ -61,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 30.h),
             Text(
-              "Welcome Phillip",
+              "Welcome you",
               textAlign: TextAlign.start,
               style: Theme.of(context).textTheme.labelMedium!.copyWith(fontWeight: FontWeight.w700),
             ),

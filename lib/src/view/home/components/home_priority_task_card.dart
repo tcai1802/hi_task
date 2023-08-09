@@ -30,7 +30,7 @@ class HomePriorityTaskCard extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 //color: context.resources.color.brandColor_02,
-                color: const Color(0xFF68A0F4),
+                color: taskModel?.isCompleted ?? false ? Colors.green : const Color(0xFF68A0F4),
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: ImageBaseWidget(
