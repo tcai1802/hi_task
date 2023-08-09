@@ -104,8 +104,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) {
                             return HomePriorityTaskCard(
                               onTap: () {
-                                Navigator.of(context).pushNamed(AppRoutes().priorityTaskDetailsRoute,
-                                    arguments: PriorityTaskDetailsArguments(
+                                Navigator.of(context).pushNamed(AppRoutes().taskDetailsRoute,
+                                    arguments: TaskDetailsArguments(
                                       state.priorityTaskList![index],
                                     ));
                               },

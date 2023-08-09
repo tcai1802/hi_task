@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/blocs/blocs_exports.dart';
-import 'package:hi_task/src/blocs/priority_task_details/priority_task_details_bloc.dart';
 import 'package:hi_task/src/cubit/carousel_slider_cubit.dart';
 import 'package:hi_task/src/cubit/checkbox/checkbox_cubit.dart';
 import 'package:hi_task/src/cubit/navigation/navigation_cubit.dart';
@@ -45,7 +44,6 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => VerifyCodeBloc()),
             BlocProvider(create: (context) => EditTaskBloc()),
             BlocProvider(create: (context) => EditProfileBloc()),
-            BlocProvider(create: (context) => PriorityTaskDetailsBloc()),
           ],
           child: MaterialApp(
             initialRoute: AppRoutes().splashRoute,

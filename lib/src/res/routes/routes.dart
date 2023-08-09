@@ -6,7 +6,7 @@ abstract class Routes {
   String get verifyAccountRoute;
   String get successVerifyRoute;
   String get dashBoardRoute;
-  String get priorityTaskDetailsRoute;
+  String get taskDetailsRoute;
   String get dailyTaskDetailsRoute;
   String get notifyRoute;
   String get addTaskRoute;

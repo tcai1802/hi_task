@@ -17,7 +17,7 @@ class MediaRepository {
     } on FirebaseException catch (e) {
       // ...
       //print("Error: $e");
-      return null;
+      return e.toString();
     }
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/custom_button_base.dart';
 import 'package:hi_task/src/models/model_exports.dart';
+import 'package:hi_task/src/res/arguments/task_details_argument.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 
 class TaskCheckBox extends StatefulWidget {
@@ -32,9 +33,7 @@ class _TaskCheckBoxState extends State<TaskCheckBox> {
         ),
         bgColorBtn: context.resources.color.brandColor_11,
         titleStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: widget.data.isCompleted!
-                  ? context.resources.color.brandColor_02
-                  : const Color(0xFF4A4646),
+              color: widget.data.isCompleted! ? context.resources.color.brandColor_02 : const Color(0xFF4A4646),
               fontWeight: FontWeight.w500,
             ),
         borderStyle: Border.all(
@@ -71,7 +70,10 @@ class _TaskCheckBoxState extends State<TaskCheckBox> {
           ],
         ),
         onTap: () {
-          Navigator.pushNamed(context, AppRoutes().dailyTaskDetailsRoute);
+          Navigator.pushNamed(context, AppRoutes().taskDetailsRoute,
+              arguments: TaskDetailsArguments(
+                widget.data,
+              ));
         },
       ),
     );

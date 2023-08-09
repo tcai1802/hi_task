@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
@@ -18,19 +16,8 @@ class HomePriorityTaskCard extends StatelessWidget {
   final TaskModel? taskModel;
   @override
   Widget build(BuildContext context) {
-    final List<TodoModel> completedTaskList = taskModel!.todoList!
-        .where((element) => element.isCompleted == true)
-        .toList();
-    //print("====${taskModel!.startDate}");
-
-    Color randomColor() {
-      List<Color> colorList = const [
-        Color(0xFF68A0F4),
-        Color(0xFF362075),
-        Color(0xFFCD2C2C),
-      ];
-      return colorList[Random().nextInt(colorList.length)];
-    }
+    final List<TodoModel> completedTaskList =
+        taskModel!.todoList!.where((element) => element.isCompleted == true).toList();
 
     return GestureDetector(
       onTap: () => onTap != null ? onTap!() : () {},
@@ -43,7 +30,7 @@ class HomePriorityTaskCard extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 //color: context.resources.color.brandColor_02,
-                color: randomColor(),
+                color: const Color(0xFF68A0F4),
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: ImageBaseWidget(
@@ -65,11 +52,9 @@ class HomePriorityTaskCard extends StatelessWidget {
                           vertical: 2.h,
                         ),
                         decoration: BoxDecoration(
-                            color: context.resources.color.bgColor,
-                            borderRadius: BorderRadius.circular(10.r)),
+                            color: context.resources.color.bgColor, borderRadius: BorderRadius.circular(10.r)),
                         child: Text(
-                          DateTimeFormat()
-                              .convertToRemainTime(taskModel!.endDate!),
+                          DateTimeFormat().convertToRemainTime(taskModel!.endDate!),
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       )
@@ -91,9 +76,7 @@ class HomePriorityTaskCard extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .labelSmall!
-                              .copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: context.resources.color.brandColor_11),
+                              .copyWith(fontWeight: FontWeight.w600, color: context.resources.color.brandColor_11),
                         ),
                       ),
                     ],
@@ -105,9 +88,10 @@ class HomePriorityTaskCard extends StatelessWidget {
                         taskModel!.isCompleted! ? "Completed" : "Progress",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: context.resources.color.brandColor_11),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(fontWeight: FontWeight.w600, color: context.resources.color.brandColor_11),
                       ),
                       const Spacer()
                     ],
@@ -126,8 +110,7 @@ class HomePriorityTaskCard extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: FractionallySizedBox(
                           widthFactor: taskModel!.todoList!.isNotEmpty
-                              ? completedTaskList.length /
-                                  taskModel!.todoList!.length
+                              ? completedTaskList.length / taskModel!.todoList!.length
                               : 1,
                           child: Container(
                             height: 4,

@@ -50,7 +50,7 @@ class TaskRepository {
 
       onSuccess(outputTaskModelList);
     } catch (e) {
-      print("Error: $e");
+      //print("Error: $e");
       onError(e.toString());
     }
     //print("End==");
@@ -72,7 +72,7 @@ class TaskRepository {
     try {
       final credential = await postCollection.where("taskId", isEqualTo: taskId).get();
       if (credential.docs.isNotEmpty) {
-        postCollection.doc(credential.docs.first.id).update(data);
+        await postCollection.doc(credential.docs.first.id).update(data);
       }
       onSuccess("Updated successfully");
     } catch (e) {

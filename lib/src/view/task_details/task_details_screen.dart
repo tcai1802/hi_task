@@ -3,42 +3,38 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/custom_button_base.dart';
-import 'package:hi_task/src/blocs/priority_task_details/priority_task_details_bloc.dart';
+import 'package:hi_task/src/blocs/blocs_exports.dart';
 import 'package:hi_task/src/models/model_exports.dart';
+import 'package:hi_task/src/res/enum/app_enum.dart';
 import 'package:hi_task/src/utils/datetime_format.dart';
-import 'package:hi_task/src/view/priority_task_details/components/task_checkbox.dart';
+import 'package:hi_task/src/view/task_details/components/task_checkbox.dart';
 
-class PriorityTaskDetailsScreen extends StatefulWidget {
+class TaskDetailsScreen extends StatefulWidget {
   final TaskModel taskModel;
-  const PriorityTaskDetailsScreen({
+  const TaskDetailsScreen({
     super.key,
     required this.taskModel,
   });
 
   @override
-  State<PriorityTaskDetailsScreen> createState() => _PriorityTaskDetailsScreenState();
+  State<TaskDetailsScreen> createState() => _TaskDetailsScreenState();
 }
 
-class _PriorityTaskDetailsScreenState extends State<PriorityTaskDetailsScreen> {
+class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<PriorityTaskDetailsBloc>().add(
-          InitPriorityTaskDetailsEvent(
-            widget.taskModel.taskId!,
-          ),
-        );
+    context.read<TaskDetailsBloc>().add(InitTaskDetailsEvent(widget.taskModel.taskId!));
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PriorityTaskDetailsBloc, PriorityTaskDetailsState>(
+    return BlocConsumer<TaskDetailsBloc, TaskDetailsState>(
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
@@ -138,11 +134,10 @@ class _PriorityTaskDetailsScreenState extends State<PriorityTaskDetailsScreen> {
                       ],
                     ),
                     SizedBox(height: 12.h),
-                    BlocBuilder<PriorityTaskDetailsBloc, PriorityTaskDetailsState>(
+                    BlocBuilder<TaskDetailsBloc, TaskDetailsState>(
                       buildWhen: (previous, current) => previous.seconds != current.seconds,
                       builder: (context, state) {
-                        final List<String> timeArray =
-                            context.read<PriorityTaskDetailsBloc>().intToTimeLeft(state.seconds);
+                        final List<String> timeArray = context.read<TaskDetailsBloc>().intToTimeLeft(state.seconds);
 
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -184,79 +179,74 @@ class _PriorityTaskDetailsScreenState extends State<PriorityTaskDetailsScreen> {
                           ),
                     ),
                     SizedBox(height: 24.h),
-                    Text(
-                      "Progress",
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: context.resources.color.textColor,
-                          ),
-                    ),
-                    SizedBox(height: 2.h),
-                    Stack(
-                      children: [
-                        Container(
-                          height: 20.h,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFA9A2A2),
-                            borderRadius: BorderRadius.circular(20.r),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: FractionallySizedBox(
-                            widthFactor: state.taskModel != null
-                                ? (state.taskModel!.todoList!
-                                        .where((element) => element.isCompleted == true)
-                                        .toList()
-                                        .length /
-                                    state.taskModel!.todoList!.length)
-                                : 0.0,
-                            child: Container(
-                              height: 20.h,
-                              decoration: BoxDecoration(
-                                color: context.resources.color.brandColor_02,
-                                borderRadius: BorderRadius.circular(20.r),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          right: 0,
-                          left: 0,
-                          bottom: 0,
-                          top: 0,
-                          child: Center(
-                            child: Text(
-                              "80%",
-                              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: context.resources.color.brandColor_11,
+                    if (state.taskModel?.todoList != null && state.taskModel?.taskType == TaskTypeEnum.priorityTask)
+                      BlocListener<TaskDetailsBloc, TaskDetailsState>(
+                        listener: (context, state) {},
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Progress",
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: context.resources.color.textColor,
                                   ),
                             ),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 24.h),
-                    Text(
-                      "To do List",
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: context.resources.color.textColor,
-                          ),
-                    ),
-                    SizedBox(height: 4.h),
-                    if (state.taskModel?.todoList != null)
-                      BlocListener<PriorityTaskDetailsBloc, PriorityTaskDetailsState>(
-                        listener: (context, state) {
-                          // TODO: implement listener
-                        },
-                        child: Column(
-                          children: [
+                            SizedBox(height: 2.h),
+                            Stack(
+                              children: [
+                                Container(
+                                  height: 20.h,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFA9A2A2),
+                                    borderRadius: BorderRadius.circular(20.r),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: AnimatedFractionallySizedBox(
+                                    widthFactor: state.percentCompleted,
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.fastOutSlowIn,
+                                    child: Container(
+                                      height: 20.h,
+                                      decoration: BoxDecoration(
+                                        color: context.resources.color.brandColor_02,
+                                        borderRadius: BorderRadius.circular(20.r),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 0,
+                                  left: 0,
+                                  bottom: 0,
+                                  top: 0,
+                                  child: Center(
+                                    child: Text(
+                                      "${state.percentCompleted * 100}%",
+                                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                            color: context.resources.color.brandColor_11,
+                                          ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 24.h),
+                            Text(
+                              "To do List",
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                    color: context.resources.color.textColor,
+                                  ),
+                            ),
+                            SizedBox(height: 4.h),
                             ...state.todoList.asMap().entries.map(
                                   (data) => PriorityTaskCheckBox(
                                     todoModel: data.value,
                                     onTap: (value) {
-                                      context.read<PriorityTaskDetailsBloc>().add(
+                                      context.read<TaskDetailsBloc>().add(
                                             OnCompleteOrNotTodoEvent(
                                               data.value,
                                               value,
@@ -265,14 +255,19 @@ class _PriorityTaskDetailsScreenState extends State<PriorityTaskDetailsScreen> {
                                           );
                                     },
                                   ),
-                                )
-                            //...List.generate(
-                            //  10,
-                            //  (index) => const PriorityTaskCheckBox(),
-                            //)
+                                ),
                           ],
                         ),
                       ),
+                    SizedBox(height: 30.h),
+                    CustomButtonBase(
+                      widthBtn: double.infinity,
+                      titleBtn: state.finishedTask ? "Completed" : "Finish",
+                      onTap: () {
+                        print("Submit===");
+                        context.read<TaskDetailsBloc>().add(SubmitFinishTask(!state.finishedTask));
+                      },
+                    ),
                   ],
                 ),
               ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hi_task/src/blocs/blocs_exports.dart';
-import 'package:hi_task/src/blocs/priority_task_details/priority_task_details_bloc.dart';
 import 'package:hi_task/src/res/arguments/arguments.dart';
 import 'package:hi_task/src/res/routes/routes.dart';
 import 'package:hi_task/src/view/export.dart';
@@ -32,7 +31,7 @@ class AppRoutes extends Routes {
   String get dailyTaskDetailsRoute => '/daily_task_details';
 
   @override
-  String get priorityTaskDetailsRoute => '/priority_task_details';
+  String get taskDetailsRoute => '/task_details';
 
   @override
   String get notifyRoute => '/notify';
@@ -74,7 +73,7 @@ class AppRoutes extends Routes {
   final _loginBloc = LoginBloc();
   final _dashboardBloc = DashboardBloc();
   final _addTaskBloc = AddTaskBloc();
-  final _priorityTaskDetailBloc = PriorityTaskDetailsBloc();
+  final _priorityTaskDetailBloc = TaskDetailsBloc();
 
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     if (settings.name == splashRoute) {
@@ -119,13 +118,14 @@ class AppRoutes extends Routes {
       return MaterialPageRoute(
         builder: (context) => const DailyTaskDetailsScreen(),
       );
-    } else if (settings.name == priorityTaskDetailsRoute) {
-      final args = settings.arguments as PriorityTaskDetailsArguments;
+    } else if (settings.name == taskDetailsRoute) {
+      final args = settings.arguments as TaskDetailsArguments;
 
       return MaterialPageRoute(
-        builder: (context) => BlocProvider.value(
-          value: _priorityTaskDetailBloc,
-          child: PriorityTaskDetailsScreen(
+        builder: (context) => BlocProvider(
+          lazy: false,
+          create: (context) => TaskDetailsBloc(),
+          child: TaskDetailsScreen(
             taskModel: args.taskModel,
           ),
         ),

@@ -56,5 +56,4 @@ class EditProfileState extends Equatable {
 }
 
 class EditProfileInitial extends EditProfileState {
-  EditProfileInitial();
 }

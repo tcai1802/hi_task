@@ -3,23 +3,42 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hi_task/src/models/model_exports.dart';
+import 'package:hi_task/src/models/task_model/requests/update_complete_task_request.dart';
 import 'package:hi_task/src/packages/task_repository.dart';
 
-part 'priority_task_details_event.dart';
-part 'priority_task_details_state.dart';
+part 'task_details_event.dart';
+part 'task_details_state.dart';
 
-class PriorityTaskDetailsBloc extends Bloc<PriorityTaskDetailsEvent, PriorityTaskDetailsState> {
-  PriorityTaskDetailsBloc() : super(const PriorityTaskDetailsInitial()) {
-    on<InitPriorityTaskDetailsEvent>(_onInitPriTaskDetailsEvent);
+class TaskDetailsBloc extends Bloc<TaskDetailsEvent, TaskDetailsState> {
+  TaskDetailsBloc() : super(const TaskDetailsInitial()) {
+    on<InitTaskDetailsEvent>(_onInitPriTaskDetailsEvent);
     on<OnChangeTimeEvent>(_onChangeTimeEvent);
     on<OnCompleteOrNotTodoEvent>(_onCompleteOrNotTodoEvent);
+    on<SubmitFinishTask>(_submitFinishTask);
   }
   StreamSubscription<int>? _tickerSubscription;
   StreamSubscription<void>? streamData;
 
+  _submitFinishTask(
+    SubmitFinishTask event,
+    Emitter<TaskDetailsState> emit,
+  ) async {
+    await TaskRepository().editTaskApi(
+      state.taskModel!.taskId!,
+      onSuccess: (message) {
+        //print("Cập nhật thành công");
+        emit(state.copyWith(finishedTask: event.isCompleted));
+      },
+      onError: (error) {
+        //print("Cập nhật thất bại ${error}");
+      },
+      data: UpdateCompleteRequest().toMap(event.isCompleted),
+    );
+  }
+
   _onCompleteOrNotTodoEvent(
     OnCompleteOrNotTodoEvent event,
-    Emitter<PriorityTaskDetailsState> emit,
+    Emitter<TaskDetailsState> emit,
   ) {
     streamData?.cancel();
     final List<TodoModel> newTodoList = List.from(state.todoList);
@@ -27,7 +46,10 @@ class PriorityTaskDetailsBloc extends Bloc<PriorityTaskDetailsEvent, PriorityTas
 
     newTodoList[event.index] = newTodo;
 
-    emit(state.copyWith(todoList: newTodoList));
+    emit(state.copyWith(
+        todoList: newTodoList,
+        percentCompleted:
+            newTodoList.where((element) => element.isCompleted == true).toList().length / newTodoList.length));
     streamData = Stream<void>.fromFuture(waitTask()).listen((event) {
       TaskRepository().editTaskApi(
         state.taskModel!.taskId!,
@@ -37,7 +59,9 @@ class PriorityTaskDetailsBloc extends Bloc<PriorityTaskDetailsEvent, PriorityTas
         onError: (error) {
           //print("Cập nhật thất bại");
         },
-        data: UpdateTodoRequest().toMap(state.todoList),
+        data: UpdateTodoRequest().toMap(
+          state.todoList,
+        ),
       );
     });
   }
@@ -48,23 +72,28 @@ class PriorityTaskDetailsBloc extends Bloc<PriorityTaskDetailsEvent, PriorityTas
 
   _onChangeTimeEvent(
     OnChangeTimeEvent event,
-    Emitter<PriorityTaskDetailsState> emit,
+    Emitter<TaskDetailsState> emit,
   ) {
-    //String data2 = intToTimeLeft(event.second);
-    //print("TIME: ${data2}");
-    emit(state.copyWith(second: event.second));
+    emit(state.copyWith(
+      second: event.second,
+    ));
   }
 
   _onInitPriTaskDetailsEvent(
-    InitPriorityTaskDetailsEvent event,
-    Emitter<PriorityTaskDetailsState> emit,
+    InitTaskDetailsEvent event,
+    Emitter<TaskDetailsState> emit,
   ) async {
     final TaskModel? data = await TaskRepository().handleGetTaskDetail(event.taskId);
     if (data != null) {
-      emit(state.copyWith(
-        taskModel: data,
-        todoList: data.todoList,
-      ));
+      emit(
+        state.copyWith(
+          taskModel: data,
+          todoList: data.todoList,
+          percentCompleted:
+              data.todoList!.where((element) => element.isCompleted == true).toList().length / data.todoList!.length,
+          finishedTask: data.isCompleted,
+        ),
+      );
     }
     final data2 = state.taskModel!.endDate!.difference(DateTime.now());
     //print("Range time${data2.inDays}");

@@ -108,7 +108,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                   context,
                                   CalendarBase(
                                     onDaySelected: (DateTime timeSelected) {
-                                      //print("Time selected: ${timeSelected.toUtc()} ");
                                       context.read<AddTaskBloc>().add(OnChangeStartTimeEvent(timeSelected));
                                     },
                                   ),
@@ -144,7 +143,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                   color: context.resources.color.brandColor_02,
                                 ),
                               ),
-                              bgColorBtn: context.resources.color.bgColor,
+                              bgColorBtn: state.taskTypeEnum != TaskTypeEnum.dailyTask
+                                  ? context.resources.color.bgColor
+                                  : Colors.grey[100],
                               titleBtn: state.endTime != null
                                   ? DateTimeFormat().convertDateTimeToString(state.endTime ?? DateTime.now())
                                   : "---",
@@ -154,14 +155,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               ),
                               mainAxisAlignment: MainAxisAlignment.start,
                               onTap: () => {
-                                showDialogBase(
-                                  context,
-                                  CalendarBase(
-                                    onDaySelected: (DateTime timeSelected) {
-                                      context.read<AddTaskBloc>().add(OnChangeEndTimeEvent(timeSelected));
-                                    },
+                                if (state.taskTypeEnum != TaskTypeEnum.dailyTask)
+                                  showDialogBase(
+                                    context,
+                                    CalendarBase(
+                                      onDaySelected: (DateTime timeSelected) {
+                                        context.read<AddTaskBloc>().add(OnChangeEndTimeEvent(timeSelected));
+                                      },
+                                    ),
                                   ),
-                                ),
                               },
                               titleStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: context.resources.color.textColor,

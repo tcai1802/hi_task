@@ -9,7 +9,7 @@ export 'home/home_screen.dart';
 export 'calendar/calendar_screen.dart';
 export 'profile/profile_screen.dart';
 export 'daily_task_details/daily_task_details_screen.dart';
-export 'priority_task_details/priority_task_details_screen.dart';
+export 'task_details/task_details_screen.dart';
 export 'notify/notify_screen.dart';
 export 'add_task/add_task_screen.dart';
 export 'edit_task/edit_task_screen.dart';

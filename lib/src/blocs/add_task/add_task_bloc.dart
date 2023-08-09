@@ -31,7 +31,14 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
     OnChangeStartTimeEvent event,
     Emitter<AddTaskState> emit,
   ) {
-    emit(state.copyWith(startTime: event.startTime));
+    emit(state.copyWith(
+      startTime: event.startTime,
+      endTime: state.taskTypeEnum == TaskTypeEnum.dailyTask
+          ? event.startTime.add(
+              const Duration(hours: 24),
+            )
+          : null,
+    ));
   }
 
   _onChangeEndTimeEvent(
@@ -90,8 +97,7 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
       )) {
         emit(
           state.copyWith(
-              addTaskStatusEnum: AddTaskStatusEnum.failure,
-              message: "End time must be greater than start time"),
+              addTaskStatusEnum: AddTaskStatusEnum.failure, message: "End time must be greater than start time"),
         );
       } else {
         emit(state.copyWith(addTaskStatusEnum: AddTaskStatusEnum.loading));
@@ -107,9 +113,7 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
       }
     } else {
       emit(
-        state.copyWith(
-            addTaskStatusEnum: AddTaskStatusEnum.failure,
-            message: "Please enter full information"),
+        state.copyWith(addTaskStatusEnum: AddTaskStatusEnum.failure, message: "Please enter full information"),
       );
       //print("Vui lòng nhập đầy đủ thông tin");
     }

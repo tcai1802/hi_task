@@ -1,6 +1,6 @@
 import 'package:hi_task/src/models/model_exports.dart';
 
-class PriorityTaskDetailsArguments {
+class TaskDetailsArguments {
   final TaskModel taskModel;
-  PriorityTaskDetailsArguments(this.taskModel);
+  TaskDetailsArguments(this.taskModel);
 }
