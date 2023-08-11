@@ -25,16 +25,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     final userId = FirebaseAuth.instance.currentUser!.uid;
     final UserModel? user = await UserRepository().getUser(userId);
-    //print('Data1111: ${user}');
     emit(state.copyWith(
       userModel: user,
     ));
   }
-
-  //Stream<int> getTotalTaskCompleted(String userId) async* {
-
-  //  FirebaseFirestore.instance.collection("posts")
-
-  //  yield 0;
-  //}
 }

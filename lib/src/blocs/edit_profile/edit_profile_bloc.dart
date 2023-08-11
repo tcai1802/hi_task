@@ -48,7 +48,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   ) async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    //print("Data: ${image!.readAsString()}");
     emit(state.copyWith(
       imageAsset: image,
     ));
@@ -92,7 +91,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     emit(state.copyWith(
       isValid: _handleCheckValidForm(),
     ));
-    //print("Time: ${state.dateOfBirth}");
   }
 
   _handleCheckValidForm() {

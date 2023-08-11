@@ -57,7 +57,6 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
         todoList: [...state.todoList, event.todoModel],
       ),
     );
-    //print("Clmaaa ${state.todoList}");
   }
 
   _onEditTodoEvent(
@@ -71,7 +70,6 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
         todoList: newTodoList,
       ),
     );
-    //print("Clmaaa ${state.todoList}");
   }
 
   _onDelTodoEvent(
@@ -115,7 +113,6 @@ class AddTaskBloc extends Bloc<AddTaskEvent, AddTaskState> {
       emit(
         state.copyWith(addTaskStatusEnum: AddTaskStatusEnum.failure, message: "Please enter full information"),
       );
-      //print("Vui lòng nhập đầy đủ thông tin");
     }
     emit(
       state.copyWith(

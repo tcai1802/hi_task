@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
+import 'package:hi_task/src/blocs/statistic/statistic_bloc.dart';
 import 'package:hi_task/src/res/enum/app_enum.dart';
+import 'package:hi_task/src/utils/datetime_format.dart';
 import 'package:hi_task/src/view/statistic/components/exports.dart';
 
-class StatisticScreen extends StatelessWidget {
+class StatisticScreen extends StatefulWidget {
   const StatisticScreen({
     super.key,
   });
+
+  @override
+  State<StatisticScreen> createState() => _StatisticScreenState();
+}
+
+class _StatisticScreenState extends State<StatisticScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<StatisticBloc>().add(InitDataEvent(DateTime.now().year));
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBarWithBodyBase(
@@ -28,75 +43,90 @@ class StatisticScreen extends StatelessWidget {
             topRight: Radius.circular(50.r),
           ),
         ),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+        child: BlocConsumer<StatisticBloc, StatisticState>(
+          listener: (context, state) {
+            // TODO: implement listener
+          },
+          builder: (context, state) {
+            return CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
                     children: [
-                      ImageBaseWidget(
-                        imageType: ImageTypeEnum.svgPicture,
-                        imageUrl:
-                            context.resources.drawable.iconLeftCaretForward,
-                        imageWidth: 24.h,
-                        imageHeight: 24.h,
-                        imgColor: context.resources.color.textColor,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 35.w),
-                        child: Text(
-                          "2019",
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              context.read<StatisticBloc>().add(InitDataEvent(state.currentYear! - 1));
+                            },
+                            child: ImageBaseWidget(
+                              imageType: ImageTypeEnum.svgPicture,
+                              imageUrl: context.resources.drawable.iconLeftCaretForward,
+                              imageWidth: 24.h,
+                              imageHeight: 24.h,
+                              imgColor: context.resources.color.textColor,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 35.w),
+                            child: Text(
+                              state.currentYear.toString(),
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                     fontWeight: FontWeight.w500,
                                   ),
-                        ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => context.read<StatisticBloc>().add(InitDataEvent(state.currentYear! + 1)),
+                            child: ImageBaseWidget(
+                              imageType: ImageTypeEnum.svgPicture,
+                              imageUrl: context.resources.drawable.iconRightCaretForward,
+                              imageWidth: 24.h,
+                              imageHeight: 24.h,
+                              imgColor: context.resources.color.textColor,
+                            ),
+                          )
+                        ],
                       ),
-                      ImageBaseWidget(
-                        imageType: ImageTypeEnum.svgPicture,
-                        imageUrl:
-                            context.resources.drawable.iconRightCaretForward,
-                        imageWidth: 24.h,
-                        imageHeight: 24.h,
-                        imgColor: context.resources.color.textColor,
-                      )
+                      SizedBox(height: 37.h),
+                      Row(
+                        children: [
+                          TotalAnalysisWidget(
+                            title: "Total task",
+                            totalNumber: state.taskModelList.length,
+                          ),
+                          SizedBox(width: 25.w),
+                          TotalAnalysisWidget(
+                            title: "Completed Tasks",
+                            totalNumber:
+                                state.taskModelList.where((element) => element.isCompleted ?? false).toList().length,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 30.h),
                     ],
                   ),
-                  SizedBox(height: 37.h),
-                  Row(
-                    children: [
-                      const TotalAnalysisWidget(
-                        title: "Total task",
-                        totalNumber: 846,
-                      ),
-                      SizedBox(width: 25.w),
-                      const TotalAnalysisWidget(
-                        title: "Completed Tasks",
-                        totalNumber: 682,
-                      ),
-                    ],
+                ),
+                SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.0,
+                    mainAxisSpacing: 10.0,
+                    crossAxisSpacing: 10.0,
                   ),
-                  SizedBox(height: 30.h),
-                ],
-              ),
-            ),
-            SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1.0,
-                mainAxisSpacing: 10.0,
-                crossAxisSpacing: 10.0,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return const PercentMonthWidget();
-                },
-                childCount: 10,
-              ),
-            ),
-          ],
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return PercentMonthWidget(
+                        indexMoth: index,
+                      );
+                    },
+                    childCount: DateTimeFormat().monthTimeList.length,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

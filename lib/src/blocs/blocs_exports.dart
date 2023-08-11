@@ -9,3 +9,4 @@ export 'calendar/calendar_bloc.dart';
 export 'edit_task/edit_task_bloc.dart';
 export 'edit_profile/edit_profile_bloc.dart';
 export 'task_details/task_details_bloc.dart';
+export 'statistic/statistic_bloc.dart';

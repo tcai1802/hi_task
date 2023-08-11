@@ -26,11 +26,9 @@ class TaskDetailsBloc extends Bloc<TaskDetailsEvent, TaskDetailsState> {
     await TaskRepository().editTaskApi(
       state.taskModel!.taskId!,
       onSuccess: (message) {
-        //print("Cập nhật thành công");
         emit(state.copyWith(finishedTask: event.isCompleted));
       },
       onError: (error) {
-        //print("Cập nhật thất bại ${error}");
       },
       data: UpdateCompleteRequest().toMap(event.isCompleted),
     );

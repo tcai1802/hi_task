@@ -1,6 +1,21 @@
 import 'package:intl/intl.dart';
 
 class DateTimeFormat {
+  final monthTimeList = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
   DateTime? convertStringToDateTime(
     String timeString, {
     String formatString = "yyyy/MM/dd HH:mm:ss",
@@ -38,5 +53,5 @@ class DateTimeFormat {
     String minute = min.toString().length <= 1 ? "0$min" : "$min";
     String second = sec.toString().length <= 1 ? "0$sec" : "$sec";
     return "$minute : $second";
-}
+  }
 }

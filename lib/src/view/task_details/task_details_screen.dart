@@ -264,7 +264,6 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
                       widthBtn: double.infinity,
                       titleBtn: state.finishedTask ? "Completed" : "Finish",
                       onTap: () {
-                        print("Submit===");
                         context.read<TaskDetailsBloc>().add(SubmitFinishTask(!state.finishedTask));
                       },
                     ),

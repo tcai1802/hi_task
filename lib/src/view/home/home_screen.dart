@@ -21,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    //print("Init state");
     if (context.read<HomeBloc>().state.firstInit) {
       context.read<HomeBloc>().add(const HomeInitEvent());
     }
@@ -29,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //print("=====");
     return SafeArea(
       child: Container(
         width: double.infinity,

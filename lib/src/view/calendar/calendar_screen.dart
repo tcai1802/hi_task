@@ -84,9 +84,6 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
               EasyDateTimeLine(
                 initialDate: state.currentTime ?? DateTime.now(),
                 onDateChange: (selectedDate) {
-                  //[selectedDate] the new date selected.
-                  //print("selected date: ${selectedDate}");
-                  //print("selected date: ${DateTime.now()}");
                   context
                       .read<CalendarBloc>()
                       .add(CalendarInitEvent(selectedDate));

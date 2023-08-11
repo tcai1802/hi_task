@@ -39,21 +39,43 @@ class TaskRepository {
           .where("taskType", isEqualTo: taskTypeEnum.name)
           .get();
       for (var docSnapshot in resultQuery.docs) {
-        //print("Data: ${docSnapshot.data()}");
         final TaskModel data = TaskModel.fromJson(docSnapshot.data());
-        //print("Data: ${docSnapshot.id}");
         if (data.endDate!.isAfter(currentTime)) {
           outputTaskModelList.add(data);
         }
       }
-      //print('Data: $outputTaskModelList');
 
       onSuccess(outputTaskModelList);
     } catch (e) {
-      //print("Error: $e");
       onError(e.toString());
     }
-    //print("End==");
+  }
+
+  Future<void> getTaskInAYear({
+    required Function(List<TaskModel>) onSuccess,
+    required Function(String error) onError,
+    required int selectedYear,
+  }) async {
+    final List<TaskModel> outputTaskModelList = [];
+
+    DateTime minDate = DateTime.utc(selectedYear);
+    DateTime maxDate = DateTime.utc(selectedYear, 12, 31);
+
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      final resultQuery = await postCollection
+          .where("userId", isEqualTo: userId)
+          .where("startDate", isGreaterThanOrEqualTo: minDate)
+          .where("startDate", isLessThanOrEqualTo: maxDate)
+          .get();
+      for (var docSnapshot in resultQuery.docs) {
+        final TaskModel data = TaskModel.fromJson(docSnapshot.data());
+        outputTaskModelList.add(data);
+      }
+      onSuccess(outputTaskModelList);
+    } catch (e) {
+      onError(e.toString());
+    }
   }
 
   Future<void> deleteTaskApi(String taskId) async {

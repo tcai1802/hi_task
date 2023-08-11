@@ -56,13 +56,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       }
 
       FirebaseAuth.instance.authStateChanges().listen((event) {
-        //print("Usedr====${event}");
         if (event == null) {
           AppRoutes().dispose();
         }
       });
     } catch (e) {
-      //print("Error: $e");
       emit(state.copyWith(splashState: StateEnum.failed));
     }
   }

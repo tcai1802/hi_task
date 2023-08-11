@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => VerifyCodeBloc()),
             BlocProvider(create: (context) => EditTaskBloc()),
             BlocProvider(create: (context) => EditProfileBloc()),
+            BlocProvider(create: (context) => StatisticBloc()),
           ],
           child: MaterialApp(
             initialRoute: AppRoutes().splashRoute,

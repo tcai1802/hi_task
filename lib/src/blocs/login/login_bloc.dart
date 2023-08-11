@@ -50,7 +50,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(status: LoginStatusEnum.init));
       },
       onError: (error) {
-        //print("Error: ${error}");
         emit(state.copyWith(status: LoginStatusEnum.failed));
         emit(state.copyWith(status: LoginStatusEnum.init));
       },

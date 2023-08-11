@@ -72,7 +72,6 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     OnChangeIndexTabEvent event,
     Emitter<CalendarState> emit,
   ) {
-    //print("Index: ${event.currentTabIndex}");
     emit(
       state.copyWith(currentTabIndex: event.currentTabIndex),
     );

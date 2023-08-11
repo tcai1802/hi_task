@@ -279,11 +279,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         ),
                         SizedBox(height: 5.h),
                         BlocBuilder<AddTaskBloc, AddTaskState>(
-                          //buildWhen: (previous, current) {
-                          //  print("Clmaaa------");
-                          //  return previous.todoList.length !=
-                          //      current.todoList.length;
-                          //},
                           builder: (context, state) {
                             return Column(
                               children: [
