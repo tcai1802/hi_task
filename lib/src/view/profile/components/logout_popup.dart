@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 
-showLogoutPopup(BuildContext context) {
+showLogoutPopup(BuildContext context, Function onTap) {
   return showDialogBase(
     context,
     Container(
@@ -27,9 +27,10 @@ showLogoutPopup(BuildContext context) {
             children: [
               Text(
                 "Remember my login info",
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: context.resources.color.subHeaderColor,
-                    fontWeight: FontWeight.w600),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: context.resources.color.subHeaderColor, fontWeight: FontWeight.w600),
               )
             ],
           ),
@@ -38,7 +39,7 @@ showLogoutPopup(BuildContext context) {
             titleBtn: "Logout",
             widthBtn: double.infinity,
             onTap: () {
-              Navigator.pop(context);
+              onTap();
             },
           ),
           SizedBox(height: 10.h),

@@ -108,10 +108,6 @@ class AppRoutes extends Routes {
       );
     } else if (settings.name == dashBoardRoute) {
       return MaterialPageRoute(
-        //builder: (context) => BlocProvider.value(
-        //  value: _dashboardBloc,
-        //  child: const DashBoardScreen(),
-        //),
         builder: (context) => const DashBoardScreen(),
       );
     } else if (settings.name == dailyTaskDetailsRoute) {
@@ -186,7 +182,11 @@ class AppRoutes extends Routes {
       );
     } else if (settings.name == settingsHelpRoute) {
       return MaterialPageRoute(
-        builder: (context) => const SettingsHelpScreen(),
+        builder: (context) => BlocProvider(
+          lazy: false,
+          create: (context) => SettingsHelpBloc(),
+          child: const SettingsHelpScreen(),
+        ),
       );
     } else if (settings.name == settingsUpdateSystemRoute) {
       return MaterialPageRoute(

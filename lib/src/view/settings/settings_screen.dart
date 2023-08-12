@@ -34,20 +34,19 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
               children: [
                 SizedBox(height: 61.h),
-                SettingOption(
-                  iconUrl: context.resources.drawable.iconNotification,
-                  title: "Notification",
-                  onTap: () {
-                    Navigator.pushNamed(
-                        context, AppRoutes().settingsNotificationRoute);
-                  },
-                ),
+                //SettingOption(
+                //  iconUrl: context.resources.drawable.iconNotification,
+                //  title: "Notification",
+                //  onTap: () {
+                //    Navigator.pushNamed(
+                //        context, AppRoutes().settingsNotificationRoute);
+                //  },
+                //),
                 SettingOption(
                   iconUrl: context.resources.drawable.iconLockClosed,
                   title: "Security",
                   onTap: () {
-                    Navigator.pushNamed(
-                        context, AppRoutes().settingsSecurityRoute);
+                    Navigator.pushNamed(context, AppRoutes().settingsSecurityRoute);
                   },
                 ),
                 SettingOption(
@@ -61,15 +60,13 @@ class SettingsScreen extends StatelessWidget {
                   iconUrl: context.resources.drawable.iconSync,
                   title: "Update System",
                   onTap: () {
-                    Navigator.pushNamed(
-                        context, AppRoutes().settingsUpdateSystemRoute);
+                    Navigator.pushNamed(context, AppRoutes().settingsUpdateSystemRoute);
                   },
                 ),
                 SettingOption(
                   iconUrl: context.resources.drawable.iconInformation,
                   title: "About",
-                  onTap: () =>
-                      Navigator.pushNamed(context, AppRoutes().settingsAbout),
+                  onTap: () => Navigator.pushNamed(context, AppRoutes().settingsAbout),
                 ),
                 //SettingOption(
                 //  iconUrl: context.resources.drawable.iconPeople,

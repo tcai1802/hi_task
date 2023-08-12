@@ -39,24 +39,22 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               children: [
                 Text(
-                  //"Saturday, Feb 20 2022",
                   DateTimeFormat().convertDateTimeToString(DateTime.now(), formatString: "EEEE, MMMM dd yyyy") ?? "",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: context.resources.color.subHeaderColor,
                       ),
                 ),
                 const Spacer(),
-                GestureDetector(
-                  onTap: () => {
-                    context.read<HomeBloc>().add(const HomeInitEvent())
-                    //Navigator.pushNamed(context, AppRoutes().notifyRoute)
-                  },
-                  child: ImageBaseWidget(
-                    imageType: ImageTypeEnum.svgPicture,
-                    imageUrl: context.resources.drawable.iconNotification,
-                    imageWidth: 24.w,
-                  ),
-                )
+                //GestureDetector(
+                //  onTap: () => {
+                //    //Navigator.pushNamed(context, AppRoutes().notifyRoute)
+                //  },
+                //  child: ImageBaseWidget(
+                //    imageType: ImageTypeEnum.svgPicture,
+                //    imageUrl: context.resources.drawable.iconNotification,
+                //    imageWidth: 24.w,
+                //  ),
+                //)
               ],
             ),
             SizedBox(height: 30.h),

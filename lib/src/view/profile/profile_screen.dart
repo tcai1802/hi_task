@@ -207,8 +207,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 iconUrl: context.resources.drawable.iconLogOut,
                                 title: "Logout",
                                 onTap: () {
-                                  context.read<ProfileBloc>().add(OnLogoutRequested());
-                                  Navigator.pushNamed(context, AppRoutes().loginRoute);
+                                  showLogoutPopup(context, () {
+                                    context.read<ProfileBloc>().add(OnLogoutRequested());
+                                    Navigator.pushNamed(context, AppRoutes().loginRoute);
+                                  });
                                 },
                               )
                             ],

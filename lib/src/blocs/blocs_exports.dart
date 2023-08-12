@@ -11,3 +11,4 @@ export 'edit_profile/edit_profile_bloc.dart';
 export 'task_details/task_details_bloc.dart';
 export 'statistic/statistic_bloc.dart';
 export 'settings_security/settings_security_bloc.dart';
+export 'settings_help/settings_help_bloc.dart';

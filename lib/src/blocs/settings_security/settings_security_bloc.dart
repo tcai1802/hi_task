@@ -12,7 +12,6 @@ class SettingsSecurityBloc extends Bloc<SettingsSecurityEvent, SettingsSecurityS
   final UserRepository _userRepository = UserRepository();
 
   SettingsSecurityBloc() : super(SettingsSecurityInitial()) {
-    on<SettingsSecurityEvent>((event, emit) {});
     on<OnChangeNewPassword>(_onChangeNewPassword);
     on<OnChangeConfirmPassword>(_onChangeConfirmPassword);
     on<OnSubmitChangePassword>(_onSubmitChangePassword);
@@ -35,8 +34,6 @@ class SettingsSecurityBloc extends Bloc<SettingsSecurityEvent, SettingsSecurityS
         isValidForm: false,
       ));
     }
-
-    //return "Invalid new password";
   }
 
   _onChangeCurrentPassword(
