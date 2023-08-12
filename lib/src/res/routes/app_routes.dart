@@ -178,7 +178,11 @@ class AppRoutes extends Routes {
       );
     } else if (settings.name == settingsSecurityRoute) {
       return MaterialPageRoute(
-        builder: (context) => const SettingsSecurityScreen(),
+        builder: (context) => BlocProvider(
+          lazy: false,
+          create: (context) => SettingsSecurityBloc(),
+          child: const SettingsSecurityScreen(),
+        ),
       );
     } else if (settings.name == settingsHelpRoute) {
       return MaterialPageRoute(

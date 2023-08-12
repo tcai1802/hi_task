@@ -20,7 +20,7 @@ class TextFieldBase extends StatelessWidget {
   final bool isPass;
   final TextEditingController? controller;
   final int? maxLines;
-  final Function? onChange;
+  final Function(String value)? onChange;
   final String? errorText;
   @override
   Widget build(BuildContext context) {
