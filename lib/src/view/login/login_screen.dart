@@ -79,10 +79,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 10.h),
                   Text(
                     "Management  App",
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelSmall!
-                        .copyWith(color: context.resources.color.textColor_02),
+                    style:
+                        Theme.of(context).textTheme.labelSmall!.copyWith(color: context.resources.color.textColor_02),
                   ),
                   const Spacer(),
                   Text(
@@ -114,27 +112,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Spacer(),
                       Text(
                         "Forgot password?",
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: context.resources.color.textColor_02),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(color: context.resources.color.textColor_02),
                       ),
                     ],
                   ),
                   SizedBox(height: 25.h),
                   BlocBuilder<LoginBloc, LoginState>(
-                    buildWhen: (previous, current) =>
-                        previous.isValid != current.isValid,
+                    buildWhen: (previous, current) => previous.isValid != current.isValid,
                     builder: (context, state) {
                       return CustomButtonBase(
                         titleBtn: 'Login',
                         bgColorBtn: !state.isValid ? Colors.grey[300] : null,
                         widthBtn: double.infinity,
-                        onTap: () => state.isValid
-                            ? {
-                                context
-                                    .read<LoginBloc>()
-                                    .add(const SubmitLoginEvent())
-                              }
-                            : () {},
+                        onTap: () => state.isValid ? {context.read<LoginBloc>().add(const SubmitLoginEvent())} : () {},
                       );
                     },
                   ),
@@ -175,10 +168,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           imageUrl: context.resources.drawable.iconGoogle,
                         ),
                         paddingBtn: EdgeInsets.all(15.h),
-                        bgColorBtn: Colors.transparent,
+                        bgColorBtn: Colors.grey[300],
                         borderStyle: Border.all(
-                          color: context.resources.color.brandColor_02
-                              .withOpacity(.1),
+                          color: context.resources.color.brandColor_02.withOpacity(.1),
                         ),
                       ),
                       SizedBox(width: 40.w),
@@ -190,10 +182,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           imageUrl: context.resources.drawable.iconFacebook,
                         ),
                         paddingBtn: EdgeInsets.all(15.h),
-                        bgColorBtn: Colors.transparent,
+                        bgColorBtn: Colors.grey[300],
                         borderStyle: Border.all(
-                          color: context.resources.color.brandColor_02
-                              .withOpacity(.1),
+                          color: context.resources.color.brandColor_02.withOpacity(.1),
                         ),
                       ),
                       SizedBox(width: 40.w),
@@ -205,10 +196,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           imageUrl: context.resources.drawable.iconGithub,
                         ),
                         paddingBtn: EdgeInsets.all(15.h),
-                        bgColorBtn: Colors.transparent,
+                        bgColorBtn: Colors.grey[300],
                         borderStyle: Border.all(
-                          color: context.resources.color.brandColor_02
-                              .withOpacity(.1),
+                          color: context.resources.color.brandColor_02.withOpacity(.1),
                         ),
                       ),
                     ],
@@ -223,8 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           TextSpan(
                             text: "Sign Up",
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () => Navigator.pushReplacementNamed(
-                                  context, AppRoutes().registerRoute),
+                              ..onTap = () => Navigator.pushReplacementNamed(context, AppRoutes().registerRoute),
                             style: TextStyle(
                               color: context.resources.color.brandColor_02,
                             ),

@@ -31,9 +31,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-
-# Symbolication related
-app.*.symbols
+/ios/
+.env
 
 # Obfuscation related
 app.*.map.json
