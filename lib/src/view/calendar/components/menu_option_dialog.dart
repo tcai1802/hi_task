@@ -22,7 +22,6 @@ menuOptionDialog(
             widthBtn: double.infinity,
             onTap: () {
               onEditTodo();
-              Navigator.pop(context);
             },
           ),
           SizedBox(height: 15.h),

@@ -131,39 +131,39 @@ class _SettingsSecurityScreenState extends State<SettingsSecurityScreen> {
                         },
                       ),
                       SizedBox(height: 25.h),
-                      Text(
-                        "Login Activity",
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: context.resources.color.brandColor_02,
-                            ),
-                      ),
-                      SizedBox(height: 10.h),
-                      Row(
-                        children: [
-                          ImageBaseWidget(
-                            imageType: ImageTypeEnum.svgPicture,
-                            imageUrl: context.resources.drawable.iconLocation,
-                          ),
-                          SizedBox(width: 10.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Malang, Indonesia",
-                                style: Theme.of(context).textTheme.bodyMedium!,
-                              ),
-                              Text(
-                                "Active Now",
-                                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                                      color: context.resources.color.subHeaderColor,
-                                    ),
-                              )
-                            ],
-                          )
-                        ],
-                      )
+                      //Text(
+                      //  "Login Activity",
+                      //  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      //        fontWeight: FontWeight.w500,
+                      //        color: context.resources.color.brandColor_02,
+                      //      ),
+                      //),
+                      //SizedBox(height: 10.h),
+                      //Row(
+                      //  children: [
+                      //    ImageBaseWidget(
+                      //      imageType: ImageTypeEnum.svgPicture,
+                      //      imageUrl: context.resources.drawable.iconLocation,
+                      //    ),
+                      //    SizedBox(width: 10.w),
+                      //    Column(
+                      //      crossAxisAlignment: CrossAxisAlignment.start,
+                      //      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //      children: [
+                      //        Text(
+                      //          "Malang, Indonesia",
+                      //          style: Theme.of(context).textTheme.bodyMedium!,
+                      //        ),
+                      //        Text(
+                      //          "Active Now",
+                      //          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      //                color: context.resources.color.subHeaderColor,
+                      //              ),
+                      //        )
+                      //      ],
+                      //    )
+                      //  ],
+                      //)
                     ],
                   ),
                 ),

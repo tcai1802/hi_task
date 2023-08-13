@@ -56,13 +56,13 @@ class SettingsScreen extends StatelessWidget {
                     Navigator.pushNamed(context, AppRoutes().settingsHelpRoute);
                   },
                 ),
-                SettingOption(
-                  iconUrl: context.resources.drawable.iconSync,
-                  title: "Update System",
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes().settingsUpdateSystemRoute);
-                  },
-                ),
+                //SettingOption(
+                //  iconUrl: context.resources.drawable.iconSync,
+                //  title: "Update System",
+                //  onTap: () {
+                //    Navigator.pushNamed(context, AppRoutes().settingsUpdateSystemRoute);
+                //  },
+                //),
                 SettingOption(
                   iconUrl: context.resources.drawable.iconInformation,
                   title: "About",

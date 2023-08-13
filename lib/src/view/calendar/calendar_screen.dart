@@ -33,8 +33,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CalendarBloc, CalendarState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return SafeArea(
           child: Column(
@@ -53,8 +52,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                     SizedBox(width: 4.w),
                     Expanded(
                       child: Text(
-                        DateTimeFormat().convertDateTimeToString(
-                                state.currentTime ?? DateTime.now(),
+                        DateTimeFormat().convertDateTimeToString(state.currentTime ?? DateTime.now(),
                                 formatString: "MMMM,yyyy") ??
                             "",
                         maxLines: 1,
@@ -84,9 +82,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
               EasyDateTimeLine(
                 initialDate: state.currentTime ?? DateTime.now(),
                 onDateChange: (selectedDate) {
-                  context
-                      .read<CalendarBloc>()
-                      .add(CalendarInitEvent(selectedDate));
+                  context.read<CalendarBloc>().add(CalendarInitEvent(selectedDate));
                 },
                 headerProps: const EasyHeaderProps(
                   showHeader: false,
@@ -100,8 +96,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                   activeBorderRadius: 10.r,
                   height: 64.h,
                 ),
-                itemBuilder: (context, dayNumber, dayName, monthName, fullDate,
-                    isSelected) {
+                itemBuilder: (context, dayNumber, dayName, monthName, fullDate, isSelected) {
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -113,9 +108,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.easeOut,
                         decoration: BoxDecoration(
-                          color: isSelected
-                              ? context.resources.color.brandColor_02
-                              : const Color(0xFFEBF2FF),
+                          color: isSelected ? context.resources.color.brandColor_02 : const Color(0xFFEBF2FF),
                           borderRadius: BorderRadius.circular(10.r),
                         ),
                         child: Column(
@@ -123,10 +116,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                           children: [
                             Text(
                               dayName,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.bodySmall!.copyWith(
                                     color: isSelected
                                         ? context.resources.color.brandColor_10
                                         : context.resources.color.brandColor_02,
@@ -135,20 +125,12 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                             Text(
                               dayNumber,
                               style: isSelected
-                                  ? Theme.of(context)
-                                      .textTheme
-                                      .labelLarge!
-                                      .copyWith(
-                                        color: context
-                                            .resources.color.brandColor_10,
+                                  ? Theme.of(context).textTheme.labelLarge!.copyWith(
+                                        color: context.resources.color.brandColor_10,
                                         fontWeight: FontWeight.w700,
                                       )
-                                  : Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        color: context
-                                            .resources.color.brandColor_02,
+                                  : Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                        color: context.resources.color.brandColor_02,
                                         fontWeight: FontWeight.w700,
                                       ),
                             ),
@@ -185,39 +167,48 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 20.w),
                   child: state.currentTabIndex == 0
-                      ? state.priorityTaskStatus ==
-                              PriorityTaskStatusEnum.loading
-                          ? const Center(
-                              child: Text("Loading data..."),
-                            )
-                          : state.priorityTaskList.isEmpty
+                      ? RefreshBase(
+                          onRefresh: () {
+                            context.read<CalendarBloc>().add(CalendarInitEvent(state.currentTime!));
+                          },
+                          child: state.priorityTaskStatus == PriorityTaskStatusEnum.loading
                               ? const Center(
-                                  child: Text("No data"),
+                                  child: Text("Loading data..."),
                                 )
-                              : ListView.builder(
-                                  itemCount: state.priorityTaskList.length,
-                                  itemBuilder: (context, index) {
-                                    return PriorityCard(
-                                      taskModel: state.priorityTaskList[index],
-                                    );
-                                  },
-                                )
-                      : state.dailyTaskStatus == DailyTaskStatusEnum.loading
-                          ? const Center(
-                              child: Text("Loading data..."),
-                            )
-                          : state.dailyTaskList.isEmpty
+                              : state.priorityTaskList.isEmpty
+                                  ? const Center(
+                                      child: Text("No data"),
+                                    )
+                                  : ListView.builder(
+                                      itemCount: state.priorityTaskList.length,
+                                      itemBuilder: (context, index) {
+                                        return PriorityCard(
+                                          taskModel: state.priorityTaskList[index],
+                                        );
+                                      },
+                                    ),
+                        )
+                      : RefreshBase(
+                          onRefresh: () {
+                            context.read<CalendarBloc>().add(CalendarInitEvent(state.currentTime!));
+                          },
+                          child: state.dailyTaskStatus == DailyTaskStatusEnum.loading
                               ? const Center(
-                                  child: Text("No data"),
+                                  child: Text("Loading data..."),
                                 )
-                              : ListView.builder(
-                                  itemCount: state.dailyTaskList.length,
-                                  itemBuilder: (context, index) {
-                                    return DailyTaskItem(
-                                      taskModel: state.dailyTaskList[index],
-                                    );
-                                  },
-                                ),
+                              : state.dailyTaskList.isEmpty
+                                  ? const Center(
+                                      child: Text("No data"),
+                                    )
+                                  : ListView.builder(
+                                      itemCount: state.dailyTaskList.length,
+                                      itemBuilder: (context, index) {
+                                        return DailyTaskItem(
+                                          taskModel: state.dailyTaskList[index],
+                                        );
+                                      },
+                                    ),
+                        ),
                 ),
               )
             ],
@@ -249,9 +240,7 @@ class _CalendarPriorityScreenState extends State<CalendarPriorityScreen> {
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelSmall!.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: isEnable
-                          ? context.resources.color.brandColor_02
-                          : context.resources.color.subHeaderColor,
+                      color: isEnable ? context.resources.color.brandColor_02 : context.resources.color.subHeaderColor,
                     ),
               ),
               SizedBox(height: 4.h),

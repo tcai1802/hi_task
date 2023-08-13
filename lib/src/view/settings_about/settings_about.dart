@@ -41,14 +41,14 @@ class SettingsAboutScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             Text(
-              "Version 3.22.18",
+              "Version 1.0.0",
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: context.resources.color.subHeaderColor,
                   ),
             ),
             SizedBox(height: 10.h),
             Text(
-              "©2022 TaskWan",
+              "©2023 HiTask",
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: context.resources.color.textColor,
                   ),
