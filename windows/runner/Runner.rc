@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "hi_task" "\0"
+            VALUE "FileDescription", "HiTask" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "hi_task" "\0"
+            VALUE "InternalName", "HiTask" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "hi_task.exe" "\0"
-            VALUE "ProductName", "hi_task" "\0"
+            VALUE "ProductName", "HiTask" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
