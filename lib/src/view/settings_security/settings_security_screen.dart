@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hi_task/src/app_context_extension.dart';
 import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/blocs/settings_security/settings_security_bloc.dart';
-import 'package:hi_task/src/res/enum/app_enum.dart';
 
 class SettingsSecurityScreen extends StatefulWidget {
   const SettingsSecurityScreen({

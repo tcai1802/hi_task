@@ -110,12 +110,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     children: [
                       const Spacer(),
-                      Text(
-                        "Forgot password?",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(color: context.resources.color.textColor_02),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, AppRoutes().forgotPassword);
+                        },
+                        child: Text(
+                          "Forgot password?",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: context.resources.color.textColor_02),
+                        ),
                       ),
                     ],
                   ),

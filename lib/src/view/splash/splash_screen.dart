@@ -30,9 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
           if (state.isLogged) {
             Navigator.pushNamedAndRemoveUntil(context, AppRoutes().dashBoardRoute, (route) => false);
           } else if (!state.firstOpenAppState) {
-            Navigator.pushNamed(context, AppRoutes().getStartedRoute);
+            Navigator.pushReplacementNamed(context, AppRoutes().getStartedRoute);
           } else {
-            Navigator.pushNamed(context, AppRoutes().loginRoute);
+            Navigator.pushReplacementNamed(context, AppRoutes().loginRoute);
           }
         }
       },

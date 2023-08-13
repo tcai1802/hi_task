@@ -20,4 +20,5 @@ abstract class Routes {
   String get settingsHelpRoute;
   String get settingsUpdateSystemRoute;
   String get settingsAbout;
+  String get forgotPassword;
 }

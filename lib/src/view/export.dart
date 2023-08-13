@@ -22,3 +22,4 @@ export 'settings_security/settings_security_screen.dart';
 export 'settings_help/settings_help_screen.dart';
 export 'settings_update_system/settings_update_system_screen.dart';
 export 'settings_about/settings_about.dart';
+export 'forgot_password/forgot_password_screen.dart';

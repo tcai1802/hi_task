@@ -91,8 +91,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(height: 10.h),
                       Text(
                         "Management  App",
-                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                            color: context.resources.color.textColor_02),
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelSmall!
+                            .copyWith(color: context.resources.color.textColor_02),
                       ),
                       //const Spacer(),
                       Text(
@@ -105,9 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: userNameController,
                         iconUrl: context.resources.drawable.iconPerson,
                         onChange: (String value) {
-                          context
-                              .read<RegisterBloc>()
-                              .add(OnChangedUserNameEvent(value));
+                          context.read<RegisterBloc>().add(OnChangedUserNameEvent(value));
                         },
                       ),
                       SizedBox(height: 20.h),
@@ -117,16 +117,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: emailController,
                         iconUrl: context.resources.drawable.iconEmail,
                         onChange: (String value) {
-                          context
-                              .read<RegisterBloc>()
-                              .add(OnChangedEmailEvent(value));
+                          context.read<RegisterBloc>().add(OnChangedEmailEvent(value));
                         },
                         errorText: state.emailErr,
                       ),
                       SizedBox(height: 20.h),
                       BlocBuilder<RegisterBloc, RegisterState>(
-                        buildWhen: (previous, current) =>
-                            previous.passErr != current.passErr,
+                        buildWhen: (previous, current) => previous.passErr != current.passErr,
                         builder: (context, state) {
                           return TextFieldBase(
                             hintText: 'Password',
@@ -134,9 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             iconUrl: context.resources.drawable.iconLock,
                             isPass: true,
                             onChange: (String value) {
-                              context
-                                  .read<RegisterBloc>()
-                                  .add(OnChangedPasswordEvent(value));
+                              context.read<RegisterBloc>().add(OnChangedPasswordEvent(value));
                             },
                             errorText: state.passErr,
                           );
@@ -149,9 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         iconUrl: context.resources.drawable.iconLock,
                         isPass: true,
                         onChange: (String value) {
-                          context
-                              .read<RegisterBloc>()
-                              .add(OnChangedConfirmPassEvent(value));
+                          context.read<RegisterBloc>().add(OnChangedConfirmPassEvent(value));
                         },
                         errorText: state.confirmPassErr,
                       ),
@@ -162,9 +155,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         widthBtn: double.infinity,
                         onTap: state.isValid
                             ? () {
-                                context
-                                    .read<RegisterBloc>()
-                                    .add(const OnRegisterSubmitEvent(true));
+                                context.read<RegisterBloc>().add(const OnRegisterSubmitEvent(true));
                               }
                             : () {},
                       ),
@@ -205,10 +196,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               imageUrl: context.resources.drawable.iconGoogle,
                             ),
                             paddingBtn: EdgeInsets.all(15.h),
-                            bgColorBtn: Colors.transparent,
+                            bgColorBtn: Colors.grey[300],
                             borderStyle: Border.all(
-                              color: context.resources.color.brandColor_02
-                                  .withOpacity(.1),
+                              color: context.resources.color.brandColor_02.withOpacity(.1),
                             ),
                           ),
                           SizedBox(width: 40.w),
@@ -220,10 +210,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               imageUrl: context.resources.drawable.iconFacebook,
                             ),
                             paddingBtn: EdgeInsets.all(15.h),
-                            bgColorBtn: Colors.transparent,
+                            bgColorBtn: Colors.grey[300],
                             borderStyle: Border.all(
-                              color: context.resources.color.brandColor_02
-                                  .withOpacity(.1),
+                              color: context.resources.color.brandColor_02.withOpacity(.1),
                             ),
                           ),
                           SizedBox(width: 40.w),
@@ -235,10 +224,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               imageUrl: context.resources.drawable.iconGithub,
                             ),
                             paddingBtn: EdgeInsets.all(15.h),
-                            bgColorBtn: Colors.transparent,
+                            bgColorBtn: Colors.grey[300],
                             borderStyle: Border.all(
-                              color: context.resources.color.brandColor_02
-                                  .withOpacity(.1),
+                              color: context.resources.color.brandColor_02.withOpacity(.1),
                             ),
                           ),
                         ],

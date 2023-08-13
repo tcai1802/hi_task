@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hi_task/src/blocs/add_task/add_task_bloc.dart';
 import 'package:hi_task/src/models/model_exports.dart';
-import 'package:hi_task/src/models/task_model/requests/update_task_request.dart';
 import 'package:hi_task/src/packages/task_repository.dart';
 
 part 'edit_task_event.dart';

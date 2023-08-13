@@ -69,6 +69,9 @@ class AppRoutes extends Routes {
   @override
   String get settingsAbout => '/settings_about';
 
+  @override
+  String get forgotPassword => 'forgot_password';
+
   final _registerBloc = RegisterBloc();
   final _loginBloc = LoginBloc();
   final _dashboardBloc = DashboardBloc();
@@ -195,6 +198,10 @@ class AppRoutes extends Routes {
     } else if (settings.name == settingsAbout) {
       return MaterialPageRoute(
         builder: (context) => const SettingsAboutScreen(),
+      );
+    } else if (settings.name == forgotPassword) {
+      return MaterialPageRoute(
+        builder: (context) => const ForgotPasswordScreen(),
       );
     }
     return null;

@@ -6,7 +6,6 @@ import 'package:hi_task/src/base_widgets/export.dart';
 import 'package:hi_task/src/blocs/blocs_exports.dart';
 import 'package:hi_task/src/models/task_model/exports.dart';
 import 'package:hi_task/src/res/arguments/arguments.dart';
-import 'package:hi_task/src/res/arguments/task_details_argument.dart';
 import 'package:hi_task/src/res/routes/app_routes.dart';
 
 import 'exports.dart';
